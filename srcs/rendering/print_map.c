@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:18 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/16 12:58:26 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/16 19:11:27 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	print_init_map(t_master *master)
 	int	j;
 	int counter;
 
+	master->map = ft_calloc(64, sizeof(int));
+	ft_memcpy(master->map, map, 64 * sizeof(int));
 	print_background(master);
 	i = 0;
 	j = 0;

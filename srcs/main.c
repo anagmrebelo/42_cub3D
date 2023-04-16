@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/16 12:31:46 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/16 19:06:15 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	render(t_master *master)
 		clean_exit(master);
 	print_init_map(master);	
 	print_player(master, RED_PIXEL);
+	draw_rays_3D(master);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
 	return (0);
 }
@@ -48,7 +49,7 @@ void	window_init(t_master *master)
 	//Initial player position
 	master->player.px = 300;
 	master->player.py = 300;
-	master->player.pa = PI/4;
+	master->player.pa = 5 * PI/4;
 	master->player.pdx = cos(master->player.pa) * 10;
 	master->player.pdy = sin(master->player.pa) * 10;
 

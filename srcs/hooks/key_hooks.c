@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/16 12:24:18 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/16 19:45:27 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	key_hook(int keycode, t_master *master)
 	else if (keycode == 123)
 	{
 		master->player.pa -= 0.1;
-		if (master->player.pa > 2 * PI)
-			master->player.pa -= 2 * PI;
+		if (master->player.pa < 0)
+			master->player.pa += 2 * PI;
 		master->player.pdx = cos(master->player.pa) * 5;
 		master->player.pdy = sin(master->player.pa) * 5;
 
@@ -51,8 +51,8 @@ int	key_hook(int keycode, t_master *master)
 	else if (keycode == 124)
 	{
 		master->player.pa += 0.1;
-		if (master->player.pa < 0)
-			master->player.pa += 2 * PI;
+		if (master->player.pa > 2 * PI)
+			master->player.pa -= 2 * PI;
 		master->player.pdx = cos(master->player.pa) * 5;
 		master->player.pdy = sin(master->player.pa) * 5;
 	}
