@@ -6,7 +6,7 @@
 #    By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/15 15:02:58 by anarebelo        ###   ########.fr        #
+#    Updated: 2023/04/16 12:59:39 by anarebelo        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,11 @@ BINARY				= cub3D
 # **************************************************************************** #
 SRCS				= main.c\
 					parsing/args_check.c\
-					free/clean_exit.c
+					hooks/key_hooks.c\
+					rendering/print_map.c\
+					rendering/draw_rays.c\
+					free/clean_exit.c\
+					utils/colors.c\
 
 MK					= Makefile
 

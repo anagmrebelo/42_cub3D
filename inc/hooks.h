@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_exit.c                                       :+:      :+:    :+:   */
+/*   hooks.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 14:51:59 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/15 21:14:40 by anarebelo        ###   ########.fr       */
+/*   Created: 2023/04/15 15:52:10 by anarebelo         #+#    #+#             */
+/*   Updated: 2023/04/15 15:52:36 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#ifndef HOOKS_H
+# define HOOKS_H
 
-void	clean_exit(t_master *master)
-{
-	if (master->mlx.mlx_ptr)
-		free(master->mlx.mlx_ptr);
-	if (master)
-		free(master);
-	exit(1);
-}
+int	key_hook(int keycode, t_master *master);
+
+#endif

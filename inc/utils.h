@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_exit.c                                       :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 14:51:59 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/15 21:14:40 by anarebelo        ###   ########.fr       */
+/*   Created: 2023/04/15 15:18:27 by anarebelo         #+#    #+#             */
+/*   Updated: 2023/04/16 13:09:09 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef UTILS_H
+# define UTILS_H
+
 #include "cub3D.h"
 
-void	clean_exit(t_master *master)
-{
-	if (master->mlx.mlx_ptr)
-		free(master->mlx.mlx_ptr);
-	if (master)
-		free(master);
-	exit(1);
-}
+int		create_trgb(int t, int r, int g, int b);
+void	img_pix_put(t_img *img, int x, int y, int color);
+void 	draw_line(t_master *master, int beginX, int beginY, int endX, int endY, int color);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/15 15:10:04 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/15 21:57:39 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,52 @@
 # include "stdio.h"
 # include <mlx.h>
 
+# define BLOCK 64
+# define WINDOW_WIDTH 1024
+# define WINDOW_HEIGHT 512
+# define PLAYER_SIZE 8
+
+#define RED_PIXEL 0xFF0000
+#define BLACK_PIXEL 0x000000
+#define WHITE_PIXEL 0xFFFFFF
+#define GRAY_PIXEL 0x808080
+
+#define GRID_SIZE 1
+
+#define PI 3.1415926
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp; /* bits per pixel */
+	int		line_len;
+	int		endian;
+}	t_img;
+
 typedef struct s_player
 {
 	float	px;
 	float	py;
+	float 	pa;
+	float	pdx;
+	float 	pdy;
 }	t_player;
+
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*mlx_win;
+	t_img	img;
+} t_mlx;
 
 typedef struct s_master
 {
-	char 		**map;
+	int 		*map;
 	t_player 	player;
+	t_mlx		mlx;
 }	t_master;
 
+void	print_player(t_master *master, int color);
 
 #endif

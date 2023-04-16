@@ -1,0 +1,2 @@
+Is it necessary to free new image?
+Is it necessary to free get addr of image?
