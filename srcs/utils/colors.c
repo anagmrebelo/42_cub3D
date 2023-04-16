@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:17:59 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/16 19:56:59 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/16 20:28:51 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,10 @@ void draw_line(t_master *master, int beginX, int beginY, int endX, int endY, int
 		minX++;
 	}	
 
+}
+
+float	calc_distance(t_master *master, int beginX, int beginY, int endX, int endY)
+{
+	(void) master;
+	return (sqrt((endX - beginX) * (endX - beginX) + (endY - beginY) * (endY - beginY)));
 }

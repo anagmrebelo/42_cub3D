@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/16 19:06:15 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/16 20:09:53 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	render(t_master *master)
 	if (!master->mlx.mlx_ptr)
 		clean_exit(master);
 	print_init_map(master);	
-	print_player(master, RED_PIXEL);
 	draw_rays_3D(master);
+	print_player(master, YELLOW_PIXEL);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
 	return (0);
 }
