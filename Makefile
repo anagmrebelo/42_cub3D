@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+         #
+#    By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/15 15:02:58 by anarebelo        ###   ########.fr        #
+#    Updated: 2023/04/17 16:29:03 by mrollo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ BINARY				= cub3D
 # **************************************************************************** #
 SRCS				= main.c\
 					parsing/args_check.c\
-					free/clean_exit.c
+					parsing/read_file.c\
+					free/clean_exit.c\
+					gnl/get_next_line.c
 
 MK					= Makefile
 

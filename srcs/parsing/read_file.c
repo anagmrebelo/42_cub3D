@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 20:43:09 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/17 16:43:47 by mrollo           ###   ########.fr       */
+/*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
+/*   Updated: 2023/04/17 16:50:03 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "cub3D.h"
+# include "get_next_line.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*read_file(char *path)
 {
-	int		i;
-	int		j;
-	char	*new;
+    int     fd;
+    char    *line;
 
-	if (!s1)
-	{
-		s1 = malloc(sizeof(char) * (1 + 1));
-		s1[0] = '\0';
-	}
-	new = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!new)
-		return (0);
-	i = -1;
-	while (s1[++i])
-		new[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		new[i + j] = s2[j];
-	new[i + j] = '\0';
-	free(s1);
-	return (new);
+    fd = open(path, O_RDONLY);
+    if (fd < 0)
+    {
+        printf("no puedo abrir\n");
+        return (NULL);
+    }
+    line = get_next_line(fd);
+    printf("%s\n", line);
+    return (NULL);
 }

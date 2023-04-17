@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/15 15:10:55 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/17 16:42:37 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void	window_init(t_master *master)
 
 int main(int argc, char **argv)
 {
-	t_master	*master;
+	// t_master	*master;
 
 	check_args(argc, argv);
-	master = ft_calloc(1, sizeof(t_master));
-	if (!master)
-		return (1);
-	window_init(master);
+	read_file(argv[1]);
+	// master = ft_calloc(1, sizeof(t_master));
+	// if (!master)
+	// 	return (1);
+	// window_init(master);
     return (0);
 }

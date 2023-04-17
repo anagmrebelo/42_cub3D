@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 20:43:09 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/17 16:43:47 by mrollo           ###   ########.fr       */
+/*   Created: 2022/02/12 17:52:14 by mrollo            #+#    #+#             */
+/*   Updated: 2023/04/17 16:19:02 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "libft.h"
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*new;
+char	*clean_line(char *save);
+char	*get_new_line(char *save);
+char	*ft_read(int fd, char *save);
+char	*get_next_line(int fd);
 
-	if (!s1)
-	{
-		s1 = malloc(sizeof(char) * (1 + 1));
-		s1[0] = '\0';
-	}
-	new = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!new)
-		return (0);
-	i = -1;
-	while (s1[++i])
-		new[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		new[i + j] = s2[j];
-	new[i + j] = '\0';
-	free(s1);
-	return (new);
-}
+#endif
