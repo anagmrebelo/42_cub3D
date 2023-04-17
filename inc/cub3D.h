@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/16 20:18:41 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/17 12:08:45 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@
 # define WINDOW_HEIGHT 512
 # define PLAYER_SIZE 8
 
-#define RED_PIXEL 0xFF0000
-#define BLACK_PIXEL 0x000000
-#define WHITE_PIXEL 0xFFFFFF
-#define GRAY_PIXEL 0x808080
-#define YELLOW_PIXEL 0xFFFF00
+# define RED_PIXEL 0xFF0000
+# define BLACK_PIXEL 0x000000
+# define WHITE_PIXEL 0xFFFFFF
+# define GRAY_PIXEL 0x808080
+# define YELLOW_PIXEL 0xFFFF00
 
-#define GRID_SIZE 1
+# define GRID_SIZE 1
 
-#define PI 3.1415926
-#define P2 PI/2
-#define P3 3 * PI/2
+# define PI 3.1415926
+# define P2 PI/2
+# define P3 3 * PI/2
+# define DR 0.0174533	// one degree in radians
 
 typedef struct s_img
 {
