@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/17 13:16:17 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/17 16:30:16 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	draw_rays_3D(t_master *master)
 	int		mx;
 	int		my;
 	int		mp;
+	float	disT;
 
 	ra = master->player.pa - DR * 30;
 	if (ra < 0)
@@ -31,7 +32,7 @@ void	draw_rays_3D(t_master *master)
 	if (ra > 2 * PI)
 		ra -= 2 * PI;
 	r = 0;
-	while (r++ < 360)
+	while (r++ < 60)
 	{
 		//------------Check horizontal lines------------
 		float	aTan = -1 /tan(ra);
@@ -127,12 +128,44 @@ void	draw_rays_3D(t_master *master)
 				rx += xo;
 				ry += yo;
 				dof +=1;
+				if (rx < 0 && ry < 0)
+					dof = 7;
 			}
 		}
+		int color;
 		if (distH < distV)
-			draw_line(master, master->player.px + 4, master->player.py + 4, hx, hy, RED_PIXEL);
-		else	
-			draw_line(master, master->player.px + 4, master->player.py + 4, vx, vy, RED_PIXEL);
+		{
+			draw_line(master, master->player.px, master->player.py, hx, hy, create_trgb(255, 255, 0, 0));
+			color = create_trgb(255, 255, 0, 0);
+			disT = distH;
+		}
+		else
+		{
+			draw_line(master, master->player.px, master->player.py, vx, vy, create_trgb(255, 225, 0, 0));
+			color = create_trgb(255, 225, 0, 0);
+			disT = distV;
+		}
+
+		//-------------- Draw 3D Walls ------------
+		int	lineH;
+		float ca = master->player.pa - ra;
+		if (ca < 0)
+			ca += 2 * PI;
+		if (ca > 2 * PI)
+			ca -= 2 * PI;
+		disT = disT * cos(ca);
+		lineH = (64 * 320) / disT;			// Line height
+		if (lineH > 320)
+			lineH = 320;
+		int lineOff = 160 - lineH / 2;
+		if (lineOff > 320)
+			lineOff = 320;
+		int	aaa = lineOff + lineH;
+		if (aaa < 0)
+		{
+			aaa = 64;
+		}
+		draw_line(master, r * 8 +530, lineOff, r * 8 + 530, aaa, color);
 		ra += DR;
 		if (ra < 0)
 			ra += 2 * PI;
@@ -140,6 +173,8 @@ void	draw_rays_3D(t_master *master)
 			ra -= 2 * PI;
 	}
 }
+			// printf("Got here! <%d>\n", aaa);
+		// printf("Begin(%d, %d)    End(%d, %d)\n", r * 8 +530, lineOff, r * 8 + 530, aaa);
 		// printf("Horizonatl line\n");
 		// printf("Vertical line\n");
 		// printf("player(%f, %f) -------- point(%f, %f)\n", master->player.px + 4, master->player.py + 4, vx, vy);

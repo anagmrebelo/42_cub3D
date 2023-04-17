@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:18 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/17 13:16:43 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/17 16:10:08 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_player(t_master *master, int color)
 		} 
 		i++;
 	}
-	draw_line(master, master->player.px + 4, master->player.py + 4, master->player.px + 4 + 5* master->player.pdx, master->player.py + 4 + 5* master->player.pdy, color);
+	draw_line(master, master->player.px, master->player.py, master->player.px + 5* master->player.pdx, master->player.py + 5* master->player.pdy, color);
 }
 
 static void	print_square(t_master *master, int x, int y, int color)
@@ -74,8 +74,8 @@ void	print_init_map(t_master *master)
 	int map[] = {
 		1, 1, 1, 1, 1, 1, 1, 1,
 		1, 0, 1, 0, 0, 0, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 1,
+		1, 0, 1, 0, 1, 0, 0, 1,
+		1, 0, 1, 0, 1, 1, 0, 1,
 		1, 0, 0, 0, 0, 0, 0, 1,
 		1, 0, 0, 0, 0, 1, 0, 1,
 		1, 0, 0, 1, 0, 0, 0, 1,

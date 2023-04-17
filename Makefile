@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+         #
+#    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/16 12:59:39 by anarebelo        ###   ########.fr        #
+#    Updated: 2023/04/17 15:11:15 by arebelo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS				= main.c\
 					hooks/key_hooks.c\
 					rendering/print_map.c\
 					rendering/draw_rays.c\
+					rendering/draw_line.c\
 					free/clean_exit.c\
 					utils/colors.c\
 
