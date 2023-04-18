@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/17 23:44:25 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/18 20:47:14 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,113 +16,111 @@ void	draw_rays_3D(t_master *master)
 {
 	float	rx;
 	float	ry;
-	float	ra;
+	int		ra;
 	float	xo;
 	float	yo;
+
 	int		r;		//number of rays to draw
-	int		dof;
 	int		mx;
 	int		my;
 	int		mp;
+	int		dof;
+
 	float	disT;
 
-	ra = master->player.pa - DR * 30;
-	if (ra < 0)
-		ra += 2 * PI;
-	if (ra > 2 * PI)
-		ra -= 2 * PI;
+	// ra = angle_check(master->player.pa + 30);
+	ra = master->player.pa;
 	r = 0;
-	while (r++ < 60)
+	while (r++ < 1)
 	{
-		//------------Check horizontal lines------------
-		float	aTan = -1 /tan(ra);
-		float	distH;
-		float	hx;
-		float	hy;
-		
-		dof = 0;
-		distH = 0;
-		
-		if (ra > PI) //Looking up
-		{
-			ry = (((int) master->player.py >> 6) << 6) - 0.0001;
-			rx = (master->player.py - ry) * aTan + master->player.px;
-			yo = -BLOCK;
-			xo = -yo * aTan;
-		}
-		if (ra < PI)	//Looking down
-		{
-			ry = (((int) master->player.py >> 6) << 6) + BLOCK;
-			rx = (master->player.py - ry) * aTan + master->player.px;
-			yo = BLOCK;
-			xo = -yo * aTan;
-		}
-		if (ra == 0 || ra == PI)	//Looking straight left or right
-		{
-			hx = master->player.px;
-			hy = master->player.py;
-			dof = 8;
-		}
-		while (dof < 8)
-		{
-			mx = (int) (rx) >> 6;
-			my = (int) (ry) >> 6;
-			mp = my * 8 + mx;		//8 is the number of columns
-			if ((mp >= 0 && mp < 8 * 8 && master->map[mp] == 1) || dof == 7)	// Hit a wall
-			{
-				distH = calc_distance(master, master->player.px, master->player.py, rx, ry);
-				hx = rx;
-				hy = ry;
-				dof = 8;
-			}
-			else 		// next horizontal line 
-			{
-				rx += xo;
-				ry += yo;
-				dof +=1;
-			}
-		}
-
 		//------------Check vertical lines------------
-		float nTan = -tan(ra);
+		float 	tang = tan(deg_to_rad(ra));
 		float	distV;
 		float	vx;
 		float	vy;
 
 		dof = 0;
-		distV = 0;
-		if (ra > P2 && ra < P3) 	//Looking left
+		distV = 100000;
+		
+		printf("%d\n", ra);
+		if (ra < 90 || ra > 270) 	//Looking left
+		{
+			rx = (((int)master->player.px >> 6) << 6) + master->map.block_size;
+			ry = (master->player.px - rx) * tang + master->player.py;
+			xo = master->map.block_size;
+			yo = -xo * tang;
+		}
+		else if (ra > 90 && ra < 270)	//Looking right
 		{
 			rx = (((int) master->player.px >> 6) << 6) - 0.0001;
-			ry = (master->player.px - rx) * nTan + master->player.py;
-			xo = -BLOCK;
-			yo = -xo * nTan;
+			ry = (master->player.px - rx) * tang + master->player.py;
+			xo = -master->map.block_size;
+			yo = -xo * tang;
 		}
-		if (ra < P2 || ra > P3)	//Looking right
+		else //Looking straight up or down
 		{
-			rx = (((int) master->player.px >> 6) << 6) + BLOCK;
-			ry = (master->player.px - rx) * nTan + master->player.py;
-			xo = BLOCK;
-			yo = -xo * nTan;
-		}
-		if (ra == P2 || ra == P3 ) //Looking straight up or down
-		{
-			printf("Got here\n");
-			vx = master->player.px;
-			vy = master->player.py;
+			rx = master->player.px;
+			ry = master->player.py;
 			dof = 8;
 		}
 		while (dof < 8)
 		{
 			mx = (int) (rx) >> 6;
 			my = (int) (ry) >> 6;
-			mp = my * 8 + mx;		//8 is the number of columns
-
-			if ((mp > 0 && mp < 8 * 8 && master->map[mp] == 1) || dof == 7)	// Hit a wall  @arebelo because there are 8 columns
+			mp = my * master->map.nb_cols + mx;		
+			if ((mp > 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1) || dof == 7)	// Hit a wall  @arebelo
 			{
-				distV = calc_distance(master, master->player.px, master->player.py, rx, ry);
-				vx = rx;
-				vy = ry;
+				// distV = calc_distance(master->player.px, master->player.py, rx, ry);
+				distV = cos(deg_to_rad(ra)) * (rx - master->player.px) - sin(deg_to_rad(ra)) * (ry - master->player.py);
+				dof = 8;
+			}
+			else 		// next vertical line 
+			{
+				rx += xo;
+				ry += yo;
+				dof +=1;
+				// if (rx < 0 && ry < 0)
+				// 	dof = 7;
+			}
+		}
+		vx = rx;
+		vy = ry;
+		
+		//------------Check horizontal lines------------
+		tang = 1.0 /tan(ra);
+		float	distH;
+
+		dof = 0;
+		distH = 100000;
+
+		if (ra < 180) //Looking up
+		{
+			rx = (master->player.py - ry) * tang + master->player.px;
+			ry = (((int)master->player.py >> 6) << 6) - 0.0001;
+			xo = -yo * tang;
+			yo = -master->map.block_size;
+		}
+		else if (ra > 180)	//Looking down
+		{
+			rx = (master->player.py - ry) * tang + master->player.px;
+			ry = (((int) master->player.py >> 6) << 6) + master->map.block_size;
+			yo = master->map.block_size;
+			xo = -yo * tang;
+		}
+		else	//Looking straight left or right
+		{
+			rx = master->player.px;
+			ry = master->player.py;
+			dof = 8;
+		}
+		while (dof < 8)
+		{
+			mx = (int)(rx) >> 6;
+			my = (int)(ry) >> 6;
+			mp = my * master->map.nb_rows + mx;
+			if ((mp >= 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1)) // || dof == 7)	// Hit a wall
+			{
+				distH = cos(deg_to_rad(ra)) * (rx - master->player.px) - sin(deg_to_rad(ra)) * (ry - master->player.py);
 				dof = 8;
 			}
 			else 		// next horizontal line 
@@ -130,52 +128,43 @@ void	draw_rays_3D(t_master *master)
 				rx += xo;
 				ry += yo;
 				dof +=1;
-				if (rx < 0 && ry < 0)
-					dof = 7;
 			}
 		}
 
 		int color;
-		if (distH < distV)
+		color = RED_PIXEL;
+		if (distV < distH)
 		{
-			printf(" %f ra: %f, Horizontal (%f, %f) INT(%d, %d) -------- (%f, %f) INT(%d, %d)\n", P3, ra, master->player.px, master->player.py, (int)master->player.px, (int)master->player.py, hx, hy, (int)hx, (int)hy);
-			draw_line(master, master->player.px, master->player.py, hx, hy, RED_PIXEL);
-			color = RED_PIXEL;
+			rx = vx;
+			ry = vy;
+			color = DARK_RED_PIXEL;
 			disT = distH;
 		}
-		else
-		{
-			printf("ra: %f, Verical (%f, %f) INT(%d, %d) -------- (%f, %f) INT(%d, %d)\n", ra, master->player.px, master->player.py, (int)master->player.px, (int)master->player.py, vx, vy, (int)vx, (int)vy);
-			draw_line(master, master->player.px, master->player.py, vx, vy, RED_PIXEL);
-			color = DARK_RED_PIXEL;
-			disT = distV;
-		}
+		draw_line(master, master->player.px, master->player.py, rx, ry, color);
 
-		//-------------- Draw 3D Walls ------------
-		int	lineH;
-		float ca = master->player.pa - ra;
-		if (ca < 0)
-			ca += 2 * PI;
-		if (ca > 2 * PI)
-			ca -= 2 * PI;
-		disT = disT * cos(ca);
-		lineH = (64 * 320) / disT;			// Line height
-		if (lineH > 320)
-			lineH = 320;
-		int lineOff = 160 - lineH / 2;
-		if (lineOff > 320)
-			lineOff = 320;
-		int	aaa = lineOff + lineH;
-		if (aaa < 0)
-		{
-			aaa = 64;
-		}
-		draw_line(master, r * 8 +530, lineOff, r * 8 + 530, aaa, color);
-		ra += DR;
-		if (ra < 0)
-			ra += 2 * PI;
-		if (ra > 2 * PI)
-			ra -= 2 * PI;
+		// //-------------- Draw 3D Walls ------------
+		// int	lineH;
+		// float ca = master->player.pa - ra;
+		// if (ca < 0)
+		// 	ca += 2 * PI;
+		// if (ca > 2 * PI)
+		// 	ca -= 2 * PI;
+		// disT = disT * cos(ca);
+		// lineH = (64 * 320) / disT;			// Line height
+		// if (lineH > 320)
+		// 	lineH = 320;
+		// int lineOff = 160 - lineH / 2;
+		// if (lineOff > 320)
+		// 	lineOff = 320;
+		// int	aaa = lineOff + lineH;
+		// if (aaa < 0)
+		// {
+		// 	aaa = 64;
+		// }
+		// draw_line(master, r * 8 +530, lineOff, r * 8 + 530, aaa, color);
+
+
+		ra = angle_check(ra - 1);
 	}
 }
 			// printf("Got here! <%d>\n", aaa);
@@ -187,3 +176,5 @@ void	draw_rays_3D(t_master *master)
 		// printf("testing up rx: %f   ry: %f\n", rx, ry);
 		// printf("testing down rx: %f   ry: %f\n", rx, ry);
 		// printf("mx: %d ---- my: %d ---- mp: %d\n", mx, my, mp);
+		// printf(" %f ra: %f, Horizontal (%f, %f) INT(%d, %d) -------- (%f, %f) INT(%d, %d)\n", P3, ra, master->player.px, master->player.py, (int)master->player.px, (int)master->player.py, hx, hy, (int)hx, (int)hy);
+		// printf("ra: %f, Verical (%f, %f) INT(%d, %d) -------- (%f, %f) INT(%d, %d)\n", ra, master->player.px, master->player.py, (int)master->player.px, (int)master->player.py, vx, vy, (int)vx, (int)vy);

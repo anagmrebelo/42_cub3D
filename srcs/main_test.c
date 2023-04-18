@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 20:55:20 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:21:50 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ int	render(t_master *master)
 {
 	if (!master->mlx.mlx_ptr)
 		clean_exit(master);
-	print_init_map(master);	
-	// draw_rays_3D(master);
-	print_player(master, YELLOW_PIXEL);
+	draw_line(master, 300, 2, 690, 800, create_trgb(255,255,0,0));
+	draw_line(master, 500, 2, 890, 800, RED_PIXEL);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
-	printf("Player angle: %d\n", master->player.pa);
 	return (0);
 }
 
@@ -48,11 +46,11 @@ void	create_image(t_master *master)
 void	window_init(t_master *master)
 {
 	//Initial player position
-	master->player.px = 150;
-	master->player.py = 400;
-	master->player.pa = 90;
-	master->player.pdx = cos(deg_to_rad(master->player.pa));
-	master->player.pdy = -sin(deg_to_rad(master->player.pa));
+	master->player.px = 300;
+	master->player.py = 300;
+	master->player.pa = 5 * PI/4;
+	master->player.pdx = cos(master->player.pa) * 10;
+	master->player.pdy = sin(master->player.pa) * 10;
 
 	master->mlx.mlx_ptr = mlx_init();
 	if (!master->mlx.mlx_ptr)

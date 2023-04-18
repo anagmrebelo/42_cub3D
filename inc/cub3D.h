@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/17 23:43:47 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/18 20:55:10 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef struct s_player
 {
 	float	px;
 	float	py;
-	float 	pa;
+	int		pa;
 	float	pdx;
-	float 	pdy;
+	float	pdy;
 }	t_player;
 
 typedef struct s_mlx
@@ -65,9 +65,18 @@ typedef struct s_mlx
 	t_img	img;
 } t_mlx;
 
+typedef struct s_map
+{
+	int 		*map_arr;
+	int			nb_cols;
+	int			nb_rows;
+	int			nb_blocks;
+	int			block_size;
+} t_map;
+
 typedef struct s_master
 {
-	int 		*map;
+	t_map		map;
 	t_player 	player;
 	t_mlx		mlx;
 }	t_master;

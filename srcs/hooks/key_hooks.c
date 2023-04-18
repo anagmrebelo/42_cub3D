@@ -3,58 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/16 19:45:27 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/18 20:49:49 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "stdio.h"
+#include "utils.h"
+#include "free.h"
 
-#define BLACK_PIXEL 0x000000
-
+/**
+ * Define behaviour of WASD -> <-
+*/
 int	key_hook(int keycode, t_master *master)
 {
+	int	temp;
+	
 	if (!master->mlx.mlx_ptr)
-		exit(1); //@arebelo protect
-	if (keycode == 13 && master->player.py > BLOCK) // W
+		clean_exit(master);
+	if (keycode == 13 && master->player.py > BLOCK) // W == FRONT
 	{
-		master->player.px += master->player.pdx;
-		master->player.py += master->player.pdy;
+		master->player.px += master->player.pdx * 5;
+		master->player.py += master->player.pdy * 5;
 	}
-	else if (keycode == 0 && master->player.px > BLOCK) // A
+	else if (keycode == 0 && master->player.px > BLOCK) // A == LEFT
 	{
-		master->player.px -= cos(PI/2 + master->player.pa) * 5;
-		master->player.py -= sin(PI/2 + master->player.pa) * 5;
+		temp = 90 + master->player.pa;
+		temp = angle_check(temp);
+		master->player.px -= cos(deg_to_rad(temp)) * 5;
+		master->player.py -= sin(deg_to_rad(temp)) * 5;
 	}
-	else if (keycode == 1 && master->player.py < WINDOW_HEIGHT - BLOCK) // S
+	else if (keycode == 1 && master->player.py < WINDOW_HEIGHT - BLOCK) // S == BACK
 	{
-		master->player.px -= master->player.pdx;
-		master->player.py -= master->player.pdy;
+		master->player.px -= master->player.pdx * 5;
+		master->player.py -= master->player.pdy * 5;
 	}
-	else if (keycode == 2 && master->player.px < WINDOW_WIDTH - BLOCK) // D
+	else if (keycode == 2 && master->player.px < WINDOW_WIDTH - BLOCK) // D == RIGHT
 	{
-		master->player.px += cos(PI/2 + master->player.pa) * 5;
-		master->player.py += sin(PI/2 + master->player.pa) * 5;
+		temp = 90 + master->player.pa;
+		temp = angle_check(temp);
+		master->player.px += cos(deg_to_rad(temp)) * 5;
+		master->player.py += sin(deg_to_rad(temp)) * 5;
 	}
-	else if (keycode == 123)
+	else if (keycode == 123) // Left arrow <-
 	{
-		master->player.pa -= 0.1;
-		if (master->player.pa < 0)
-			master->player.pa += 2 * PI;
-		master->player.pdx = cos(master->player.pa) * 5;
-		master->player.pdy = sin(master->player.pa) * 5;
+		master->player.pa += 1;
+		master->player.pa = angle_check(master->player.pa);
+		master->player.pdx = cos(deg_to_rad(master->player.pa));
+		master->player.pdy = -sin(deg_to_rad(master->player.pa));
 
 	}
-	else if (keycode == 124)
+	else if (keycode == 124) // Right arrow ->
 	{
-		master->player.pa += 0.1;
-		if (master->player.pa > 2 * PI)
-			master->player.pa -= 2 * PI;
-		master->player.pdx = cos(master->player.pa) * 5;
-		master->player.pdy = sin(master->player.pa) * 5;
+		master->player.pa -= 1;
+		master->player.pa = angle_check(master->player.pa);
+		master->player.pdx = cos(deg_to_rad(master->player.pa));
+		master->player.pdy = -sin(deg_to_rad(master->player.pa));
 	}
 	return (0);
 }
