@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/17 16:30:16 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/17 23:44:25 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	draw_rays_3D(t_master *master)
 				dof +=1;
 			}
 		}
+
 		//------------Check vertical lines------------
 		float nTan = -tan(ra);
 		float	distV;
@@ -104,8 +105,9 @@ void	draw_rays_3D(t_master *master)
 			xo = BLOCK;
 			yo = -xo * nTan;
 		}
-		if (ra == 0 || ra == PI) //Looking straight up or down
+		if (ra == P2 || ra == P3 ) //Looking straight up or down
 		{
+			printf("Got here\n");
 			vx = master->player.px;
 			vy = master->player.py;
 			dof = 8;
@@ -132,17 +134,20 @@ void	draw_rays_3D(t_master *master)
 					dof = 7;
 			}
 		}
+
 		int color;
 		if (distH < distV)
 		{
-			draw_line(master, master->player.px, master->player.py, hx, hy, create_trgb(255, 255, 0, 0));
-			color = create_trgb(255, 255, 0, 0);
+			printf(" %f ra: %f, Horizontal (%f, %f) INT(%d, %d) -------- (%f, %f) INT(%d, %d)\n", P3, ra, master->player.px, master->player.py, (int)master->player.px, (int)master->player.py, hx, hy, (int)hx, (int)hy);
+			draw_line(master, master->player.px, master->player.py, hx, hy, RED_PIXEL);
+			color = RED_PIXEL;
 			disT = distH;
 		}
 		else
 		{
-			draw_line(master, master->player.px, master->player.py, vx, vy, create_trgb(255, 225, 0, 0));
-			color = create_trgb(255, 225, 0, 0);
+			printf("ra: %f, Verical (%f, %f) INT(%d, %d) -------- (%f, %f) INT(%d, %d)\n", ra, master->player.px, master->player.py, (int)master->player.px, (int)master->player.py, vx, vy, (int)vx, (int)vy);
+			draw_line(master, master->player.px, master->player.py, vx, vy, RED_PIXEL);
+			color = DARK_RED_PIXEL;
 			disT = distV;
 		}
 

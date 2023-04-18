@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/17 16:20:47 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/17 23:43:47 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define PLAYER_SIZE 8
 
 # define RED_PIXEL 0xFF0000
+# define DARK_RED_PIXEL 0x8B0000
 # define BLACK_PIXEL 0x000000
 # define WHITE_PIXEL 0xFFFFFF
 # define GRAY_PIXEL 0x808080
@@ -34,7 +35,7 @@
 
 # define GRID_SIZE 1
 
-# define PI 3.1415926
+# define PI 3.1415
 # define P2 PI/2
 # define P3 3 * PI/2
 # define DR 0.0174533	// one degree in radians
