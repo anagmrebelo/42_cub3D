@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 20:47:14 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/18 22:49:04 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,10 @@ void	draw_rays_3D(t_master *master)
 			mx = (int)(rx) >> 6;
 			my = (int)(ry) >> 6;
 			mp = my * master->map.nb_rows + mx;
+			printf("MP = %d\n", mp);
 			if ((mp >= 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1)) // || dof == 7)	// Hit a wall
 			{
+				// printf("Hit a wall %f %f\n", rx, ry);
 				distH = cos(deg_to_rad(ra)) * (rx - master->player.px) - sin(deg_to_rad(ra)) * (ry - master->player.py);
 				dof = 8;
 			}
