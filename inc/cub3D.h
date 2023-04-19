@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/19 18:35:43 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/19 19:33:00 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define WINDOW_HEIGHT 512
 # define PLAYER_SIZE 8
 
-# define RED_PIXEL 0xFF0000
-# define DARK_RED_PIXEL 0x8B0000
+# define RED_PIXEL 0x9E1A1A
+# define DARK_RED_PIXEL 0xB53737
 # define BLACK_PIXEL 0x000000
 # define WHITE_PIXEL 0xFFFFFF
 # define GRAY_PIXEL 0x808080

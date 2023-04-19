@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/19 18:34:04 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/19 19:19:56 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	window_init(t_master *master)
 		clean_exit(master);
 	}
 	create_image(master);
-	mlx_key_hook(master->mlx.mlx_win, &key_hook, master);
+	mlx_hook(master->mlx.mlx_win, 2, 1L<<0, &key_hook, master);
 	mlx_loop_hook(master->mlx.mlx_ptr, &render, master);
 	mlx_loop(master->mlx.mlx_ptr);
 	return ;
