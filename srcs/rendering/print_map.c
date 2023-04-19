@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:18 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 20:53:39 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/19 18:35:17 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,17 @@ void	print_init_map(t_master *master)
 	i = -1;
 	j = 0;
 	counter = 0;
-	while (++i < master->map.nb_rows)
-	{
-		j = 0;
-		while (j < master->map.nb_cols)
-		{
-			if (map[counter] == 0)
-				print_square(master, j * master->map.block_size, i * master->map.block_size, BLACK_PIXEL);
-			else if (map[counter] == 1)
-				print_square(master, j * master->map.block_size , i * master->map.block_size, WHITE_PIXEL);
-			j++;
-			counter++;
-		}	
-	}
+// 	while (++i < master->map.nb_rows)
+// 	{
+// 		j = 0;
+// 		while (j < master->map.nb_cols)
+// 		{
+// 			if (map[counter] == 0)
+// 				print_square(master, j * master->map.block_size, i * master->map.block_size, BLACK_PIXEL);
+// 			else if (map[counter] == 1)
+// 				print_square(master, j * master->map.block_size , i * master->map.block_size, WHITE_PIXEL);
+// 			j++;
+// 			counter++;
+// 		}	
+// 	}
 }

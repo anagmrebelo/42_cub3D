@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 22:47:22 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/19 18:34:04 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	render(t_master *master)
 		clean_exit(master);
 	print_init_map(master);	
 	draw_rays_3D(master);
-	print_player(master, YELLOW_PIXEL);
+	// print_player(master, YELLOW_PIXEL);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
-	printf("Player angle: %d\n", master->player.pa);
+	// printf("Player angle: %d\n", master->player.pa);
 	return (0);
 }
 

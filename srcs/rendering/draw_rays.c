@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 22:49:04 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/19 18:55:10 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	draw_rays_3D(t_master *master)
 {
 	float	rx;
 	float	ry;
-	int		ra;
 	float	xo;
 	float	yo;
+	float	ra;
 
 	int		r;		//number of rays to draw
 	int		mx;
@@ -26,12 +26,12 @@ void	draw_rays_3D(t_master *master)
 	int		mp;
 	int		dof;
 
-	float	disT;
+	float	distT;
 
-	// ra = angle_check(master->player.pa + 30);
-	ra = master->player.pa;
+	ra = angle_check(master->player.pa + 30);
+	// printf("Ray angle %f\n", ra);
 	r = 0;
-	while (r++ < 1)
+	while (r++ < 960)
 	{
 		//------------Check vertical lines------------
 		float 	tang = tan(deg_to_rad(ra));
@@ -42,15 +42,14 @@ void	draw_rays_3D(t_master *master)
 		dof = 0;
 		distV = 100000;
 		
-		printf("%d\n", ra);
-		if (ra < 90 || ra > 270) 	//Looking left
+		if (ra < 90 || ra > 270) 	//Looking Right
 		{
 			rx = (((int)master->player.px >> 6) << 6) + master->map.block_size;
 			ry = (master->player.px - rx) * tang + master->player.py;
 			xo = master->map.block_size;
 			yo = -xo * tang;
 		}
-		else if (ra > 90 && ra < 270)	//Looking right
+		else if (ra > 90 && ra < 270)	//Looking Left
 		{
 			rx = (((int) master->player.px >> 6) << 6) - 0.0001;
 			ry = (master->player.px - rx) * tang + master->player.py;
@@ -67,10 +66,10 @@ void	draw_rays_3D(t_master *master)
 		{
 			mx = (int) (rx) >> 6;
 			my = (int) (ry) >> 6;
-			mp = my * master->map.nb_cols + mx;		
-			if ((mp > 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1) || dof == 7)	// Hit a wall  @arebelo
+			mp = my * master->map.nb_cols + mx;
+			if ((mp >= 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1))	// Hit a wall  @arebelo
 			{
-				// distV = calc_distance(master->player.px, master->player.py, rx, ry);
+				
 				distV = cos(deg_to_rad(ra)) * (rx - master->player.px) - sin(deg_to_rad(ra)) * (ry - master->player.py);
 				dof = 8;
 			}
@@ -79,31 +78,30 @@ void	draw_rays_3D(t_master *master)
 				rx += xo;
 				ry += yo;
 				dof +=1;
-				// if (rx < 0 && ry < 0)
-				// 	dof = 7;
 			}
 		}
 		vx = rx;
 		vy = ry;
+
 		
 		//------------Check horizontal lines------------
-		tang = 1.0 /tan(ra);
+		tang = 1.0 /tan(deg_to_rad(ra));
 		float	distH;
 
 		dof = 0;
 		distH = 100000;
 
-		if (ra < 180) //Looking up
+		if (ra < 180 && ra > 0 && !isnan(tang)) //Looking up
 		{
+			ry = (((int) master->player.py >> 6) << 6) - 0.0001;
 			rx = (master->player.py - ry) * tang + master->player.px;
-			ry = (((int)master->player.py >> 6) << 6) - 0.0001;
-			xo = -yo * tang;
 			yo = -master->map.block_size;
+			xo = -yo * tang;
 		}
-		else if (ra > 180)	//Looking down
+		else if (ra > 180 && !isnan(tang))	//Looking down
 		{
-			rx = (master->player.py - ry) * tang + master->player.px;
 			ry = (((int) master->player.py >> 6) << 6) + master->map.block_size;
+			rx = (master->player.py - ry) * tang + master->player.px;
 			yo = master->map.block_size;
 			xo = -yo * tang;
 		}
@@ -118,10 +116,8 @@ void	draw_rays_3D(t_master *master)
 			mx = (int)(rx) >> 6;
 			my = (int)(ry) >> 6;
 			mp = my * master->map.nb_rows + mx;
-			printf("MP = %d\n", mp);
-			if ((mp >= 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1)) // || dof == 7)	// Hit a wall
+			if ((mp >= 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1))	// Hit a wall
 			{
-				// printf("Hit a wall %f %f\n", rx, ry);
 				distH = cos(deg_to_rad(ra)) * (rx - master->player.px) - sin(deg_to_rad(ra)) * (ry - master->player.py);
 				dof = 8;
 			}
@@ -132,7 +128,9 @@ void	draw_rays_3D(t_master *master)
 				dof +=1;
 			}
 		}
+		distT = distH;
 
+		//------------Check shortest line------------
 		int color;
 		color = RED_PIXEL;
 		if (distV < distH)
@@ -140,36 +138,32 @@ void	draw_rays_3D(t_master *master)
 			rx = vx;
 			ry = vy;
 			color = DARK_RED_PIXEL;
-			disT = distH;
+			distT = distV;
 		}
-		draw_line(master, master->player.px, master->player.py, rx, ry, color);
+		// draw_line(master, master->player.px, master->player.py, rx, ry, color);
 
-		// //-------------- Draw 3D Walls ------------
-		// int	lineH;
-		// float ca = master->player.pa - ra;
-		// if (ca < 0)
-		// 	ca += 2 * PI;
-		// if (ca > 2 * PI)
-		// 	ca -= 2 * PI;
-		// disT = disT * cos(ca);
-		// lineH = (64 * 320) / disT;			// Line height
-		// if (lineH > 320)
-		// 	lineH = 320;
-		// int lineOff = 160 - lineH / 2;
-		// if (lineOff > 320)
-		// 	lineOff = 320;
-		// int	aaa = lineOff + lineH;
-		// if (aaa < 0)
-		// {
-		// 	aaa = 64;
-		// }
-		// draw_line(master, r * 8 +530, lineOff, r * 8 + 530, aaa, color);
+		// -------------- Draw 3D Walls ------------
+		int	lineH;
+		float ca = angle_check(master->player.pa - ra);
+		distT = distT * cos(deg_to_rad(ca));
+		lineH = (master->map.block_size * WINDOW_HEIGHT) / distT;			// Line height
+		if (lineH > WINDOW_HEIGHT)
+			lineH = WINDOW_HEIGHT;
+		int lineOff = WINDOW_HEIGHT / 2 - lineH / 2;						// To center the line
+		int aaa = lineH + lineOff;
+		if (aaa > WINDOW_HEIGHT)
+			aaa = WINDOW_HEIGHT;
+		draw_line(master, r, lineOff, r, lineH + lineOff, color);
 
-
-		ra = angle_check(ra - 1);
+		ra = angle_check(ra - 60.0/960.0);
 	}
 }
-			// printf("Got here! <%d>\n", aaa);
+
+
+
+		// printf("FINAL (%f, %f) (%f, %f)\n", master->player.px, master->player.py, rx, ry);
+		// printf("Got here! <%d>\n", r);
+		// printf("Got here! <%d>\n", aaa);
 		// printf("Begin(%d, %d)    End(%d, %d)\n", r * 8 +530, lineOff, r * 8 + 530, aaa);
 		// printf("Horizonatl line\n");
 		// printf("Vertical line\n");

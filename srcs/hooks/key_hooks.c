@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 20:49:49 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/19 14:49:29 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_hook(int keycode, t_master *master)
 	}
 	else if (keycode == 0 && master->player.px > BLOCK) // A == LEFT
 	{
-		temp = 90 + master->player.pa;
+		temp = 90 - master->player.pa;
 		temp = angle_check(temp);
 		master->player.px -= cos(deg_to_rad(temp)) * 5;
 		master->player.py -= sin(deg_to_rad(temp)) * 5;
@@ -43,23 +43,21 @@ int	key_hook(int keycode, t_master *master)
 	}
 	else if (keycode == 2 && master->player.px < WINDOW_WIDTH - BLOCK) // D == RIGHT
 	{
-		temp = 90 + master->player.pa;
+		temp = 90 - master->player.pa;
 		temp = angle_check(temp);
 		master->player.px += cos(deg_to_rad(temp)) * 5;
 		master->player.py += sin(deg_to_rad(temp)) * 5;
 	}
 	else if (keycode == 123) // Left arrow <-
 	{
-		master->player.pa += 1;
-		master->player.pa = angle_check(master->player.pa);
+		master->player.pa = angle_check(master->player.pa + 5);
 		master->player.pdx = cos(deg_to_rad(master->player.pa));
 		master->player.pdy = -sin(deg_to_rad(master->player.pa));
 
 	}
 	else if (keycode == 124) // Right arrow ->
 	{
-		master->player.pa -= 1;
-		master->player.pa = angle_check(master->player.pa);
+		master->player.pa = angle_check(master->player.pa - 5);
 		master->player.pdx = cos(deg_to_rad(master->player.pa));
 		master->player.pdy = -sin(deg_to_rad(master->player.pa));
 	}

@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:41:56 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/18 20:47:28 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/19 15:21:52 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float	deg_to_rad(int d)
 	return d * M_PI/ 180.0;
 }
 
-int	angle_check(int ang)
+float	angle_check(float ang)
 {
 	if (ang > 359)
 		ang -= 360;

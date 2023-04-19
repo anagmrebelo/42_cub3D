@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 20:55:10 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/19 18:35:43 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <mlx.h>
 
 # define BLOCK 64
-# define WINDOW_WIDTH 1024
+# define WINDOW_WIDTH 960
 # define WINDOW_HEIGHT 512
 # define PLAYER_SIZE 8
 
@@ -38,7 +38,6 @@
 # define PI 3.1415
 # define P2 PI/2
 # define P3 3 * PI/2
-# define DR 0.0174533	// one degree in radians
 
 typedef struct s_img
 {

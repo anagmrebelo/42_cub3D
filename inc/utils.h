@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:18:27 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 19:37:56 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/19 15:21:59 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ float	calc_distance(int beginX, int beginY, int endX, int endY);
 
 // angles.c
 float	deg_to_rad(int d);
-int		angle_check(int ang);
+float	angle_check(float ang);
 
 #endif
