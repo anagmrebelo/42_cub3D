@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/19 19:33:00 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/20 18:12:13 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define WINDOW_WIDTH 960
 # define WINDOW_HEIGHT 512
 # define PLAYER_SIZE 8
+# define ANGLE_VIEW 60
 
 # define RED_PIXEL 0x9E1A1A
 # define DARK_RED_PIXEL 0xB53737
@@ -34,10 +35,6 @@
 # define YELLOW_PIXEL 0xFFFF00
 
 # define GRID_SIZE 1
-
-# define PI 3.1415
-# define P2 PI/2
-# define P3 3 * PI/2
 
 typedef struct s_img
 {
@@ -71,6 +68,12 @@ typedef struct s_map
 	int			nb_rows;
 	int			nb_blocks;
 	int			block_size;
+	float		ra;
+	float		disT;
+	float		rx;
+	float		ry;
+	int			dof;
+	int			color;
 } t_map;
 
 typedef struct s_master

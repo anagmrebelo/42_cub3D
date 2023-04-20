@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:18 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/19 19:35:05 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:48:52 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,15 @@ void	print_init_map(t_master *master)
 {
 	int map[] = {
 		1, 1, 1, 1, 1, 1, 1, 1,
-		1, 0, 1, 0, 0, 0, 0, 1,
-		1, 0, 1, 0, 1, 0, 0, 1,
-		1, 0, 1, 0, 1, 1, 0, 1,
+		1, 0, 1, 0, 0, 0, 0, 0,
+		1, 0, 1, 0, 1, 0, 0, 0,
+		1, 0, 1, 0, 1, 1, 0, 0,
 		1, 0, 0, 1, 0, 0, 0, 1,
 		1, 0, 0, 0, 0, 1, 0, 1,
 		1, 0, 0, 1, 0, 0, 0, 1,
 		1, 1, 1, 1, 1, 1, 1, 1,
 	};
-	int	i;
-	int	j;
-	int counter;
-
+	
 	master->map.nb_cols = 8;
 	master->map.nb_rows = 8;
 	master->map.nb_blocks = master->map.nb_cols * master->map.nb_rows;
@@ -97,20 +94,4 @@ void	print_init_map(t_master *master)
 	master->map.map_arr = ft_calloc(master->map.nb_blocks, sizeof(int));
 	ft_memcpy(master->map.map_arr, map, master->map.nb_blocks * sizeof(int));
 	print_background(master);
-	i = -1;
-	j = 0;
-	counter = 0;
-	// while (++i < master->map.nb_rows)
-	// {
-	// 	j = 0;
-	// 	while (j < master->map.nb_cols)
-	// 	{
-	// 		if (map[counter] == 0)
-	// 			print_square(master, j * master->map.block_size, i * master->map.block_size, BLACK_PIXEL);
-	// 		else if (map[counter] == 1)
-	// 			print_square(master, j * master->map.block_size , i * master->map.block_size, WHITE_PIXEL);
-	// 		j++;
-	// 		counter++;
-	// 	}	
-	// }
 }

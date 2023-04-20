@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/19 19:19:56 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:49:14 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 #include "utils.h"
 #include "hooks.h"
 #include "rendering.h"
-
+ 
+/**
+ * Prints background and rays into image
+ * Pushes image to screen
+*/
 int	render(t_master *master)
 {
 	if (!master->mlx.mlx_ptr)
 		clean_exit(master);
 	print_init_map(master);	
 	draw_rays_3D(master);
-	// print_player(master, YELLOW_PIXEL);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
-	// printf("Player angle: %d\n", master->player.pa);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:33 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/17 15:10:33 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/20 18:27:10 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "cub3D.h"
 # include "utils.h"
+# include "limits.h"
 
 void	print_player(t_master *master, int color);
 void	print_init_map(t_master *master);

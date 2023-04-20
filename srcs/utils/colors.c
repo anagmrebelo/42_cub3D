@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:17:59 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/18 18:37:26 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/20 18:18:27 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-float	calc_distance(int beginX, int beginY, int endX, int endY)
+float	calc_distance(t_master *master)
 {
-	return (sqrt((endX - beginX) * (endX - beginX) + (endY - beginY) * (endY - beginY)));
+	return (cos(deg_to_rad(master->map.ra)) * (master->map.rx - master->player.px) - sin(deg_to_rad(master->map.ra)) * (master->map.ry - master->player.py));
+	// return (sqrt((endX - beginX) * (endX - beginX) + (endY - beginY) * (endY - beginY)));
 }
