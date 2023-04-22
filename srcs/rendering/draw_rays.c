@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/20 20:03:40 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/22 12:38:20 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void find_obs(t_master *master, float xo, float yo, int color)
 	int		mp;
 	float	temp;
 	
-	mx = (int)(master->map.rx) >> 6;
-	my = (int)(master->map.ry) >> 6;
+	mx = (int)(master->map.rx / SCALE);
+	my = (int)(master->map.ry / SCALE);
 	mp = my * master->map.nb_cols + mx;
 	if ((mp >= 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1))	// Hit a wall
 	{
@@ -96,14 +96,14 @@ static void	check_vertical_lines(t_master *master)
 	master->map.disT = 100000;
 	if (master->map.ra < 90 || master->map.ra > 270) 	//Looking Right
 	{
-		master->map.rx = (((int)master->player.px >> 6) << 6) + master->map.block_size;
+		master->map.rx = ((int)(master->player.px / SCALE) * SCALE) + master->map.block_size;
 		master->map.ry = (master->player.px - master->map.rx) * tang + master->player.py;
 		xo = master->map.block_size;
 		yo = -xo * tang;
 	}
 	else if (master->map.ra > 90 && master->map.ra < 270)	//Looking Left
 	{
-		master->map.rx = (((int) master->player.px >> 6) << 6) - 0.0001;
+		master->map.rx = ((int)(master->player.px / SCALE) * SCALE) - 0.0001;
 		master->map.ry = (master->player.px - master->map.rx) * tang + master->player.py;
 		xo = -master->map.block_size;
 		yo = -xo * tang;
@@ -127,14 +127,14 @@ static void	check_horizontal_lines(t_master *master)
 	master->map.dof = 0;
 	if (master->map.ra < 180 && master->map.ra > 0 && !isnan(tang)) //Looking up
 	{
-		master->map.ry = (((int) master->player.py >> 6) << 6) - 0.0001;
+		master->map.ry = ((int)(master->player.py / SCALE) * SCALE) - 0.0001;
 		master->map.rx = (master->player.py - master->map.ry) * tang + master->player.px;
 		yo = -master->map.block_size;
 		xo = -yo * tang;
 	}
 	else if (master->map.ra > 180 && !isnan(tang))	//Looking down
 	{
-		master->map.ry = (((int) master->player.py >> 6) << 6) + master->map.block_size;
+		master->map.ry = ((int)(master->player.py / SCALE) * SCALE) + master->map.block_size;
 		master->map.rx = (master->player.py - master->map.ry) * tang + master->player.px;
 		yo = master->map.block_size;
 		xo = -yo * tang;

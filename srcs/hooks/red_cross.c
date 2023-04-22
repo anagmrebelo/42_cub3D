@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.h                                        :+:      :+:    :+:   */
+/*   red_cross.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 21:28:33 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/22 10:59:10 by anarebelo        ###   ########.fr       */
+/*   Created: 2023/04/22 13:07:57 by anarebelo         #+#    #+#             */
+/*   Updated: 2023/04/22 13:09:11 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERING_H
-# define RENDERING_H
+#include "cub3D.h"
+#include "free.h"
 
-# include "cub3D.h"
-# include "utils.h"
-# include "limits.h"
-
-void	print_init_map(t_master *master);
-void	draw_rays_3D(t_master *master);
-void 	draw_line(t_master *master, int beginX, int beginY, int endX, int endY, int color);
-
-// print_minimap.c
-void	print_minimap(t_master *master);
-
-#endif
+int	red_cross(t_master *master)
+{
+	mlx_destroy_window(master->mlx.mlx_ptr, master->mlx.mlx_win);
+	clean_exit(master);
+	return (0);
+}

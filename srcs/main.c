@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/20 20:49:14 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/22 13:05:41 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	render(t_master *master)
 		clean_exit(master);
 	print_init_map(master);	
 	draw_rays_3D(master);
+	print_minimap(master);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
 	return (0);
 }
@@ -50,9 +51,9 @@ void	create_image(t_master *master)
 void	window_init(t_master *master)
 {
 	//Initial player position
-	master->player.px = 150;
-	master->player.py = 400;
-	master->player.pa = 90;
+	master->player.px = 1.5 * SCALE;
+	master->player.py = 1.5 * SCALE;
+	master->player.pa = 270;
 	master->player.pdx = cos(deg_to_rad(master->player.pa));
 	master->player.pdy = -sin(deg_to_rad(master->player.pa));
 
@@ -67,6 +68,7 @@ void	window_init(t_master *master)
 	}
 	create_image(master);
 	mlx_hook(master->mlx.mlx_win, 2, 1L<<0, &key_hook, master);
+	mlx_hook(master->mlx.mlx_win, 17, 0, &red_cross, master);
 	mlx_loop_hook(master->mlx.mlx_ptr, &render, master);
 	mlx_loop(master->mlx.mlx_ptr);
 	return ;

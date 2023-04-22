@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
+#    By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/18 18:44:05 by arebelo          ###   ########.fr        #
+#    Updated: 2023/04/22 13:09:35 by anarebelo        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ BINARY				= cub3D
 SRCS				= main.c\
 					parsing/args_check.c\
 					hooks/key_hooks.c\
+					hooks/red_cross.c\
 					rendering/print_map.c\
+					rendering/print_minimap.c\
 					rendering/draw_rays.c\
 					rendering/draw_line.c\
 					free/clean_exit.c\
