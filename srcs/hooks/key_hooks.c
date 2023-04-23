@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 11:00:04 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 11:11:03 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	key_hook(int keycode, t_master *master)
 {	
 	if (!master->mlx.mlx_ptr)
 		clean_exit(master);
-	if (keycode == 13) // W == FRONT
+	else if (keycode == 13) // W == FRONT
 		move_front(master);
 	else if (keycode == 0) // A == LEFT
 		move_left(master);

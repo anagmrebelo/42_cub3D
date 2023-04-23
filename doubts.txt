@@ -1,2 +1,4 @@
 Is it necessary to free new image?
 Is it necessary to free get addr of image?
+
+How to allow for two key press simultaneously?
