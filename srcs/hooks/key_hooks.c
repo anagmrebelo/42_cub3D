@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/22 13:07:32 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 10:55:00 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,56 +29,105 @@ static _Bool	allow_move(t_master *master, float x, float y)
 	return (0);
 }
 
+static void	move_front(t_master *master)
+{
+	if (allow_move(master, master->player.px + master->player.pdx * 5, master->player.py + master->player.pdy * 5))
+		{
+			master->player.px += master->player.pdx * 5;
+			master->player.py += master->player.pdy * 5;
+		}
+		else if (allow_move(master, master->player.px + master->player.pdx * 5, master->player.py))
+			master->player.px += master->player.pdx * 5;
+		else if (allow_move(master, master->player.px, master->player.py + master->player.pdy * 5))
+			master->player.py += master->player.pdy * 5;
+}
+
+static void	move_left(t_master *master)
+{
+	int	temp;
+
+	temp = angle_check(90 - master->player.pa);
+		if (allow_move(master, master->player.px - cos(deg_to_rad(temp)) * 5, master->player.py - sin(deg_to_rad(temp)) * 5))
+		{
+			master->player.px -= cos(deg_to_rad(temp)) * 5;
+			master->player.py -= sin(deg_to_rad(temp)) * 5;
+		}
+		else if (allow_move(master, master->player.px - cos(deg_to_rad(temp)) * 5, master->player.py))
+			master->player.px -= cos(deg_to_rad(temp)) * 5;
+		else if (allow_move(master, master->player.px, master->player.py - sin(deg_to_rad(temp)) * 5))
+			master->player.px -= cos(deg_to_rad(temp)) * 5;
+}
+
+static void	move_back(t_master *master)
+{
+	if (allow_move(master, master->player.px - master->player.pdx * 5, master->player.py - master->player.pdy * 5))
+		{
+			master->player.px -= master->player.pdx * 5;
+			master->player.py -= master->player.pdy * 5;
+		}
+		else if (allow_move(master, master->player.px - master->player.pdx * 5, master->player.py))
+			master->player.px -= master->player.pdx * 5;
+		else if (allow_move(master, master->player.px, master->player.py - master->player.pdy * 5))
+			master->player.py -= master->player.pdy * 5;
+}
+
+static void	move_right(t_master *master)
+{
+	int	temp;
+
+	temp = angle_check(90 - master->player.pa);
+	if (allow_move(master, master->player.px + cos(deg_to_rad(temp)) * 5, master->player.py + sin(deg_to_rad(temp)) * 5))
+	{
+		master->player.px += cos(deg_to_rad(temp)) * 5;
+		master->player.py += sin(deg_to_rad(temp)) * 5;
+	}
+	else if (allow_move(master, master->player.px + cos(deg_to_rad(temp)) * 5, master->player.py))
+		master->player.px += cos(deg_to_rad(temp)) * 5;
+	else if (allow_move(master, master->player.px, master->player.py + sin(deg_to_rad(temp)) * 5))
+		master->player.py += sin(deg_to_rad(temp)) * 5;
+}
+
+static void	move_larrow(t_master *master)
+{
+	master->player.pa = angle_check(master->player.pa + 5);
+	master->player.pdx = cos(deg_to_rad(master->player.pa));
+	master->player.pdy = -sin(deg_to_rad(master->player.pa));
+}
+
+static void	move_rarrow(t_master *master)
+{
+	master->player.pa = angle_check(master->player.pa - 5);
+	master->player.pdx = cos(deg_to_rad(master->player.pa));
+	master->player.pdy = -sin(deg_to_rad(master->player.pa));
+}
+
+static void	esc(t_master *master)
+{
+	mlx_destroy_window(master->mlx.mlx_ptr, master->mlx.mlx_win);
+	clean_exit(master);
+}
 
 /**
  * Define behaviour of WASD -> <-
 */
 int	key_hook(int keycode, t_master *master)
-{
-	int	temp;
-	
+{	
 	if (!master->mlx.mlx_ptr)
 		clean_exit(master);
-	if (keycode == 13 && allow_move(master, master->player.px + master->player.pdx * 5, master->player.py + master->player.pdy * 5)) // W == FRONT
-	{
-		master->player.px += master->player.pdx * 5;
-		master->player.py += master->player.pdy * 5;
-	}
-	else if (keycode == 0 && allow_move(master, master->player.px - cos(deg_to_rad(angle_check(90 - master->player.pa))) * 5, master->player.py - sin(deg_to_rad(angle_check(90 - master->player.pa))) * 5)) // A == LEFT
-	{
-		temp = angle_check(90 - master->player.pa);
-		master->player.px -= cos(deg_to_rad(temp)) * 5;
-		master->player.py -= sin(deg_to_rad(temp)) * 5;
-	}
-	else if (keycode == 1 && allow_move(master, master->player.px - master->player.pdx * 5, master->player.py - master->player.pdy * 5)) // S == BACK
-	{
-		master->player.px -= master->player.pdx * 5;
-		master->player.py -= master->player.pdy * 5;
-	}
-	else if (keycode == 2 && allow_move(master, master->player.px + cos(deg_to_rad(angle_check(90 - master->player.pa))) * 5, master->player.py + sin(deg_to_rad(angle_check(90 - master->player.pa))) * 5)) // D == RIGHT
-	{
-		temp = angle_check(90 - master->player.pa);
-		master->player.px += cos(deg_to_rad(temp)) * 5;
-		master->player.py += sin(deg_to_rad(temp)) * 5;
-	}
+	if (keycode == 13) // W == FRONT
+		move_front(master);
+	else if (keycode == 0) // A == LEFT
+		move_left(master);
+	else if (keycode == 1) // S == BACK
+		move_back(master);
+	else if (keycode == 2) // D == RIGHT
+		move_right(master);
 	else if (keycode == 123) // Left arrow <-
-	{
-		master->player.pa = angle_check(master->player.pa + 5);
-		master->player.pdx = cos(deg_to_rad(master->player.pa));
-		master->player.pdy = -sin(deg_to_rad(master->player.pa));
-
-	}
+		move_larrow(master);
 	else if (keycode == 124) // Right arrow ->
-	{
-		master->player.pa = angle_check(master->player.pa - 5);
-		master->player.pdx = cos(deg_to_rad(master->player.pa));
-		master->player.pdy = -sin(deg_to_rad(master->player.pa));
-	}
+		move_rarrow(master);
 	else if (keycode == 53)
-	{
-		mlx_destroy_window(master->mlx.mlx_ptr, master->mlx.mlx_win);
-		clean_exit(master);
-	}
+		esc(master);	// ESC
 	return (0);
 }
 
