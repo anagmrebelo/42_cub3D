@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/22 12:42:12 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 10:11:39 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 # define WINDOW_WIDTH 960
 # define WINDOW_HEIGHT 512
-# define SCALE 30
-# define PLAYER_SIZE 4
+# define SCALE 64
+# define PLAYER_SIZE 5
 # define ANGLE_VIEW 60
 
 # define RED_PIXEL 0x9E1A1A

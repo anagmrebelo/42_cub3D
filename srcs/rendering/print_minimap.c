@@ -6,12 +6,13 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 10:09:26 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/22 12:57:22 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 10:13:08 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "utils.h"
+#include "rendering.h"
 
 /**
  * Draws player as yellow square of size 8 and a small yellow ray in the direction player is oriented
@@ -36,7 +37,7 @@ static void	print_player(t_master *master, int color)
 		} 
 		i++;
 	}
-	// draw_line(master, master->player.px, master->player.py, master->player.px + 5 * master->player.pdx, master->player.py + 5 * master->player.pdy, color);
+	draw_line(master, master->player.px/SCALE * master->map.map_s + MINIMAP_OFF, master->player.py /SCALE * master->map.map_s + MINIMAP_OFF, master->player.px/SCALE * master->map.map_s + MINIMAP_OFF +  5 * master->player.pdx, master->player.py /SCALE * master->map.map_s + MINIMAP_OFF + 5 * master->player.pdy, color);
 }
 
 static void	print_square(t_master *master, int x, int y, int color)
@@ -99,5 +100,5 @@ void	print_minimap(t_master *master)
 		}	
 	}
 	print_frontier(master, BLACK_PIXEL);
-	print_player(master, RED_PIXEL);
+	print_player(master, YELLOW_PIXEL);
 }

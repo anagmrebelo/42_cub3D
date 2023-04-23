@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/22 12:38:20 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 10:14:53 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void		draw_rays_3D(t_master *master)
 
 	master->map.ra = angle_check(master->player.pa + ANGLE_VIEW / 2);
 	r = 0;
-	while (r++ < WINDOW_WIDTH)
+	while (r < WINDOW_WIDTH)
 	{
 		//------------ Check vertical lines------------
 		check_vertical_lines(master);
@@ -166,5 +166,6 @@ void		draw_rays_3D(t_master *master)
 		// ----------- Draw 3D Walls ------------
 		draw_3D_wall(master, r, master->map.color);
 		master->map.ra = angle_check(master->map.ra - (float)ANGLE_VIEW / WINDOW_WIDTH);
+		r++;
 	}
 }
