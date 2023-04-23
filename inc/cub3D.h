@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 10:11:39 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 11:01:13 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define SCALE 64
 # define PLAYER_SIZE 5
 # define ANGLE_VIEW 60
+# define PLAYER_SPEED 7
+# define ANGLE_SPEED 5
 
 # define RED_PIXEL 0x9E1A1A
 # define DARK_RED_PIXEL 0xB53737

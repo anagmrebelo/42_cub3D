@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 10:55:00 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 11:00:04 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static _Bool	allow_move(t_master *master, float x, float y)
 
 static void	move_front(t_master *master)
 {
-	if (allow_move(master, master->player.px + master->player.pdx * 5, master->player.py + master->player.pdy * 5))
+	if (allow_move(master, master->player.px + master->player.pdx * PLAYER_SPEED, master->player.py + master->player.pdy * PLAYER_SPEED))
 		{
-			master->player.px += master->player.pdx * 5;
-			master->player.py += master->player.pdy * 5;
+			master->player.px += master->player.pdx * PLAYER_SPEED;
+			master->player.py += master->player.pdy * PLAYER_SPEED;
 		}
-		else if (allow_move(master, master->player.px + master->player.pdx * 5, master->player.py))
-			master->player.px += master->player.pdx * 5;
-		else if (allow_move(master, master->player.px, master->player.py + master->player.pdy * 5))
-			master->player.py += master->player.pdy * 5;
+		else if (allow_move(master, master->player.px + master->player.pdx * PLAYER_SPEED, master->player.py))
+			master->player.px += master->player.pdx * PLAYER_SPEED;
+		else if (allow_move(master, master->player.px, master->player.py + master->player.pdy * PLAYER_SPEED))
+			master->player.py += master->player.pdy * PLAYER_SPEED;
 }
 
 static void	move_left(t_master *master)
@@ -47,28 +47,28 @@ static void	move_left(t_master *master)
 	int	temp;
 
 	temp = angle_check(90 - master->player.pa);
-		if (allow_move(master, master->player.px - cos(deg_to_rad(temp)) * 5, master->player.py - sin(deg_to_rad(temp)) * 5))
+		if (allow_move(master, master->player.px - cos(deg_to_rad(temp)) * PLAYER_SPEED, master->player.py - sin(deg_to_rad(temp)) * PLAYER_SPEED))
 		{
-			master->player.px -= cos(deg_to_rad(temp)) * 5;
-			master->player.py -= sin(deg_to_rad(temp)) * 5;
+			master->player.px -= cos(deg_to_rad(temp)) * PLAYER_SPEED;
+			master->player.py -= sin(deg_to_rad(temp)) * PLAYER_SPEED;
 		}
-		else if (allow_move(master, master->player.px - cos(deg_to_rad(temp)) * 5, master->player.py))
-			master->player.px -= cos(deg_to_rad(temp)) * 5;
-		else if (allow_move(master, master->player.px, master->player.py - sin(deg_to_rad(temp)) * 5))
-			master->player.px -= cos(deg_to_rad(temp)) * 5;
+		else if (allow_move(master, master->player.px - cos(deg_to_rad(temp)) * PLAYER_SPEED, master->player.py))
+			master->player.px -= cos(deg_to_rad(temp)) * PLAYER_SPEED;
+		else if (allow_move(master, master->player.px, master->player.py - sin(deg_to_rad(temp)) * PLAYER_SPEED))
+			master->player.px -= cos(deg_to_rad(temp)) * PLAYER_SPEED;
 }
 
 static void	move_back(t_master *master)
 {
-	if (allow_move(master, master->player.px - master->player.pdx * 5, master->player.py - master->player.pdy * 5))
+	if (allow_move(master, master->player.px - master->player.pdx * PLAYER_SPEED, master->player.py - master->player.pdy * PLAYER_SPEED))
 		{
-			master->player.px -= master->player.pdx * 5;
-			master->player.py -= master->player.pdy * 5;
+			master->player.px -= master->player.pdx * PLAYER_SPEED;
+			master->player.py -= master->player.pdy * PLAYER_SPEED;
 		}
-		else if (allow_move(master, master->player.px - master->player.pdx * 5, master->player.py))
-			master->player.px -= master->player.pdx * 5;
-		else if (allow_move(master, master->player.px, master->player.py - master->player.pdy * 5))
-			master->player.py -= master->player.pdy * 5;
+		else if (allow_move(master, master->player.px - master->player.pdx * PLAYER_SPEED, master->player.py))
+			master->player.px -= master->player.pdx * PLAYER_SPEED;
+		else if (allow_move(master, master->player.px, master->player.py - master->player.pdy * PLAYER_SPEED))
+			master->player.py -= master->player.pdy * PLAYER_SPEED;
 }
 
 static void	move_right(t_master *master)
@@ -76,27 +76,27 @@ static void	move_right(t_master *master)
 	int	temp;
 
 	temp = angle_check(90 - master->player.pa);
-	if (allow_move(master, master->player.px + cos(deg_to_rad(temp)) * 5, master->player.py + sin(deg_to_rad(temp)) * 5))
+	if (allow_move(master, master->player.px + cos(deg_to_rad(temp)) * PLAYER_SPEED, master->player.py + sin(deg_to_rad(temp)) * PLAYER_SPEED))
 	{
-		master->player.px += cos(deg_to_rad(temp)) * 5;
-		master->player.py += sin(deg_to_rad(temp)) * 5;
+		master->player.px += cos(deg_to_rad(temp)) * PLAYER_SPEED;
+		master->player.py += sin(deg_to_rad(temp)) * PLAYER_SPEED;
 	}
-	else if (allow_move(master, master->player.px + cos(deg_to_rad(temp)) * 5, master->player.py))
-		master->player.px += cos(deg_to_rad(temp)) * 5;
-	else if (allow_move(master, master->player.px, master->player.py + sin(deg_to_rad(temp)) * 5))
-		master->player.py += sin(deg_to_rad(temp)) * 5;
+	else if (allow_move(master, master->player.px + cos(deg_to_rad(temp)) * PLAYER_SPEED, master->player.py))
+		master->player.px += cos(deg_to_rad(temp)) * PLAYER_SPEED;
+	else if (allow_move(master, master->player.px, master->player.py + sin(deg_to_rad(temp)) * PLAYER_SPEED))
+		master->player.py += sin(deg_to_rad(temp)) * PLAYER_SPEED;
 }
 
 static void	move_larrow(t_master *master)
 {
-	master->player.pa = angle_check(master->player.pa + 5);
+	master->player.pa = angle_check(master->player.pa + ANGLE_SPEED);
 	master->player.pdx = cos(deg_to_rad(master->player.pa));
 	master->player.pdy = -sin(deg_to_rad(master->player.pa));
 }
 
 static void	move_rarrow(t_master *master)
 {
-	master->player.pa = angle_check(master->player.pa - 5);
+	master->player.pa = angle_check(master->player.pa - ANGLE_SPEED);
 	master->player.pdx = cos(deg_to_rad(master->player.pa));
 	master->player.pdy = -sin(deg_to_rad(master->player.pa));
 }
