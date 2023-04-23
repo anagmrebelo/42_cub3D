@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 11:00:04 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 11:20:46 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	move_left(t_master *master)
 		else if (allow_move(master, master->player.px - cos(deg_to_rad(temp)) * PLAYER_SPEED, master->player.py))
 			master->player.px -= cos(deg_to_rad(temp)) * PLAYER_SPEED;
 		else if (allow_move(master, master->player.px, master->player.py - sin(deg_to_rad(temp)) * PLAYER_SPEED))
-			master->player.px -= cos(deg_to_rad(temp)) * PLAYER_SPEED;
+			master->player.py -= sin(deg_to_rad(temp)) * PLAYER_SPEED;
 }
 
 static void	move_back(t_master *master)

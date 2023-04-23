@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 11:01:13 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 11:19:34 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "stdio.h"
 # include <mlx.h>
 
+// -------- Game Settings --------
 # define WINDOW_WIDTH 960
 # define WINDOW_HEIGHT 512
 # define SCALE 64
@@ -29,16 +30,18 @@
 # define PLAYER_SPEED 7
 # define ANGLE_SPEED 5
 
+// -------- Minimap settings --------
+# define MINIMAP_OFF 10
+# define MINIMAP_SIZE 100
+
+// -------- Colors --------
 # define RED_PIXEL 0x9E1A1A
 # define DARK_RED_PIXEL 0xB53737
 # define BLACK_PIXEL 0x000000
 # define WHITE_PIXEL 0xFFFFFF
 # define GRAY_PIXEL 0x808080
 # define YELLOW_PIXEL 0xFFFF00
-
-# define MINIMAP_OFF 10
-# define MINIMAP_SIZE 100
-
+# define BLUE_PIXEL 0x0000FF
 
 typedef struct s_img
 {

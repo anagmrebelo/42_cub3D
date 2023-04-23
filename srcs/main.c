@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/22 13:05:41 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 11:16:02 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,8 @@ int main(int argc, char **argv)
 	check_args(argc, argv);
 	master = ft_calloc(1, sizeof(t_master));
 	if (!master)
-		return (1);
+		clean_exit(master);
 	window_init(master);
-	// mlx_destroy_display(master->mlx.mlx_ptr);
-	free(master->mlx.mlx_ptr);
+	clean_exit(master);
     return (0);
 }
