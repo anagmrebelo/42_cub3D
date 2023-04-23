@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 11:19:34 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/23 13:38:31 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@
 # define WHITE_PIXEL 0xFFFFFF
 # define GRAY_PIXEL 0x808080
 # define YELLOW_PIXEL 0xFFFF00
-# define BLUE_PIXEL 0x0000FF
+# define BLUE_PIXEL 0x63C5DA
+# define GREEN_PIXEL 0x028A0F
 
 typedef struct s_img
 {
@@ -80,8 +81,13 @@ typedef struct s_map
 	float		disT;
 	float		rx;
 	float		ry;
+	float		rx_f;
+	float		ry_f;
+	char		f;
 	int			dof;
 	int			color;
+	int			ceil_col;
+	int			floor_col;
 } t_map;
 
 typedef struct s_master
