@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:18:27 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/20 18:19:29 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/24 10:44:00 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 // colors.c
 void	img_pix_put(t_img *img, int x, int y, int color);
+int		img_pix_get(t_img *img, int x, int y);
 float	calc_distance(t_master *master);
 
 // angles.c

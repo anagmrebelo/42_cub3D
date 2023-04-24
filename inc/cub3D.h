@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 13:38:31 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/24 12:11:05 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define SCALE 64
 # define PLAYER_SIZE 5
 # define ANGLE_VIEW 60
-# define PLAYER_SPEED 7
+# define PLAYER_SPEED 20
 # define ANGLE_SPEED 5
 
 // -------- Minimap settings --------
@@ -51,6 +51,8 @@ typedef struct s_img
 	int		bpp; /* bits per pixel */
 	int		line_len;
 	int		endian;
+	int		height;
+	int		width;
 }	t_img;
 
 typedef struct s_player
@@ -88,6 +90,10 @@ typedef struct s_map
 	int			color;
 	int			ceil_col;
 	int			floor_col;
+	t_img		north;
+	t_img		south;
+	t_img		east;
+	t_img		west;
 } t_map;
 
 typedef struct s_master

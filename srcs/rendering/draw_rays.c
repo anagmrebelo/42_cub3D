@@ -6,7 +6,7 @@
 /*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 14:12:43 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/24 11:22:13 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,17 @@ static void	draw_3D_wall(t_master *master, int r, int color)
 	ca = angle_check(master->player.pa - master->map.ra);
 	master->map.disT = master->map.disT * cos(deg_to_rad(ca));
 	line_h = (master->map.block_size * WINDOW_HEIGHT) / master->map.disT;
-	float	ty_step = 32.0 / line_h;
+
+	t_img	text;
+	if (master->map.f == 'h' && master->map.ra < 180)
+		text = master->map.north;
+	else if (master->map.f == 'h' && master->map.ra >= 180)
+		text = master->map.south;
+	else if (master->map.f == 'v' && master->map.ra > 90 && master->map.ra < 270)
+		text = master->map.west;
+	else
+		text = master->map.east;
+	float	ty_step = text.height / line_h;
 	float	ty_off = 0;
 	if (line_h > WINDOW_HEIGHT)
 	{
@@ -193,44 +203,29 @@ static void	draw_3D_wall(t_master *master, int r, int color)
 	// Draw wall
 	// draw_line(master, r, line_off, r, line_f, color);
 
-	int	text;
-	if (master->map.f == 'h' && master->map.ra < 180)
-		text = 0;
-	else if (master->map.f == 'h' && master->map.ra >= 180)
-		text = 1;
-	else if (master->map.f == 'v' && master->map.ra > 90 && master->map.ra < 270)
-		text = 2;
-	else
-		text = 3;
 	float y = 0;
-	float ty = ty_off * ty_step + text * 32;
+	float ty = ty_off * ty_step;
 	float tx;
 	
 	if (master->map.f == 'h')
 	{
-		tx = (int)(master->map.rx_f / 2.0) % 32;
+		tx = (int)(master->map.rx_f) % text.height;
 		if (master->map.ra > 180)
-			tx = 31 - tx;
+			tx = text.height - 1 - tx;
 	}
 	else
 	{
-		tx = (int)(master->map.ry_f / 2.0) % 32;
+		tx = (int)(master->map.ry_f) % text.height;
 		if (master->map.ra > 90 && master->map.ra < 270)
-			tx = 31 - tx;
+			tx = text.height - 1 - tx;
 	}
 	while (y < line_h)
 	{
-		int c = check_text[(int)ty * 32 + (int)(tx)];
-		if (c == 0)
-			color = BLACK_PIXEL;
-		else if (c == 1)
-			color = WHITE_PIXEL;
+		int color = img_pix_get(&text, (int)(tx), (int)(ty));
 		draw_pixel(master, r, y + line_off, color);
 		ty += ty_step;
 		y++;
 	}
-
-
 	// Draw floor
 	draw_line(master, r, line_f, r, WINDOW_HEIGHT, master->map.floor_col);
 	// Draw celing

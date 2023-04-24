@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:17:59 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/20 18:18:27 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/24 10:30:37 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(int *)pixel = color;
+}
+
+int	img_pix_get(t_img *img, int x, int y)
+{
+	char    *pixel;
+
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	return (*(int *)pixel);
 }
 
 float	calc_distance(t_master *master)
