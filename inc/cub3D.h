@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:23:38 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:41:06 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define BLUE_PIXEL 0x63C5DA
 # define GREEN_PIXEL 0x028A0F
 
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -73,8 +74,19 @@ typedef struct s_mlx
 
 typedef struct s_map
 {
+	char		*str_map;
+	char		**mtx;
+	char		*tex_no;
+	char		*tex_so;
+	char		*tex_ea;
+	char		*tex_we;
+	char		*color_c;
+	char		*color_f;
+
 	int			nb_cols;
 	int			nb_rows;
+	int			ceil_col;
+	int			floor_col;
 	int			nb_blocks;
 	int			block_size;
 	int			map_s;
@@ -87,8 +99,6 @@ typedef struct s_map
 	char		f;
 	int			dof;
 	int			color;
-	int			ceil_col;
-	int			floor_col;
 	t_img		north;
 	t_img		south;
 	t_img		east;

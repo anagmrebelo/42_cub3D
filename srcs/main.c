@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 12:37:00 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:46:19 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 	master = ft_calloc(1, sizeof(t_master));
 	if (!master)
 		return (1);
-	check_args(argc, argv);
+	check_args(argc, argv, master);
 	window_init(master);
 	window_loops(master);
 	clean_exit(master);
