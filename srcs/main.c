@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:57:23 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 00:30:21 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@
 */
 int	render(t_master *master)
 {
+	int x;
+	int y;
+	
+	// mlx_mouse_get_pos(master->mlx.mlx_win, &x, &y);
+	// printf("(%d, %d)\n", x, y);
+	// if (x > 720)
+	// 	master->player.pa = angle_check(master->player.pa - 1);
+	// else if (x < 240)
+	// 	master->player.pa = angle_check(master->player.pa + 1);
 	draw_rays_3D(master);
 	print_minimap(master);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:10:36 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/26 16:57:09 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 00:07:17 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ static void	create_game_image(t_master *master)
 		clean_exit(master);
 }
 
+/**
+ * Exits the program if image width and height is different from 64 pixels
+*/
+static void	check_64(t_master *master, t_img *img)
+{
+	if (img->width == 64 && img->height == 64)
+		return ;
+	printf("Insert only textures of 64 x 64 pixlels\n");
+	clean_exit(master);
+}
+
 /***
  *	Saves as the file given by path in the structure img 
 */
@@ -38,6 +49,7 @@ static void	save_image(t_master *master, t_img *img, char *path)
 			img->mlx_img, &img->bpp, &img->line_len, &img->endian);
 	if (!img->addr)
 		clean_exit(master);
+	check_64(master, img);
 }
 
 /**
