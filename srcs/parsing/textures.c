@@ -1,30 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
+/*   Updated: 2023/04/26 19:16:17 by mrollo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 #include "parsing.h"
 
-int	check_color(char *str)
+int	check_color(int *arr)
 {
-	char	**aux;
-	int		n;
-	int		i;
+	int	i;
 
-	aux = ft_split(str, ',');
-	if (!aux)
-		return (1); // que hago!!??
 	i = 0;
-	while (i < 3)
+	while (arr[i])
 	{
-		n = ft_atoi(aux[i]);
-		if (n >= 0 && n <= 255)
+		if (arr[i] >= 0 && arr[i] <= 255)
 			i++;
 		else
-		{
-			free_tab(aux);
 			return (1);
-		}
 	}
-	free_tab(aux);
 	return (0);
-	
+}
+
+int	*color_arr(char *line)
+{
+	char	*str_color;
+	char	**aux;
+	int		*color;
+	int		i;
+
+	str_color = tex_parse(line);
+	if (!str_color)
+			return (NULL);
+	aux = ft_split(str_color, ',');
+	if (!aux)
+	{
+		free (str_color);
+		return (NULL);
+	}
+	free (str_color);
+	color = (int *)ft_calloc(4, sizeof(int));
+	if (!color)
+	{
+		free_tab(aux);
+		return (NULL);
+	}
+	i = -1;
+	while (++i < 3)
+		color[i] = ft_atoi(aux[i]);
+	free_tab(aux);
+	return (color);
 }
 
 char	*tab_to_space(char *str)
