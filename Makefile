@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
+#    By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/26 12:43:49 by arebelo          ###   ########.fr        #
+#    Updated: 2023/04/26 15:30:39 by mrollo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,11 @@ BINARY				= cub3D
 SRCS				= main.c\
 					free/clean_exit.c\
 					parsing/args_check.c\
+					parsing/parse.c\
+					parsing/read_file.c\
+					parsing/map.c\
+					parsing/map_check.c\
+					parsing/textures.c\
 					hooks/key_hooks.c\
 					hooks/red_cross.c\
 					rendering/images.c\
@@ -27,7 +32,8 @@ SRCS				= main.c\
 					rendering/draw_rays.c\
 					rendering/draw_line.c\
 					utils/colors.c\
-					utils/angles.c
+					utils/angles.c\
+					gnl/get_next_line.c
 
 MK					= Makefile
 
