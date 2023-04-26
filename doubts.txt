@@ -2,11 +2,12 @@ TO DOS:
 
 NORMAL
 > wall collision improve
-> Press two keys at the same time
 > Textures that are smaller than SCALE square
 > Textures that are larger than SCALE square
 > textures that are rectangles
 > function that converts rgb to int
+> limitar texturas de 64
+> Press two keys at the same time
 
 BONUS
 > separate bonus from normal
