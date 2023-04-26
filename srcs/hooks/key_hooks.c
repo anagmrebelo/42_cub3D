@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:36:03 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:57:32 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static _Bool	allow_move(t_master *master, float x, float y)
 {
 	int	nx;
 	int	ny;
-	int	final;
 
 	nx = (int)(x) / SCALE;
 	ny = (int)(y) / SCALE;

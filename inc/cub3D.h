@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:41:06 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 17:03:19 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 # define WINDOW_WIDTH 960
 # define WINDOW_HEIGHT 512
 # define SCALE 64
-# define PLAYER_SIZE 5
+# define PLAYER_SIZE 7
 # define ANGLE_VIEW 60
 # define PLAYER_SPEED 10
 # define ANGLE_SPEED 5
 
 // -------- Minimap settings --------
 # define MINIMAP_OFF 10
-# define MINIMAP_SIZE 100
+# define MINIMAP_SIZE 200
 
 // -------- Colors --------
 # define RED_PIXEL 0x9E1A1A

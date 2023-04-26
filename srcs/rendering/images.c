@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:10:36 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/26 16:48:43 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:57:09 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static void	save_image(t_master *master, t_img *img, char *path)
 */
 static void	upload_textures(t_master *master)
 {
-	save_image(master, &master->map.north, "srcs/imgs/wall_text/a.xpm");	// North
-		printf("Got here <%s>\n", master->map.tex_no);
+	save_image(master, &master->map.north, master->map.tex_no);	// North
 	save_image(master, &master->map.south, master->map.tex_so);	// South
 	save_image(master, &master->map.east, master->map.tex_ea);	// East
 	save_image(master, &master->map.west, master->map.tex_we);	// West	

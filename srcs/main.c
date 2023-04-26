@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:46:19 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:57:23 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	render(t_master *master)
 static void	window_init(t_master *master)
 {
 	// Initial player position
-	master->player.px = 1.5 * SCALE;
-	master->player.py = 1.5 * SCALE;
+	master->player.px = 10.5 * SCALE;
+	master->player.py = 10.5 * SCALE;
 	master->player.pa = 270;
 	master->player.pdx = cos(deg_to_rad(master->player.pa));
 	master->player.pdy = -sin(deg_to_rad(master->player.pa));
