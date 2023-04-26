@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:51:59 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 12:32:39 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:23:42 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	clean_exit(t_master *master)
 		mlx_destroy_window(master->mlx.mlx_ptr, master->mlx.mlx_win);
 
 	// Mica clean
-	if (master->map.map_arr)
-		free(master->map.map_arr);
 	if (master)
 		free(master);
 	exit(1);

@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 12:24:42 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:36:11 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void find_obs(t_master *master, float xo, float yo, char c)
 	mx = (int)(master->map.rx / SCALE);
 	my = (int)(master->map.ry / SCALE);
 	mp = my * master->map.nb_cols + mx;
-	if ((mp >= 0 && mp < master->map.nb_blocks && master->map.map_arr[mp] == 1))	// Hit a wall
+	if (mx >= 0 && my >= 0 && mx < master->map.nb_cols && my < master->map.nb_rows && master->map.mtx[my][mx] == '1')	// Hit a wall
 	{
 		temp = calc_distance(master);
 		if (temp < master->map.disT)
@@ -100,7 +100,7 @@ static void find_obs(t_master *master, float xo, float yo, char c)
 			master->map.ry_f = master->map.ry;
 		}
 		master->map.dof = INT_MAX;
-	}
+	} 
 	else 		// next vertical line 
 	{
 		master->map.rx += xo;

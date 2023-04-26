@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 15:14:20 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:23:38 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_mlx
 
 typedef struct s_map
 {
-	int			*map_arr;
 	int			nb_cols;
 	int			nb_rows;
 	int			nb_blocks;

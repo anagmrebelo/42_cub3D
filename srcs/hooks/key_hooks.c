@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/24 18:06:20 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:36:03 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ static _Bool	allow_move(t_master *master, float x, float y)
 
 	nx = (int)(x) / SCALE;
 	ny = (int)(y) / SCALE;
-	final = ny * master->map.nb_cols + nx;
-	if ((final >= 0 && final < master->map.nb_blocks && master->map.map_arr[final] == 0))
+	if (nx < 0 || ny < 0)
+		return (0);
+	if ((nx < master->map.nb_cols && ny < master->map.nb_rows && master->map.mtx[ny][nx] == '0'))
 		return (1);
 	return (0);
 }
@@ -129,5 +130,3 @@ int	key_hook(int keycode, t_master *master)
 		esc(master);	// ESC
 	return (0);
 }
-
-	// printf("(%f, %f) nx: %d, ny: %d, final: %d   (%d)\n", x, y, nx, ny, final, master->map.map_arr[final]);

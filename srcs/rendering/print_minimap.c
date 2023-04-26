@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 10:09:26 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 11:36:24 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 16:36:19 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,19 @@ void	print_minimap(t_master *master)
 {
 	int	i;
 	int	j;
-	int counter;
 
 	i = -1;
 	j = 0;
-	counter = 0;
 	while (++i < master->map.nb_rows)
 	{
 		j = 0;
 		while (j < master->map.nb_cols)
 		{
-			if (master->map.map_arr[counter] == 0)
+			if (master->map.mtx[i][j] == '0' )
 				print_square(master, j * master->map.map_s + MINIMAP_OFF, i * master->map.map_s + MINIMAP_OFF, BLACK_PIXEL);
-			else if (master->map.map_arr[counter] == 1)
+			else if (master->map.mtx[i][j] == '1')
 				print_square(master, j * master->map.map_s + MINIMAP_OFF, i * master->map.map_s + MINIMAP_OFF, WHITE_PIXEL);
 			j++;
-			counter++;
 		}	
 	}
 	print_frontier(master, BLACK_PIXEL);
