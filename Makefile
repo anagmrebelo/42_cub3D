@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+         #
+#    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/22 13:09:35 by anarebelo        ###   ########.fr        #
+#    Updated: 2023/04/26 12:43:49 by arebelo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,15 @@ BINARY				= cub3D
 # FILES
 # **************************************************************************** #
 SRCS				= main.c\
+					free/clean_exit.c\
 					parsing/args_check.c\
 					hooks/key_hooks.c\
 					hooks/red_cross.c\
+					rendering/images.c\
 					rendering/print_map.c\
 					rendering/print_minimap.c\
 					rendering/draw_rays.c\
 					rendering/draw_line.c\
-					free/clean_exit.c\
 					utils/colors.c\
 					utils/angles.c
 
@@ -47,7 +48,7 @@ MINILIBX_DIR		= mlx
 LINK				= gcc
 CC					= gcc -c
 DEPFLAGS			= -MMD -MP
-CFLAGS				= -Wall -Wextra
+CFLAGS				= -Wall -Wextra -g
 RM					= rm -rf
 
 # LIBRARIES

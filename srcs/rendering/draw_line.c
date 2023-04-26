@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:10:02 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/20 18:32:52 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 12:06:44 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ static int ft_abs(int n)
 
 void draw_line(t_master *master, int X0, int Y0, int X1, int Y1, int color)
 {
+	if (X0 == X1 && Y0 == Y1)
+	{
+		// printf("Got here!\n");
+		return ;
+	}
 	// calculate dx & dy
     int dx = X1 - X0;
     int dy = Y1 - Y0;
@@ -39,7 +44,7 @@ void draw_line(t_master *master, int X0, int Y0, int X1, int Y1, int color)
 	int		i = 0;
 	while (i <= steps)
 	{
-		if (X >= 0 && Y >= 0 && X <= WINDOW_WIDTH && Y <= WINDOW_HEIGHT)
+		if (X >= 0 && Y >= 0 && X < WINDOW_WIDTH && Y < WINDOW_HEIGHT)
         	img_pix_put(&master->mlx.img, round(X), round(Y), color);
         X += Xinc; // increment in x at each step
         Y += Yinc; // increment in y at each step

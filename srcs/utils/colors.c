@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:17:59 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/24 10:30:37 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/24 17:49:12 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,18 @@ int	img_pix_get(t_img *img, int x, int y)
 {
 	char    *pixel;
 
+	if (y * img->line_len + x * (img->bpp / 8) >= 32 * 64 * 64)
+		printf("Got here!\n");
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	// printf("GET PIXEL %d  -- BPP %d\n", (y * img->line_len + x * (img->bpp / 8)), img->bpp);
+	// usleep(100000);
 	return (*(int *)pixel);
+}
+
+void	draw_pixel(t_master *master, int x, int y, int color)
+{
+	if (x >= 0 && y >= 0 && x <= WINDOW_WIDTH && y <= WINDOW_HEIGHT)
+		img_pix_put(&master->mlx.img, round(x), round(y), color);	
 }
 
 float	calc_distance(t_master *master)

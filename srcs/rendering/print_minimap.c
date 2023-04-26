@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_minimap.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 10:09:26 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 10:13:08 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/26 11:36:24 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ static void	print_player(t_master *master, int color)
 	draw_line(master, master->player.px/SCALE * master->map.map_s + MINIMAP_OFF, master->player.py /SCALE * master->map.map_s + MINIMAP_OFF, master->player.px/SCALE * master->map.map_s + MINIMAP_OFF +  5 * master->player.pdx, master->player.py /SCALE * master->map.map_s + MINIMAP_OFF + 5 * master->player.pdy, color);
 }
 
+/**
+ * Prints squares starting at (x, y) with size of master->map.map_s
+*/
 static void	print_square(t_master *master, int x, int y, int color)
 {
 	int	i;
@@ -58,6 +61,9 @@ static void	print_square(t_master *master, int x, int y, int color)
 	}
 }
 
+/**
+ * Draw to image black line around minimap
+*/
 static void	print_frontier(t_master *master, int color)
 {
 	int	i;
@@ -77,6 +83,10 @@ static void	print_frontier(t_master *master, int color)
 	}
 }
 
+/**
+ * Prints minimap offset MINIMAP_OFF of (0, 0)
+ * Player and small line indicating its angle
+*/
 void	print_minimap(t_master *master)
 {
 	int	i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/24 12:11:05 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/24 18:29:48 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define SCALE 64
 # define PLAYER_SIZE 5
 # define ANGLE_VIEW 60
-# define PLAYER_SPEED 20
+# define PLAYER_SPEED 10
 # define ANGLE_SPEED 5
 
 // -------- Minimap settings --------
@@ -73,7 +73,7 @@ typedef struct s_mlx
 
 typedef struct s_map
 {
-	int 		*map_arr;
+	int			*map_arr;
 	int			nb_cols;
 	int			nb_rows;
 	int			nb_blocks;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 11:20:46 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/24 18:06:20 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ static void	move_rarrow(t_master *master)
 
 static void	esc(t_master *master)
 {
-	mlx_destroy_window(master->mlx.mlx_ptr, master->mlx.mlx_win);
 	clean_exit(master);
 }
 

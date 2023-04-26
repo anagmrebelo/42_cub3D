@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "mlx_int.h"
 
-
 @interface NSWindowEvent : NSWindow
 {
   func_t	event_funct[MAX_EVENT];

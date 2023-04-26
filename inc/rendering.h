@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:33 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/23 11:33:48 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/24 18:20:09 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@ void 	draw_line(t_master *master, int beginX, int beginY, int endX, int endY, in
 
 // print_minimap.c
 void	print_minimap(t_master *master);
+
+//images.c
+void	upload_images(t_master *master);
 
 #endif

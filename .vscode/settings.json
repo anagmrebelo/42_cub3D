@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"stdlib.h": "c",
-		"libft.h": "c",
-		"algorithm": "c",
-		"rendering.h": "c",
-		"parsing.h": "c"
-	}
-}
