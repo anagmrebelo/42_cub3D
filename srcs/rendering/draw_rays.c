@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:36:11 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 23:52:45 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,10 @@ static void find_obs(t_master *master, float xo, float yo, char c)
 {
 	int		mx;
 	int		my;
-	int		mp;
 	float	temp;
 	
 	mx = (int)(master->map.rx / SCALE);
 	my = (int)(master->map.ry / SCALE);
-	mp = my * master->map.nb_cols + mx;
 	if (mx >= 0 && my >= 0 && mx < master->map.nb_cols && my < master->map.nb_rows && master->map.mtx[my][mx] == '1')	// Hit a wall
 	{
 		temp = calc_distance(master);
