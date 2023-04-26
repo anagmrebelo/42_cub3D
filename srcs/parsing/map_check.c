@@ -6,14 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:24:56 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 15:24:57 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 16:27:48 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3D.h"
 # include "parsing.h"
 
-int	check_map_row(char *row, int cols)
+int	check_nb_rows(char *row, int cols)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ int	check_map_row(char *row, int cols)
 	return (0);
 }
 
-int	check_map_col(char **map, int rows, int j)
+int	check_nb_cols(char **map, int rows, int j)
 {
 	int	i;
 
@@ -53,28 +53,28 @@ int	check_round(char **map, int x, int y)
 	return (1);
 }
 
-int	check_map(char **map, t_data *data)
+int	check_map(char **mtx, t_map *map)
 {
 	int	i;
 	int	j;
 
-	if (check_map_row(map[0], data->map_col)
-		|| check_map_row(map[data->map_row - 1], data->map_col)
-		|| check_map_col(map, data->map_row, 0)
-		|| check_map_col(map, data->map_row, (data->map_col - 1)))
+	if (check_nb_rows(mtx[0], map->nb_cols)
+		|| check_nb_rows(mtx[map->nb_rows - 1], map->nb_cols)
+		|| check_nb_cols(mtx, map->nb_rows, 0)
+		|| check_nb_cols(mtx, map->nb_rows, (map->nb_cols - 1)))
 	{
 		printf("The map is not closed\n");
 		return (1);
 	}
 	i = 0;
-	while (++i < data->map_row - 1)
+	while (++i < map->nb_rows - 1)
 	{
 		j = 0;
-		while (++j < data->map_col - 1)
+		while (++j < map->nb_cols - 1)
 		{
-			if (map[i][j] == ' ')
+			if (mtx[i][j] == ' ')
 			{
-				if (check_round(map, i, j))
+				if (check_round(mtx, i, j))
 				{
 					printf("not closed desde check\n");
 					return (1);

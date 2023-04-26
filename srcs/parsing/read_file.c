@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 16:01:20 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 16:31:03 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@
 int	count_row(char *str_map)
 {
 	int	count;
-	int	map_row;
+	int	nb_rows;
 
 	count = 0;
-	map_row = 0;
+	nb_rows = 0;
 	while (str_map[count])
 	{
 		if (str_map[count] != '\n')
 			count++;
 		else
 		{
-			map_row++;
+			nb_rows++;
 			count++;
 		}
 	}
-	map_row++;
-	return (map_row);
+	nb_rows++;
+	return (nb_rows);
 }
 
 int	ft_isspace(char *line)
@@ -50,39 +50,39 @@ int	ft_isspace(char *line)
 	return (0);
 }
 
-int	color_parse(char *line, char a, t_data *data)
+int	color_parse(char *line, char a, t_map *map)
 {
 	if (a == 'C')
 	{
-		data->color_c = tex_parse(line);
-		if (check_color(data->color_c))
+		map->color_c = tex_parse(line);
+		if (check_color(map->color_c))
 			return (1);
 	}
 	if (a == 'F')
 	{
-		data->color_f = tex_parse(line);
-		if (check_color(data->color_f))
+		map->color_f = tex_parse(line);
+		if (check_color(map->color_f))
 		{
-			free (data->color_c);
+			free (map->color_c);
 			return (1);
 		}
 	}
 	return (0);
 }
 
-void	tex_parse_aux(char a, char b, char *line, t_data *data)
+void	tex_parse_aux(char a, char b, char *line, t_map *map)
 {
 	if (a == 'N' && b == 'O')
-		data->tex_no = tex_parse(line);
+		map->tex_no = tex_parse(line);
 	if (a == 'S' && b == 'O')
-		data->tex_so = tex_parse(line);
+		map->tex_so = tex_parse(line);
 	if (a == 'E' && b == 'A')
-		data->tex_ea = tex_parse(line);
+		map->tex_ea = tex_parse(line);
 	if (a == 'W' && b == 'E')
-		data->tex_we = tex_parse(line);
+		map->tex_we = tex_parse(line);
 }
 
-int	check_line(char *line, t_data *data)
+int	check_line(char *line, t_map *map)
 {
 	int	i;
 
@@ -98,12 +98,12 @@ int	check_line(char *line, t_data *data)
 			|| (line[i] == 'E' && line[i + 1] == 'A')
 			|| (line[i] == 'W' && line[i + 1] == 'E'))
 		{
-			tex_parse_aux(line[i], line[i + 1], line, data); //lo chequeo en read_file
+			tex_parse_aux(line[i], line[i + 1], line, map); //lo chequeo en read_file
 			return (1);
 		}
 		if (line[i] == 'C' || line[i] == 'F')
 		{
-			if (color_parse(line, line[i], data))
+			if (color_parse(line, line[i], map))
 			{
 				printf("Color error\n");
 				return (2);
@@ -121,7 +121,7 @@ int	check_line(char *line, t_data *data)
 	return (0);
 }
 
-char	*read_file(char *path, t_data *data)
+char	*read_file(char *path, t_map *map)
 {
     int		fd;
 	char	*line;
@@ -138,7 +138,7 @@ char	*read_file(char *path, t_data *data)
 	}
 	line = NULL;
 	exit = 0;
-	data->map_col = 0;
+	map->nb_cols = 0;
 	str_map = NULL;
 	while (!exit)
 	{
@@ -147,7 +147,7 @@ char	*read_file(char *path, t_data *data)
 			exit = 1;
 		else
 		{
-			chk = check_line(line, data);
+			chk = check_line(line, map);
 			if (chk == 1)
 				free (line);
 			else if (chk == 2)
@@ -158,20 +158,20 @@ char	*read_file(char *path, t_data *data)
 			else
 			{
 				len = ft_strlen(line) - 1;
-				if (len > data->map_col)
-					data->map_col = len;
+				if (len > map->nb_cols)
+					map->nb_cols = len;
 				str_map = ft_strjoin(str_map, line); //join_free
 				free (line);
 			}
 		}
 	}
-	data->map_row = count_row(str_map);
-	// if (check_textures(data))
+	map->nb_rows = count_row(str_map);
+	// if (check_textures(map))
 	// {
 	// 	free (str_map);
 	// 	return (NULL);
 	// }
-	// if (fill_map(str_map, data))
+	// if (fill_map(str_map, map))
 	// 	return (NULL);
 	return (str_map);
 }

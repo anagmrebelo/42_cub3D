@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 16:01:24 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 16:17:57 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int	open_close(char *path)
 	return (0);
 }
 
-int	check_textures(t_data *data)
+int	check_textures(t_map *map)
 {
-	if (!data->tex_ea || !data->tex_no || !data->tex_so || !data->tex_we)
+	if (!map->tex_ea || !map->tex_no || !map->tex_so || !map->tex_we)
 		return (1);
-	// if (open_close(data->tex_ea)|| open_close(data->tex_no)
-	// 	|| open_close(data->tex_so) || open_close(data->tex_we))
+	// if (open_close(map->tex_ea)|| open_close(map->tex_no)
+	// 	|| open_close(map->tex_so) || open_close(map->tex_we))
 	// {
 	// 	printf("no abre el archivo\n");
 	// 	return (1);
@@ -76,19 +76,19 @@ int	check_textures(t_data *data)
 	return (0);
 }
 
-int parse(char *path, t_data *data)
+int parse(char *path, t_map *map)
 {
-	data->str_map = read_file(path, data);
-	if (!data->str_map)
+	map->str_map = read_file(path, map);
+	if (!map->str_map)
 		return (1);
-	if (check_content(data->str_map))
+	if (check_content(map->str_map))
 		return (1);
-	if (check_textures(data))
+	if (check_textures(map))
 	{
-		free (data->str_map);
+		free (map->str_map);
 		return (1);
 	}
-	if (fill_map(data))
+	if (fill_map(map))
 		return (1);
 	return (0);
 }

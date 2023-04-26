@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:15:36 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 16:31:33 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,6 @@
 # define BLUE_PIXEL 0x63C5DA
 # define GREEN_PIXEL 0x028A0F
 
-typedef struct s_data
-{
-	char		*str_map;
-	char		**map;
-	char		*tex_no;
-	char		*tex_so;
-	char		*tex_ea;
-	char		*tex_we;
-	char		*color_c;
-	char		*color_f;
-	int			map_col;
-	int			map_row;
-}	t_data;
 
 typedef struct s_img
 {
@@ -87,6 +74,15 @@ typedef struct s_mlx
 
 typedef struct s_map
 {
+	char		*str_map;
+	char		**mtx;
+	char		*tex_no;
+	char		*tex_so;
+	char		*tex_ea;
+	char		*tex_we;
+	char		*color_c;
+	char		*color_f;
+
 	int			*map_arr;
 	int			nb_cols;
 	int			nb_rows;
@@ -115,7 +111,6 @@ typedef struct s_master
 	t_map		map;
 	t_player 	player;
 	t_mlx		mlx;
-	t_data		data;
 }	t_master;
 
 #endif

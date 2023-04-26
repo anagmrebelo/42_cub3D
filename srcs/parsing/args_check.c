@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:45:11 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 15:51:47 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 16:16:41 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	check_args(int argc, char **argv, t_master *master)
 		exit (1);
 	}
 	check_file_extension(argv[1]);
-	if (parse(argv[1], &master->data))
+	if (parse(argv[1], &master->map))
 		clean_exit(master);
 }
