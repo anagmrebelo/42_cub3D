@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 19:14:15 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 19:17:53 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,12 +173,5 @@ char	*read_file(char *path, t_map *map)
 		}
 	}
 	map->nb_rows = count_row(str_map);
-	// if (check_textures(map))
-	// {
-	// 	free (str_map);
-	// 	return (NULL);
-	// }
-	// if (fill_map(str_map, map))
-	// 	return (NULL);
 	return (str_map);
 }

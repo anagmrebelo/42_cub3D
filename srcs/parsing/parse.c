@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 16:17:57 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 19:28:04 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,37 @@ int	check_textures(t_map *map)
 {
 	if (!map->tex_ea || !map->tex_no || !map->tex_so || !map->tex_we)
 		return (1);
-	// if (open_close(map->tex_ea)|| open_close(map->tex_no)
-	// 	|| open_close(map->tex_so) || open_close(map->tex_we))
-	// {
-	// 	printf("no abre el archivo\n");
-	// 	return (1);
-	// }
+	if (open_close(map->tex_ea)|| open_close(map->tex_no)
+		|| open_close(map->tex_so) || open_close(map->tex_we))
+	{
+		printf("no abre el archivo\n");
+		return (1);
+	}
 	return (0);
+}
+
+void	save_ini_pos(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->nb_rows)
+	{
+		j = 0;
+		while (j < map->nb_cols)
+		{
+			if (map->mtx[i][j] == 'N' || map->mtx[i][j] == 'S'
+				|| map->mtx[i][j] == 'E' || map->mtx[i][j] == 'W')
+			{
+				map->view = map->mtx[i][j];
+				map->px = i;
+				map->py = j;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 int parse(char *path, t_map *map)
@@ -90,5 +114,7 @@ int parse(char *path, t_map *map)
 	}
 	if (fill_map(map))
 		return (1);
+	save_ini_pos(map);
+	printf("map->view = %c\nmap->px = %d\nmap->py = %d\n", map->view, map->px, map->py);
 	return (0);
 }

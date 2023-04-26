@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 18:41:19 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 19:25:09 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ typedef struct s_map
 	char		*tex_so;
 	char		*tex_ea;
 	char		*tex_we;
-	char		*str_color_c;
-	char		*str_color_f;
 	int			*color_c;
 	int			*color_f;
+	int			px;
+	int			py;
+	char		view;
 
 	int			nb_cols;
 	int			nb_rows;

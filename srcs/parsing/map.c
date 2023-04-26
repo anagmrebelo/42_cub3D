@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:17:28 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 16:25:32 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/26 19:18:12 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ int fill_map(t_map *map)
 		free_tab(aux);
 		return (1);
 	}
-	// printf("text_so: %s\ntext_no: %s\ntext_ea: %s\ntext_we: %s\n", map->tex_so, map->tex_no, map->tex_ea, map->tex_we);
-	// printf("F: %s\nC: %s\n", map->color_f, map->color_c);
 	free_tab(aux);
 	return (0);
 }
