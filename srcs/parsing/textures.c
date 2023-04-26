@@ -49,7 +49,8 @@ char	*tex_parse(char *str)
 	tab = ft_split(str, ' ');
 	if (!tab)
 		return (NULL); //manejar en la otra funcion
-	new = ft_strdup(tab[1]);
+	new = ft_strtrim(tab[1], "\n");
+	// new = ft_strdup(tab[1]);
 	if (!new)
 	{
 		free_tab(tab);
