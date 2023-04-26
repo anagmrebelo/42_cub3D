@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:10:36 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/24 18:23:46 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/26 15:14:25 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	upload_textures(t_master *master)
 	save_image(master, &master->map.north, "srcs/imgs/wall_text/a.xpm");	// North
 	save_image(master, &master->map.south, "srcs/imgs/wall_text/b.xpm");	// South
 	save_image(master, &master->map.east, "srcs/imgs/wall_text/c.xpm");		// East
-	save_image(master, &master->map.west, "srcs/imgs/wall_text/c.xpm");		// West	
+	save_image(master, &master->map.west, "srcs/imgs/wall_text/d.xpm");		// West	
 }
 
 /**
