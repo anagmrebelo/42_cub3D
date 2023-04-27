@@ -6,7 +6,7 @@
 #    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/27 14:47:15 by arebelo          ###   ########.fr        #
+#    Updated: 2023/04/27 18:49:29 by arebelo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRCS				= main.c\
 					parsing/map.c\
 					parsing/map_check.c\
 					parsing/textures.c\
+					hooks/key_letters.c\
+					hooks/key_arrows.c\
 					hooks/key_hooks.c\
 					hooks/red_cross.c\
 					rendering/images.c\

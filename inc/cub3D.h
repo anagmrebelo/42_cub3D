@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/27 17:20:13 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:45:04 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define SCALE 64
 # define PLAYER_SIZE 7
 # define ANGLE_VIEW 60
-# define PLAYER_SPEED 4
+# define PLAYER_SPEED 2
 # define ANGLE_SPEED 2
 
 // -------- Minimap settings --------

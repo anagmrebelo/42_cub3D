@@ -6,39 +6,38 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:10:02 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/27 15:33:50 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 18:55:01 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
 #include "utils.h"
 
-void draw_line(t_master *master, int X0, int Y0, int X1, int Y1, int color)
+void	draw_line(t_master *master, int x0, int y0, int x1, int y1, int color)
 {
-	if (X0 == X1 && Y0 == Y1)
-		return ;
-
-	// calculate dx & dy
-    int dx = X1 - X0;
-    int dy = Y1 - Y0;
- 
-    // calculate steps required for generating pixels
-    int steps = ft_abs(dx) > ft_abs(dy) ? ft_abs(dx) : ft_abs(dy);
- 
-    // calculate increment in x & y for each steps
-    float Xinc = dx / (float)steps;
-    float Yinc = dy / (float)steps;
- 
-    // Put pixel for each step
-    float	X = X0;
-    float	Y = Y0;
-	int		i = 0;
+	int		steps;
+	float	x_inc;
+	float	y_inc;
+	int		i;
+	
+	if (x0 == x1 && y0 == y1)
+		return ; 
+	// calculate steps required for generating pixels
+	if (ft_abs(x1 - x0) > ft_abs(y1 - y0))
+		steps = ft_abs(x1 - x0);
+	else
+		steps = ft_abs(y1 - y0);
+	// calculate increment in x & y for each steps
+	x_inc = (x1 - x0) / (float)steps;
+	y_inc = (y1 - y0) / (float)steps;
+	// Put pixel for each step
+	i = 0;
 	while (i <= steps)
 	{
-		if (X >= 0 && Y >= 0 && X < WINDOW_WIDTH && Y < WINDOW_HEIGHT)
-        	img_pix_put(&master->mlx.img, round(X), round(Y), color);
-        X += Xinc; // increment in x at each step
-        Y += Yinc; // increment in y at each step
+		if (x0 >= 0 && y0 >= 0 && x0 < WINDOW_WIDTH && y0 < WINDOW_HEIGHT)
+			img_pix_put(&master->mlx.img, round(x0), round(y0), color);
+		x0 += x_inc; // increment in x at each step
+		y0 += y_inc; // increment in y at each step
 		i++;
 	}
 }
