@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:33 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/24 18:20:09 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:48:31 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@
 # include "utils.h"
 # include "limits.h"
 
-void	print_init_map(t_master *master);
+// set_vars.c
+void	set_positions(t_master *master);
+
+// draw_rays.c
 void	draw_rays_3D(t_master *master);
+
+// draw_line.c
 void 	draw_line(t_master *master, int beginX, int beginY, int endX, int endY, int color);
 
 // print_minimap.c

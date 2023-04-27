@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/27 00:30:21 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/27 14:50:32 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 */
 int	render(t_master *master)
 {
-	int x;
-	int y;
+	// int x;
+	// int y;
 	
 	// mlx_mouse_get_pos(master->mlx.mlx_win, &x, &y);
 	// printf("(%d, %d)\n", x, y);
@@ -43,13 +43,6 @@ int	render(t_master *master)
 */
 static void	window_init(t_master *master)
 {
-	// Initial player position
-	master->player.px = 10.5 * SCALE;
-	master->player.py = 10.5 * SCALE;
-	master->player.pa = 270;
-	master->player.pdx = cos(deg_to_rad(master->player.pa));
-	master->player.pdy = -sin(deg_to_rad(master->player.pa));
-
 	// Create mlx and window
 	master->mlx.mlx_ptr = mlx_init();
 	if (!master->mlx.mlx_ptr)
@@ -60,7 +53,9 @@ static void	window_init(t_master *master)
 
 	// Upload texture images and create new img for game
 	upload_images(master);
-	print_init_map(master);	
+
+	//Define player initial pos
+	set_positions(master);
 	return ;
 }
 

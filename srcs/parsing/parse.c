@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 19:28:04 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/27 14:44:54 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	save_ini_pos(t_map *map)
 				|| map->mtx[i][j] == 'E' || map->mtx[i][j] == 'W')
 			{
 				map->view = map->mtx[i][j];
-				map->px = i;
-				map->py = j;
+				map->px = j;
+				map->py = i;
 			}
 			j++;
 		}

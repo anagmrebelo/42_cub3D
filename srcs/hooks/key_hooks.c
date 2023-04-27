@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:47:41 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 16:57:32 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 14:48:58 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static _Bool	allow_move(t_master *master, float x, float y)
 	ny = (int)(y) / SCALE;
 	if (nx < 0 || ny < 0)
 		return (0);
-	if ((nx < master->map.nb_cols && ny < master->map.nb_rows && master->map.mtx[ny][nx] == '0'))
+	if ((nx < master->map.nb_cols && ny < master->map.nb_rows && master->map.mtx[ny][nx] != '1'))
 		return (1);
 	return (0);
 }

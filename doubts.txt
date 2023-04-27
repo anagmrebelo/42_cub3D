@@ -3,6 +3,7 @@ TO DOS:
 NORMAL
 > wall collision improve
 > Press two keys at the same time
+> if horizontal shade
 
 BONUS
 > separate bonus from normal
