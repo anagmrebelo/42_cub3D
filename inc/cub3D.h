@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 19:25:09 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/27 17:20:13 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define SCALE 64
 # define PLAYER_SIZE 7
 # define ANGLE_VIEW 60
-# define PLAYER_SPEED 10
-# define ANGLE_SPEED 5
+# define PLAYER_SPEED 4
+# define ANGLE_SPEED 2
 
 // -------- Minimap settings --------
 # define MINIMAP_OFF 10
@@ -65,11 +65,23 @@ typedef struct s_player
 	float	pdy;
 }	t_player;
 
+typedef struct s_keys
+{
+	int	a;
+	int	w;
+	int	s;
+	int	d;
+	int	r;
+	int	l;
+}	t_keys;
+
+
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
 	t_img	img;
+	t_keys	keys;
 } t_mlx;
 
 typedef struct s_map

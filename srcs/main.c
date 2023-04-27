@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/27 14:51:26 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:14:02 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	render(t_master *master)
 	// 	master->player.pa = angle_check(master->player.pa - 1);
 	// else if (x < 240)
 	// 	master->player.pa = angle_check(master->player.pa + 1);
+	key_hook(master);
 	draw_rays_3D(master);
 	print_minimap(master);
 	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
@@ -65,7 +66,8 @@ static void	window_init(t_master *master)
 static void	window_loops(t_master *master)
 {
 	// Key hooks
-	mlx_hook(master->mlx.mlx_win, 2, 1L<<0, &key_hook, master);
+	mlx_hook(master->mlx.mlx_win, 2, 1L<<0, &key_down, master);
+	mlx_hook(master->mlx.mlx_win, 3, 1L<<0, &key_up, master);
 	// Red cross hook
 	mlx_hook(master->mlx.mlx_win, 17, 0, &red_cross, master);
 	// Changes on image
