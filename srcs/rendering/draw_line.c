@@ -6,27 +6,18 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:10:02 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/26 12:06:44 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:33:50 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
-
-static int ft_abs(int n)
-{
-	if (n > 0)
-		return (n);
-	else
-		return (n * (-1));
-}
+#include "utils.h"
 
 void draw_line(t_master *master, int X0, int Y0, int X1, int Y1, int color)
 {
 	if (X0 == X1 && Y0 == Y1)
-	{
-		// printf("Got here!\n");
 		return ;
-	}
+
 	// calculate dx & dy
     int dx = X1 - X0;
     int dy = Y1 - Y0;

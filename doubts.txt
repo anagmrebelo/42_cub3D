@@ -1,11 +1,11 @@
 TO DOS:
 
 NORMAL
-> wall collision improve
 > Press two keys at the same time
-> if horizontal shade
+> normi
 
 BONUS
+> wall collision improve
 > separate bonus from normal
 > Makefile bonus
 > Doors which can open and close

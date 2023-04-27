@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 18:41:56 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/20 18:15:59 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:33:58 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,20 @@ float	angle_check(float ang)
 		ang += 360;
 	return (ang);
 }
+
+int ft_abs(int n)
+{
+	if (n > 0)
+		return (n);
+	else
+		return (n * (-1));
+}
+
+float ft_abs_float(float n)
+{
+	if (n > 0)
+		return (n);
+	else
+		return (n * (-1));
+}
+

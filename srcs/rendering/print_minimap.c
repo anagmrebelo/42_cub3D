@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 10:09:26 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/27 14:50:14 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:52:50 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ void	print_minimap(t_master *master)
 		}	
 	}
 	print_frontier(master, BLACK_PIXEL);
-	print_player(master, YELLOW_PIXEL);
+	print_player(master, RED_PIXEL);
 }

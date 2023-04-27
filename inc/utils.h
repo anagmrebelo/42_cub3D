@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:18:27 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 17:26:50 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:02:55 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int		create_trgb(int t, int r, int g, int b);
 // angles.c
 float	deg_to_rad(float d);
 float	angle_check(float ang);
+float	ft_abs_float(float n);
+int		ft_abs(int n);
 
 #endif

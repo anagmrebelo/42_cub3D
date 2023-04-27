@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/27 14:44:54 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:24:40 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ int parse(char *path, t_map *map)
 	if (fill_map(map))
 		return (1);
 	save_ini_pos(map);
-	printf("map->view = %c\nmap->px = %d\nmap->py = %d\n", map->view, map->px, map->py);
+	// printf("map->view = %c\nmap->px = %d\nmap->py = %d\n", map->view, map->px, map->py);
 	return (0);
 }
