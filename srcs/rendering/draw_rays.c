@@ -3,42 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 23:52:45 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/28 12:31:11 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
+
+/**
+ * Returns the texture according to ray angle
+*/
+static t_img	find_texture(t_master *master)
+{
+	t_img	ret;
+
+	if (master->map.f == 'h' && master->map.ra < 180)
+		ret = master->map.north;
+	else if (master->map.f == 'h' && master->map.ra >= 180)
+		ret = master->map.south;
+	else if (master->map.f == 'v' && master->map.ra > 90 && master->map.ra < 270)
+		ret = master->map.west;
+	else
+		ret = master->map.east;
+	return (ret);
+}
 
 /***
  * Prints in the image vertical line per ray
  * Offset to the center of the screen
  * Removed fish eye-effect
 */
-static void	draw_3D_wall(t_master *master, int r)
+static void	draw_3d_wall(t_master *master, int r)
 {
+	t_img	text;
+	
+	text = find_texture(master);
+
 	float	line_h;
 	float	ca;
 	float	line_off;
 	float	line_f;
-	
+	int		point_a[2];
+	int		point_b[2];
+	float	ty_step;
+	float	ty_off;
+
 	ca = angle_check(master->player.pa - master->map.ra);
 	master->map.disT = master->map.disT * cos(deg_to_rad(ca));
 	line_h = (master->map.block_size * WINDOW_HEIGHT) / master->map.disT;
 
-	t_img	text;
-	if (master->map.f == 'h' && master->map.ra < 180)
-		text = master->map.north;
-	else if (master->map.f == 'h' && master->map.ra >= 180)
-		text = master->map.south;
-	else if (master->map.f == 'v' && master->map.ra > 90 && master->map.ra < 270)
-		text = master->map.west;
-	else
-		text = master->map.east;
-	float	ty_step = text.height / line_h;
-	float	ty_off = 0;
+	ty_step = text.height / line_h;
+	ty_off = 0;
 	if (line_h > WINDOW_HEIGHT)
 	{
 		ty_off = (line_h - WINDOW_HEIGHT) / 2.0;
@@ -70,10 +87,16 @@ static void	draw_3D_wall(t_master *master, int r)
 		ty += ty_step;
 		y++;
 	}
+	point_a[0] = r;
+	point_a[1] = round(line_f);
+	point_b[0] = r;
+	point_b[1] = WINDOW_HEIGHT;
 	// Draw floor
-	draw_line(master, r, round(line_f), r, WINDOW_HEIGHT, master->map.floor_col);
+	draw_line(master, point_a, point_b, master->map.floor_col);
+	point_a[1] = 0;
+	point_b[1] = line_off;
 	// Draw celing
-	draw_line(master, r, 0, r, line_off, master->map.ceil_col);
+	draw_line(master, point_a, point_b, master->map.ceil_col);
 }
 
 /**
@@ -204,7 +227,7 @@ void		draw_rays_3D(t_master *master)
 		//------------ Check horizontal lines------------
 		check_horizontal_lines(master);
 		// ----------- Draw 3D Walls, ceilings and floors ------------
-		draw_3D_wall(master, r);
+		draw_3d_wall(master, r);
 		master->map.ra = angle_check(master->map.ra - (float)ANGLE_VIEW / WINDOW_WIDTH);
 		r++;
 	}

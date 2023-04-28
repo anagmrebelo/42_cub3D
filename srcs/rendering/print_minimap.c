@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 10:09:26 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/27 15:52:50 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/28 12:13:20 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	print_player(t_master *master, int color)
 	int	i;
 	int j;
 	int	p_size;
+	int	point_a[2];
+	int	point_b[2];
 
 	p_size = PLAYER_SIZE;
 	p_size /= 2;
@@ -37,7 +39,11 @@ static void	print_player(t_master *master, int color)
 		} 
 		i++;
 	}
-	draw_line(master, master->player.px/SCALE * master->map.map_s + MINIMAP_OFF, master->player.py /SCALE * master->map.map_s + MINIMAP_OFF, master->player.px/SCALE * master->map.map_s + MINIMAP_OFF +  5 * master->player.pdx, master->player.py /SCALE * master->map.map_s + MINIMAP_OFF + 5 * master->player.pdy, color);
+	point_a[0] = master->player.px/SCALE * master->map.map_s + MINIMAP_OFF;
+	point_a[1] = master->player.py /SCALE * master->map.map_s + MINIMAP_OFF;
+	point_b[0] = master->player.px/SCALE * master->map.map_s + MINIMAP_OFF +  5 * master->player.pdx;
+	point_b[1] = master->player.py /SCALE * master->map.map_s + MINIMAP_OFF + 5 * master->player.pdy;
+	draw_line(master, point_a, point_b, color);
 }
 
 /**

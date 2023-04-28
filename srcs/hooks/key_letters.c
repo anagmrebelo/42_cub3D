@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:32:04 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/27 17:36:42 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/28 12:11:27 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ void	move_front(t_master *master)
 		master->player.px += master->player.pdx * PLAYER_SPEED;
 		master->player.py += master->player.pdy * PLAYER_SPEED;
 	}
-	else if (allow_move(master,
-			master->player.px + master->player.pdx * PLAYER_SPEED,
-			master->player.py))
-		master->player.px += master->player.pdx * PLAYER_SPEED;
-	else if (allow_move(master, master->player.px,
-			master->player.py + master->player.pdy * PLAYER_SPEED))
-		master->player.py += master->player.pdy * PLAYER_SPEED;
 }
 
 void	move_left(t_master *master)
@@ -44,13 +37,6 @@ void	move_left(t_master *master)
 		master->player.px -= cos(deg_to_rad(temp)) * PLAYER_SPEED;
 		master->player.py -= sin(deg_to_rad(temp)) * PLAYER_SPEED;
 	}
-	else if (allow_move(master,
-			master->player.px - cos(deg_to_rad(temp)) * PLAYER_SPEED,
-			master->player.py))
-		master->player.px -= cos(deg_to_rad(temp)) * PLAYER_SPEED;
-	else if (allow_move(master, master->player.px,
-			master->player.py - sin(deg_to_rad(temp)) * PLAYER_SPEED))
-		master->player.py -= sin(deg_to_rad(temp)) * PLAYER_SPEED;
 }
 
 void	move_back(t_master *master)
@@ -62,13 +48,6 @@ void	move_back(t_master *master)
 		master->player.px -= master->player.pdx * PLAYER_SPEED;
 		master->player.py -= master->player.pdy * PLAYER_SPEED;
 	}
-	else if (allow_move(master,
-			master->player.px - master->player.pdx * PLAYER_SPEED,
-			master->player.py))
-		master->player.px -= master->player.pdx * PLAYER_SPEED;
-	else if (allow_move(master, master->player.px,
-			master->player.py - master->player.pdy * PLAYER_SPEED))
-		master->player.py -= master->player.pdy * PLAYER_SPEED;
 }
 
 void	move_right(t_master *master)
@@ -83,11 +62,4 @@ void	move_right(t_master *master)
 		master->player.px += cos(deg_to_rad(temp)) * PLAYER_SPEED;
 		master->player.py += sin(deg_to_rad(temp)) * PLAYER_SPEED;
 	}
-	else if (allow_move(master,
-			master->player.px + cos(deg_to_rad(temp)) * PLAYER_SPEED,
-			master->player.py))
-		master->player.px += cos(deg_to_rad(temp)) * PLAYER_SPEED;
-	else if (allow_move(master, master->player.px,
-			master->player.py + sin(deg_to_rad(temp)) * PLAYER_SPEED))
-		master->player.py += sin(deg_to_rad(temp)) * PLAYER_SPEED;
 }

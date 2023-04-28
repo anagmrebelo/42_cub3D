@@ -6,7 +6,7 @@
 #    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/27 18:49:29 by arebelo          ###   ########.fr        #
+#    Updated: 2023/04/28 12:08:53 by arebelo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ MINILIBX_DIR		= mlx
 LINK				= gcc
 CC					= gcc -c
 DEPFLAGS			= -MMD -MP
-CFLAGS				= -Wall -Wextra -g
+CFLAGS				= -Wall -Wextra -g -O3
 RM					= rm -rf
 
 # LIBRARIES
