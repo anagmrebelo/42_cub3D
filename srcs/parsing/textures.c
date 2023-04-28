@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 12:52:56 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 13:46:49 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	*color_arr(char *line)
 
 	str_color = tex_parse(line);
 	if (!str_color)
-			return (NULL);
+		return (NULL);
 	aux = ft_split(str_color, ',');
 	if (!aux)
 	{
@@ -79,12 +79,12 @@ char	*tex_parse(char *str)
 	str = tab_to_space(str);
 	tab = ft_split(str, ' ');
 	if (!tab)
-		return (NULL); //manejar en la otra funcion
+		return (NULL);
 	new = ft_strtrim(tab[1], "\n");
 	if (!new)
 	{
 		free_tab(tab);
-		return (NULL); //manejar en la otra funcion
+		return (NULL);
 	}
 	free_tab(tab);
 	return (new);

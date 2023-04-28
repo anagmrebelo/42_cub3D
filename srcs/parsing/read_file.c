@@ -6,14 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 12:19:36 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 13:46:00 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3D.h"
-# include "get_next_line.h"
-# include "parsing.h"
-# include "utils.h"
+#include "cub3D.h"
+#include "get_next_line.h"
+#include "parsing.h"
+#include "utils.h"
 
 int	count_row(char *str_map)
 {
@@ -106,7 +106,7 @@ int	check_line(char *line, t_map *map)
 			|| (line[i] == 'E' && line[i + 1] == 'A')
 			|| (line[i] == 'W' && line[i + 1] == 'E'))
 		{
-			tex_parse_aux(line[i], line[i + 1], line, map); //lo chequeo en read_file
+			tex_parse_aux(line[i], line[i + 1], line, map);
 			return (1);
 		}
 		if (line[i] == 'C' || line[i] == 'F')
@@ -131,12 +131,12 @@ int	check_line(char *line, t_map *map)
 
 char	*read_file(char *path, t_map *map)
 {
-    int		fd;
+	int		fd;
 	char	*line;
 	int		exit;
 	char	*str_map;
-	int	len;
-	int	chk;
+	int		len;
+	int		chk;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)

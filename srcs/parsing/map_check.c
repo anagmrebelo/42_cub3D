@@ -6,12 +6,12 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:24:56 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 16:27:48 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 13:41:54 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3D.h"
-# include "parsing.h"
+#include "cub3D.h"
+#include "parsing.h"
 
 int	check_nb_rows(char *row, int cols)
 {
@@ -49,7 +49,7 @@ int	check_round(char **map, int x, int y)
 		&& (map[x][y + 1] == ' ' || map[x][y + 1] == '1')
 		&& (map[x + 1][y] == ' ' || map[x + 1][y] == '1')
 		&& (map[x - 1][y] == ' ' || map[x - 1][y] == '1'))
-			return (0);
+		return (0);
 	return (1);
 }
 
