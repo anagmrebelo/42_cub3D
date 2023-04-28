@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
+#    By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/27 14:47:15 by arebelo          ###   ########.fr        #
+#    Updated: 2023/04/28 12:26:41 by mrollo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS				= main.c\
 					rendering/draw_line.c\
 					utils/colors.c\
 					utils/angles.c\
+					utils/join_free.c\
 					gnl/get_next_line.c
 
 MK					= Makefile

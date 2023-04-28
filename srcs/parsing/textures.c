@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 19:16:17 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 12:52:56 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char	*tex_parse(char *str)
 	if (!tab)
 		return (NULL); //manejar en la otra funcion
 	new = ft_strtrim(tab[1], "\n");
-	// new = ft_strdup(tab[1]);
 	if (!new)
 	{
 		free_tab(tab);

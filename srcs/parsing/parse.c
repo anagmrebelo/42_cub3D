@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/27 16:24:40 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/28 12:48:51 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_textures(t_map *map)
 	if (open_close(map->tex_ea)|| open_close(map->tex_no)
 		|| open_close(map->tex_so) || open_close(map->tex_we))
 	{
-		printf("no abre el archivo\n");
+		error_control("Can't open file\n");
 		return (1);
 	}
 	return (0);
@@ -109,7 +109,7 @@ int parse(char *path, t_map *map)
 		return (1);
 	if (check_textures(map))
 	{
-		free (map->str_map);
+		// free (map->str_map);
 		return (1);
 	}
 	if (fill_map(map))

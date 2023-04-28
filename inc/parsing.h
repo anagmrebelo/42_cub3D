@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:46:05 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 19:16:09 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 12:08:08 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*tex_parse(char *str);
 int		*color_arr(char *line);
 int		check_color(int *arr);
 void	free_tab(char** tab);
+void	error_control(char *msj);
 
 #endif

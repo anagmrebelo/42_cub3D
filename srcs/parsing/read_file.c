@@ -6,13 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 19:17:53 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 12:19:36 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3D.h"
 # include "get_next_line.h"
 # include "parsing.h"
+# include "utils.h"
 
 int	count_row(char *str_map)
 {
@@ -112,7 +113,7 @@ int	check_line(char *line, t_map *map)
 		{
 			if (color_parse(line, line[i], map))
 			{
-				printf("Color error\n");
+				error_control("Color error\n");
 				return (2);
 			}
 			return (1);
@@ -121,8 +122,8 @@ int	check_line(char *line, t_map *map)
 			return (0);
 		else
 		{
-			printf("Error, map not closed?\n");
-			return (1);
+			error_control("Shit on the .cub\n");
+			return (2);
 		}
 	}
 	return (0);
@@ -140,7 +141,7 @@ char	*read_file(char *path, t_map *map)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Cannot read the map\n");
+		error_control("Cannot read the map\n");
 		return (NULL);
 	}
 	line = NULL;
@@ -167,7 +168,7 @@ char	*read_file(char *path, t_map *map)
 				len = ft_strlen(line) - 1;
 				if (len > map->nb_cols)
 					map->nb_cols = len;
-				str_map = ft_strjoin(str_map, line); //join_free
+				str_map = join_free_s1(str_map, line);
 				free (line);
 			}
 		}
