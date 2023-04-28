@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 13:46:49 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 17:46:03 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	*color_arr(char *line)
 	int		i;
 
 	str_color = tex_parse(line);
+	printf("str_color: %s\n", str_color);
 	if (!str_color)
 		return (NULL);
 	aux = ft_split(str_color, ',');
@@ -52,8 +53,12 @@ int	*color_arr(char *line)
 		return (NULL);
 	}
 	i = -1;
-	while (++i < 3)
+	while (++i < 4)
+	{
+		printf("aux[%d]: %s\n", i, aux[i]);
 		color[i] = ft_atoi(aux[i]);
+		printf("color[%d]: %d\n", i, color[i]);
+	}
 	free_tab(aux);
 	return (color);
 }
@@ -88,4 +93,93 @@ char	*tex_parse(char *str)
 	}
 	free_tab(tab);
 	return (new);
+}
+
+// int	check_number(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		printf("c: [%c]\n", str[i]);
+// 		if (ft_isdigit(str[i]))
+// 			i++;
+// 		else
+// 			return (1);
+// 	}
+// 	return (0);
+// }
+
+// char	*color_trim(char *str)
+// {
+// 	int	len;
+// 	char	*color;
+
+// 	len = ft_strlen(str);
+// 	if (str[len - 1] == ',')
+// 		color = ft_strtrim(str, ",");
+// 	if (str[len - 1] == '\n')
+// 		color = ft_strtrim(str, "\n");
+// 	return (color);
+// }
+
+char	*clean_color(char *str)
+{
+	int	i;
+	int	count;
+	char	*color;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) || str[i] == ',')
+			count++;
+		i++;
+	}
+	color = (char *)ft_calloc(count + 1, sizeof(char));
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) || str[i] == ',')
+		{
+			color[count] = str[i];
+			i++;
+			count++;		
+		}
+		else
+			i++;
+	}
+	return (color);
+}
+
+int	*parse_color_array(char *line)
+{
+	char	**tab;
+	int		*color;
+	int		i;
+	char	*str;
+	char	*clean;
+
+	line = tab_to_space(line);
+	// printf("line: %s\n", line);
+	clean = clean_color(line);
+	printf("clean_line: [%s]\n", clean);
+	tab = ft_split(line, ' ');
+	if (!tab)
+		return (NULL);
+	color = (int *)ft_calloc(4, sizeof(int));
+	i = 0;
+	while (tab[++i])
+	{
+		str = ft_strtrim(tab[i], ",");
+		// if (check_number(str))
+		// 	return (NULL);
+		color[i] = ft_atoi(str);
+		free (str);
+	}
+	free_tab(tab);
+	return (color);
 }

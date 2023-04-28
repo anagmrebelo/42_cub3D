@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 13:46:00 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 17:17:51 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	color_parse(char *line, char a, t_map *map)
 {
 	if (a == 'C')
 	{
-		map->color_c = color_arr(line);
+		map->color_c = parse_color_array(line);
 		if (!map->color_c)
 			return (1);
 		if (check_color(map->color_c))
@@ -66,7 +66,7 @@ int	color_parse(char *line, char a, t_map *map)
 	}
 	if (a == 'F')
 	{
-		map->color_f = color_arr(line);
+		map->color_f = parse_color_array(line);
 		if (!map->color_f)
 			return (1);
 		if (check_color(map->color_f))
@@ -113,7 +113,8 @@ int	check_line(char *line, t_map *map)
 		{
 			if (color_parse(line, line[i], map))
 			{
-				error_control("Color error\n");
+				printf("ENTRO AQUI");
+				error_control("Color not valid\n");
 				return (2);
 			}
 			return (1);
@@ -172,6 +173,11 @@ char	*read_file(char *path, t_map *map)
 				free (line);
 			}
 		}
+	}
+	if (!str_map)
+	{
+		error_control("No map in the file\n");
+		return (NULL);
 	}
 	map->nb_rows = count_row(str_map);
 	return (str_map);

@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 13:44:37 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 16:46:18 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int	open_close(char *path)
 int	check_textures(t_map *map)
 {
 	if (!map->tex_ea || !map->tex_no || !map->tex_so || !map->tex_we)
+	{
+		error_control("Texture error\n");
 		return (1);
+	}
 	if (open_close(map->tex_ea) || open_close(map->tex_no)
 		|| open_close(map->tex_so) || open_close(map->tex_we))
 	{
@@ -105,6 +108,11 @@ int	parse(char *path, t_map *map)
 	map->str_map = read_file(path, map);
 	if (!map->str_map)
 		return (1);
+	if (!map->color_c || !map->color_f)
+	{
+		error_control("Error color\n");
+		return (1);
+	}
 	if (check_content(map->str_map))
 		return (1);
 	if (check_textures(map))
