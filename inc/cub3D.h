@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/27 18:45:04 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/28 16:12:31 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define SCALE 64
 # define PLAYER_SIZE 7
 # define ANGLE_VIEW 60
-# define PLAYER_SPEED 2
+# define PLAYER_SPEED 3
 # define ANGLE_SPEED 2
 
 // -------- Minimap settings --------
@@ -44,12 +44,11 @@
 # define BLUE_PIXEL 0x63C5DA
 # define GREEN_PIXEL 0x028A0F
 
-
 typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp; /* bits per pixel */
+	int		bpp;
 	int		line_len;
 	int		endian;
 	int		height;
@@ -75,14 +74,13 @@ typedef struct s_keys
 	int	l;
 }	t_keys;
 
-
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
 	t_img	img;
 	t_keys	keys;
-} t_mlx;
+}	t_mlx;
 
 typedef struct s_map
 {
@@ -106,7 +104,7 @@ typedef struct s_map
 	int			block_size;
 	int			map_s;
 	float		ra;
-	float		disT;
+	float		dis_t;
 	float		rx;
 	float		ry;
 	float		rx_f;
@@ -118,12 +116,12 @@ typedef struct s_map
 	t_img		south;
 	t_img		east;
 	t_img		west;
-} t_map;
+}	t_map;
 
 typedef struct s_master
 {
 	t_map		map;
-	t_player 	player;
+	t_player	player;
 	t_mlx		mlx;
 }	t_master;
 

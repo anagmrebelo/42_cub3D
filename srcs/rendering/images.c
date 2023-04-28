@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:10:36 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/27 00:07:17 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/04/28 15:54:58 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 #include "free.h"
 
 /**
- * Creates an image of the size of the window and stores it in the master structure
+ * Creates an image of the size of the window 
+ * stores it in the master structure
 */
 static void	create_game_image(t_master *master)
 {
-	master->mlx.img.mlx_img = mlx_new_image(master->mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	master->mlx.img.mlx_img = mlx_new_image(master->mlx.mlx_ptr,
+			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!master->mlx.img.mlx_img)
 		clean_exit(master);
-	master->mlx.img.addr = mlx_get_data_addr(master->mlx.img.mlx_img, &master->mlx.img.bpp, &master->mlx.img.line_len, &master->mlx.img.endian);
+	master->mlx.img.addr = mlx_get_data_addr(master->mlx.img.mlx_img,
+			&master->mlx.img.bpp, &master->mlx.img.line_len,
+			&master->mlx.img.endian);
 	if (!master->mlx.img.addr)
 		clean_exit(master);
 }
@@ -42,7 +46,8 @@ static void	check_64(t_master *master, t_img *img)
 */
 static void	save_image(t_master *master, t_img *img, char *path)
 {
-	img->mlx_img = mlx_xpm_file_to_image(master->mlx.mlx_ptr, path, &img->width, &img->height);
+	img->mlx_img = mlx_xpm_file_to_image(master->mlx.mlx_ptr,
+			path, &img->width, &img->height);
 	if (!img->mlx_img)
 		clean_exit(master);
 	img->addr = mlx_get_data_addr(
@@ -57,10 +62,10 @@ static void	save_image(t_master *master, t_img *img, char *path)
 */
 static void	upload_textures(t_master *master)
 {
-	save_image(master, &master->map.north, master->map.tex_no);	// North
-	save_image(master, &master->map.south, master->map.tex_so);	// South
-	save_image(master, &master->map.east, master->map.tex_ea);	// East
-	save_image(master, &master->map.west, master->map.tex_we);	// West	
+	save_image(master, &master->map.north, master->map.tex_no); // North
+	save_image(master, &master->map.south, master->map.tex_so); // South
+	save_image(master, &master->map.east, master->map.tex_ea); // East
+	save_image(master, &master->map.west, master->map.tex_we); // West	
 }
 
 /**
@@ -69,5 +74,5 @@ static void	upload_textures(t_master *master)
 void	upload_images(t_master *master)
 {
 	create_game_image(master);
-	upload_textures(master);	
+	upload_textures(master);
 }

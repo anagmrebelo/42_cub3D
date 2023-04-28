@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 12:31:11 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/28 16:14:53 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	draw_3d_wall(t_master *master, int r)
 	float	ty_off;
 
 	ca = angle_check(master->player.pa - master->map.ra);
-	master->map.disT = master->map.disT * cos(deg_to_rad(ca));
-	line_h = (master->map.block_size * WINDOW_HEIGHT) / master->map.disT;
+	master->map.dis_t = master->map.dis_t * cos(deg_to_rad(ca));
+	line_h = (master->map.block_size * WINDOW_HEIGHT) / master->map.dis_t;
 
 	ty_step = text.height / line_h;
 	ty_off = 0;
@@ -100,7 +100,7 @@ static void	draw_3d_wall(t_master *master, int r)
 }
 
 /**
- * Finds next line and saves distance to player in master->map.disT
+ * Finds next line and saves distance to player in master->map.dis_t
 */
 static void find_obs(t_master *master, float xo, float yo, char c)
 {
@@ -113,9 +113,9 @@ static void find_obs(t_master *master, float xo, float yo, char c)
 	if (mx >= 0 && my >= 0 && mx < master->map.nb_cols && my < master->map.nb_rows && master->map.mtx[my][mx] == '1')	// Hit a wall
 	{
 		temp = calc_distance(master);
-		if (temp < master->map.disT)
+		if (temp < master->map.dis_t)
 		{
-			master->map.disT = temp;
+			master->map.dis_t = temp;
 			master->map.f = c;
 			master->map.rx_f = master->map.rx;
 			master->map.ry_f = master->map.ry;
@@ -156,7 +156,7 @@ static void	check_vertical_lines(t_master *master)
 
 	master->map.dof = 0;
 	tang = tan(deg_to_rad(master->map.ra));
-	master->map.disT = 100000;
+	master->map.dis_t = 100000;
 	if (master->map.ra < 90 || master->map.ra > 270) 	//Looking Right
 	{
 		master->map.rx = ((int)(master->player.px / SCALE) * SCALE) + master->map.block_size;
