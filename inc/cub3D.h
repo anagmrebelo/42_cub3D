@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 16:12:31 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/29 22:08:46 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_map
 	int			block_size;
 	int			map_s;
 	float		ra;
+
 	float		dis_t;
 	float		rx;
 	float		ry;
@@ -112,6 +113,12 @@ typedef struct s_map
 	char		f;
 	int			dof;
 	int			color;
+
+	float		line_off;
+	float		line_f;
+	float		ty_step;
+	float		ty_off;
+
 	t_img		north;
 	t_img		south;
 	t_img		east;

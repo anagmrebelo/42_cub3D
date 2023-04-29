@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 16:14:53 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/29 22:22:28 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,43 +30,54 @@ static t_img	find_texture(t_master *master)
 	return (ret);
 }
 
-/***
- * Prints in the image vertical line per ray
- * Offset to the center of the screen
- * Removed fish eye-effect
+/**
+ * Define line height to be drawn on screen and offset to center of the screen
 */
-static void	draw_3d_wall(t_master *master, int r)
+static void	update_dis_t(t_master *master, t_img text)
 {
-	t_img	text;
-	
-	text = find_texture(master);
-
-	float	line_h;
 	float	ca;
-	float	line_off;
-	float	line_f;
-	int		point_a[2];
-	int		point_b[2];
-	float	ty_step;
-	float	ty_off;
-
+	
 	ca = angle_check(master->player.pa - master->map.ra);
 	master->map.dis_t = master->map.dis_t * cos(deg_to_rad(ca));
-	line_h = (master->map.block_size * WINDOW_HEIGHT) / master->map.dis_t;
-
-	ty_step = text.height / line_h;
-	ty_off = 0;
-	if (line_h > WINDOW_HEIGHT)
+	master->map.dis_t = (master->map.block_size * WINDOW_HEIGHT) / master->map.dis_t;
+	master->map.ty_step = text.height / master->map.dis_t;
+	master->map.ty_off = 0;
+	if (master->map.dis_t > WINDOW_HEIGHT)
 	{
-		ty_off = (line_h - WINDOW_HEIGHT) / 2.0;
-		line_h = WINDOW_HEIGHT;
+		master->map.ty_off = (master->map.dis_t - WINDOW_HEIGHT) / 2.0;
+		master->map.dis_t = WINDOW_HEIGHT;
 	}
-	line_off = WINDOW_HEIGHT / 2 - line_h / 2;
-	line_f = line_h + line_off;
+	master->map.line_off = WINDOW_HEIGHT / 2 - master->map.dis_t / 2;
+	master->map.line_f = master->map.dis_t + master->map.line_off ;
 
-	float y = 0;
-	float ty = ty_off * ty_step;
-	float tx;
+}
+
+/**
+ * Draws ceiling and floor lines according to colors given in map
+*/
+static void	draw_floor_ceil(t_master *master, int r)
+{
+	int		point_a[2];
+	int		point_b[2];
+
+	point_a[0] = r;
+	point_a[1] = round(master->map.line_f);
+	point_b[0] = r;
+	point_b[1] = WINDOW_HEIGHT;
+	// Draw floor
+	draw_line(master, point_a, point_b, master->map.floor_col);
+	point_a[1] = 0;
+	point_b[1] = master->map.line_off;
+	// Draw celing
+	draw_line(master, point_a, point_b, master->map.ceil_col);
+}
+
+/**
+ * Returns x depending if it is vertical or horizontal line
+*/
+static float	calc_tx(t_master *master, t_img text)
+{
+	float	tx;
 	
 	if (master->map.f == 'h')
 	{
@@ -80,23 +91,33 @@ static void	draw_3d_wall(t_master *master, int r)
 		if (master->map.ra > 90 && master->map.ra < 270)
 			tx = text.width - 1 - tx;
 	}
-	while (y < line_h)
+	return (tx);
+}
+
+/***
+ * Prints in the image vertical line per ray
+ * Offset to the center of the screen
+ * Removed fish eye-effect
+*/
+static void	draw_3d_wall(t_master *master, int r)
+{
+	t_img	text;
+	float 	y;
+	float 	ty;
+	float	tx;
+	
+	text = find_texture(master);
+	update_dis_t(master, text);
+	y = 0;
+	ty = master->map.ty_off * master->map.ty_step;
+	tx = calc_tx(master, text);
+	while (y < master->map.dis_t)
 	{
-		int color = img_pix_get(&text, (int)(tx), (int)(ty));
-		draw_pixel(master, r, y + line_off, color);
-		ty += ty_step;
+		draw_pixel(master, r, y + master->map.line_off, img_pix_get(&text, (int)(tx), (int)(ty)));
+		ty += master->map.ty_step;
 		y++;
 	}
-	point_a[0] = r;
-	point_a[1] = round(line_f);
-	point_b[0] = r;
-	point_b[1] = WINDOW_HEIGHT;
-	// Draw floor
-	draw_line(master, point_a, point_b, master->map.floor_col);
-	point_a[1] = 0;
-	point_b[1] = line_off;
-	// Draw celing
-	draw_line(master, point_a, point_b, master->map.ceil_col);
+	draw_floor_ceil(master, r);
 }
 
 /**
