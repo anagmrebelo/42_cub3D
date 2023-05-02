@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:18 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 15:41:53 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:46:16 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,45 @@ void	set_positions(t_master *master)
 		master->map.map_s = MINIMAP_SIZE / master->map.nb_cols;
 	else
 		master->map.map_s = MINIMAP_SIZE / master->map.nb_rows;
+}
+
+/**
+ * Define line height to be drawn on screen and offset to center of the screen
+*/
+void	update_dis_t(t_master *master, t_img text)
+{
+	float	ca;
+
+	ca = angle_check(master->player.pa - master->map.ra);
+	master->map.dis_t = master->map.dis_t * cos(deg_to_rad(ca));
+	master->map.dis_t = (master->map.block_size * WINDOW_HEIGHT)
+		/ master->map.dis_t;
+	master->map.ty_step = text.height / master->map.dis_t;
+	master->map.ty_off = 0;
+	if (master->map.dis_t > WINDOW_HEIGHT)
+	{
+		master->map.ty_off = (master->map.dis_t - WINDOW_HEIGHT) / 2.0;
+		master->map.dis_t = WINDOW_HEIGHT;
+	}
+	master->map.line_off = WINDOW_HEIGHT / 2 - master->map.dis_t / 2;
+	master->map.line_f = master->map.dis_t + master->map.line_off ;
+}
+
+/**
+ * Returns the texture according to ray angle
+*/
+t_img	find_texture(t_master *master)
+{
+	t_img	ret;
+
+	if (master->map.f == 'h' && master->map.ra < 180)
+		ret = master->map.north;
+	else if (master->map.f == 'h' && master->map.ra >= 180)
+		ret = master->map.south;
+	else if (master->map.f == 'v' && master->map.ra > 90
+		&& master->map.ra < 270)
+		ret = master->map.west;
+	else
+		ret = master->map.east;
+	return (ret);
 }

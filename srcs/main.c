@@ -6,7 +6,7 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 15:56:56 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:06:13 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int	render(t_master *master)
 {
 	key_hook(master);
-	draw_rays_3D(master);
+	draw_rays_3d(master);
 	print_minimap(master);
 	mlx_put_image_to_window(master->mlx.mlx_ptr,
 		master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);

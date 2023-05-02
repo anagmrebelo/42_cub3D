@@ -6,7 +6,7 @@
 #    By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/28 12:08:53 by arebelo          ###   ########.fr        #
+#    Updated: 2023/05/02 10:11:29 by arebelo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRCS				= main.c\
 					rendering/images.c\
 					rendering/set_vars.c\
 					rendering/print_minimap.c\
+					rendering/horizontal.c\
+					rendering/vertical.c\
 					rendering/draw_rays.c\
 					rendering/draw_line.c\
 					utils/colors.c\
