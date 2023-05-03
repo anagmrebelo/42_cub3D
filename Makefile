@@ -24,11 +24,15 @@ SRCS				= main.c\
 					parsing/map.c\
 					parsing/map_check.c\
 					parsing/textures.c\
+					hooks/key_letters.c\
+					hooks/key_arrows.c\
 					hooks/key_hooks.c\
 					hooks/red_cross.c\
 					rendering/images.c\
 					rendering/set_vars.c\
 					rendering/print_minimap.c\
+					rendering/horizontal.c\
+					rendering/vertical.c\
 					rendering/draw_rays.c\
 					rendering/draw_line.c\
 					utils/colors.c\
@@ -55,7 +59,7 @@ MINILIBX_DIR		= mlx
 LINK				= gcc
 CC					= gcc -c
 DEPFLAGS			= -MMD -MP
-CFLAGS				= -Wall -Wextra -g
+CFLAGS				= -Wall -Wextra -g -O3
 RM					= rm -rf
 
 # LIBRARIES

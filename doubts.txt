@@ -1,7 +1,6 @@
 TO DOS:
 
 NORMAL
-> Press two keys at the same time
 > normi
 
 BONUS

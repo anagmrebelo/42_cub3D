@@ -18,7 +18,6 @@
 */
 void	clean_exit(t_master *master)
 {
-	// Destroy images
 	if (master->mlx.img.mlx_img)
 		mlx_destroy_image(master->mlx.mlx_ptr, master->mlx.img.mlx_img);
 	if (master->map.north.mlx_img)
@@ -29,8 +28,6 @@ void	clean_exit(t_master *master)
 		mlx_destroy_image(master->mlx.mlx_ptr, master->map.east.mlx_img);
 	if (master->map.west.mlx_img)
 		mlx_destroy_image(master->mlx.mlx_ptr, master->map.west.mlx_img);
-	
-	// Destroy window
 	if (master->mlx.mlx_win)
 		mlx_destroy_window(master->mlx.mlx_ptr, master->mlx.mlx_win);
 
@@ -51,6 +48,7 @@ void	clean_exit(t_master *master)
 		free (master->map.color_c);
 	if (master->map.color_f)
 		free (master->map.color_f);
+
 	if (master)
 		free(master);
 	exit(1);

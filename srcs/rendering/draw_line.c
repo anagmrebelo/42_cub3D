@@ -6,39 +6,37 @@
 /*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:10:02 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/27 15:33:50 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/28 16:06:41 by arebelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rendering.h"
 #include "utils.h"
 
-void draw_line(t_master *master, int X0, int Y0, int X1, int Y1, int color)
+void	draw_line(t_master *master, int point_a[2], int point_b[2], int color)
 {
-	if (X0 == X1 && Y0 == Y1)
-		return ;
+	int		steps;
+	float	x_inc;
+	float	y_inc;
+	int		i;
 
-	// calculate dx & dy
-    int dx = X1 - X0;
-    int dy = Y1 - Y0;
- 
-    // calculate steps required for generating pixels
-    int steps = ft_abs(dx) > ft_abs(dy) ? ft_abs(dx) : ft_abs(dy);
- 
-    // calculate increment in x & y for each steps
-    float Xinc = dx / (float)steps;
-    float Yinc = dy / (float)steps;
- 
-    // Put pixel for each step
-    float	X = X0;
-    float	Y = Y0;
-	int		i = 0;
+	if (point_a[0] == point_b[0] && point_a[1] == point_b[1])
+		return ;
+	// calculate steps required for generating pixels
+	if (ft_abs(point_b[0] - point_a[0]) > ft_abs(point_b[1] - point_a[1]))
+		steps = ft_abs(point_b[0] - point_a[0]);
+	else
+		steps = ft_abs(point_b[1] - point_a[1]);
+	// calculate increment in x & y for each steps
+	x_inc = (point_b[0] - point_a[0]) / (float)steps;
+	y_inc = (point_b[1] - point_a[1]) / (float)steps;
+	// Put pixel for each step
+	i = 0;
 	while (i <= steps)
 	{
-		if (X >= 0 && Y >= 0 && X < WINDOW_WIDTH && Y < WINDOW_HEIGHT)
-        	img_pix_put(&master->mlx.img, round(X), round(Y), color);
-        X += Xinc; // increment in x at each step
-        Y += Yinc; // increment in y at each step
+		draw_pixel(master, round(point_a[0]), round(point_a[1]), color);
+		point_a[0] += x_inc; // increment in x at each step
+		point_a[1] += y_inc; // increment in y at each step
 		i++;
 	}
 }

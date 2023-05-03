@@ -16,26 +16,18 @@
 #include "utils.h"
 #include "hooks.h"
 #include "rendering.h"
- 
+
 /**
  * Prints background and rays into image
  * Pushes image to screen
 */
 int	render(t_master *master)
 {
-	// int x;
-	// int y;
-	
-	// mlx_mouse_get_pos(master->mlx.mlx_win, &x, &y);
-	// printf("(%d, %d)\n", x, y);
-	// if (x > 720)
-	// 	master->player.pa = angle_check(master->player.pa - 1);
-	// else if (x < 240)
-	// 	master->player.pa = angle_check(master->player.pa + 1);
 	key_hook(master);
-	draw_rays_3D(master);
+	draw_rays_3d(master);
 	print_minimap(master);
-	mlx_put_image_to_window(master->mlx.mlx_ptr, master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
+	mlx_put_image_to_window(master->mlx.mlx_ptr,
+		master->mlx.mlx_win, master->mlx.img.mlx_img, 0, 0);
 	return (0);
 }
 
@@ -48,13 +40,12 @@ static void	window_init(t_master *master)
 	master->mlx.mlx_ptr = mlx_init();
 	if (!master->mlx.mlx_ptr)
 		clean_exit(master);
-	master->mlx.mlx_win = mlx_new_window(master->mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
+	master->mlx.mlx_win = mlx_new_window(master->mlx.mlx_ptr,
+			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!master->mlx.mlx_win)
 		clean_exit(master);
-
 	// Upload texture images and create new img for game
 	upload_images(master);
-
 	//Define player initial pos
 	set_positions(master);
 	return ;
@@ -66,8 +57,8 @@ static void	window_init(t_master *master)
 static void	window_loops(t_master *master)
 {
 	// Key hooks
-	mlx_hook(master->mlx.mlx_win, 2, 1L<<0, &key_down, master);
-	mlx_hook(master->mlx.mlx_win, 3, 1L<<0, &key_up, master);
+	mlx_hook(master->mlx.mlx_win, 2, 1L << 0, &key_down, master);
+	mlx_hook(master->mlx.mlx_win, 3, 1L << 0, &key_up, master);
 	// Red cross hook
 	mlx_hook(master->mlx.mlx_win, 17, 0, &red_cross, master);
 	// Changes on image
@@ -76,7 +67,7 @@ static void	window_loops(t_master *master)
 	mlx_loop(master->mlx.mlx_ptr);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_master	*master;
 
