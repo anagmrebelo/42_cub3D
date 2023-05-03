@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:24:56 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 15:45:50 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 16:03:19 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,27 @@ int	check_round(char **map, int x, int y)
 	return (1);
 }
 
+int	aux_check_map(char c, char **map, int i, int j)
+{
+	if (c == ' ')
+	{
+		if (check_round(map, i, j))
+		{
+			error_control("The map has to be closed\n");
+			return (1);
+		}
+	}
+	if (c == '0')
+	{
+		if (check_round_2(map, i, j))
+		{
+			error_control("The map has to be closed\n");
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int	check_map(char **mtx, t_map *map)
 {
 	int	i;
@@ -80,22 +101,8 @@ int	check_map(char **mtx, t_map *map)
 		j = 0;
 		while (++j < map->nb_cols - 1)
 		{
-			if (mtx[i][j] == ' ')
-			{
-				if (check_round(mtx, i, j))
-				{
-					error_control("The map has to be closed\n");
-					return (1);
-				}
-			}
-			if (mtx[i][j] == '0')
-			{
-				if (check_round_2(mtx, i, j))
-				{
-					error_control("The map has to be closed\n");
-					return (1);
-				}
-			}
+			if (aux_check_map(mtx[i][j], mtx, i, j))
+				return (1);
 		}
 	}
 	return (0);
