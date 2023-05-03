@@ -6,14 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:17:28 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 19:18:12 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:15:36 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
-# include "cub3D.h"
+#include "parsing.h"
+#include "cub3D.h"
 
-void free_tab(char** tab)
+void	free_tab(char **tab)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ void free_tab(char** tab)
 		if (tab[i])
 			free(tab[i]);
 	}
-    free(tab);
+	free(tab);
 }
 
 void	fill_with_spaces(char *str, int cols)
@@ -36,7 +36,7 @@ void	fill_with_spaces(char *str, int cols)
 	str[i] = '\0';
 }
 
-char **create_map(int x, int y)
+char	**create_map(int x, int y)
 {
 	char	**map;
 	int		i;
@@ -47,7 +47,7 @@ char **create_map(int x, int y)
 	i = -1;
 	while (++i < x)
 	{
-		map[i] = (char*)calloc(y + 1, sizeof(char));
+		map[i] = (char *)calloc(y + 1, sizeof(char));
 		if (!map[i])
 		{
 			free_tab(map);
@@ -70,7 +70,7 @@ void	fill_row(char *str, char *nb_rows)
 	}
 }
 
-int fill_map(t_map *map)
+int	fill_map(t_map *map)
 {
 	char	**aux;
 	int		i;
@@ -89,7 +89,6 @@ int fill_map(t_map *map)
 		fill_row(aux[i], map->mtx[i]);
 	if (check_map(map->mtx, map))
 	{
-		free_tab(map->mtx);
 		free_tab(aux);
 		return (1);
 	}

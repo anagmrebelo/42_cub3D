@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/27 16:24:40 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:26:13 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3D.h"
-# include "parsing.h"
+#include "cub3D.h"
+#include "parsing.h"
 
 void	error_control(char *msj)
 {
@@ -40,13 +40,18 @@ int	check_content(char *str_map)
 		else
 		{
 			error_control("Your map has a wrong character\n");
-			printf("CHAR: %c\n", str_map[i]);
+			// printf("CHAR: %c\n", str_map[i]);
 			return (1);
 		}
 	}
 	if (count > 1)
 	{
 		error_control("Only 1 initial position\n");
+		return (1);
+	}
+	if (count == 0)
+	{
+		error_control("You need an initial position: N-W-E-S\n");
 		return (1);
 	}
 	return (0);
@@ -66,11 +71,14 @@ int	open_close(char *path)
 int	check_textures(t_map *map)
 {
 	if (!map->tex_ea || !map->tex_no || !map->tex_so || !map->tex_we)
+	{
+		error_control("Texture error or missing\n");
 		return (1);
-	if (open_close(map->tex_ea)|| open_close(map->tex_no)
+	}
+	if (open_close(map->tex_ea) || open_close(map->tex_no)
 		|| open_close(map->tex_so) || open_close(map->tex_we))
 	{
-		printf("no abre el archivo\n");
+		error_control("Can't open texture\n");
 		return (1);
 	}
 	return (0);
@@ -100,21 +108,22 @@ void	save_ini_pos(t_map *map)
 	}
 }
 
-int parse(char *path, t_map *map)
+int	parse(char *path, t_map *map)
 {
 	map->str_map = read_file(path, map);
 	if (!map->str_map)
 		return (1);
+	if (!map->color_c || !map->color_f)
+	{
+		error_control("Missing color\n");
+		return (1);
+	}
 	if (check_content(map->str_map))
 		return (1);
 	if (check_textures(map))
-	{
-		free (map->str_map);
 		return (1);
-	}
 	if (fill_map(map))
 		return (1);
 	save_ini_pos(map);
-	// printf("map->view = %c\nmap->px = %d\nmap->py = %d\n", map->view, map->px, map->py);
 	return (0);
 }

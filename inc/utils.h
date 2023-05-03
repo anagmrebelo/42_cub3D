@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:18:27 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 16:12:55 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/04/28 12:18:38 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ float	deg_to_rad(float d);
 float	angle_check(float ang);
 float	ft_abs_float(float n);
 int		ft_abs(int n);
+
+char	*join_free_s1(char *s1, char *s2);
+char	*join_double_free(char *s1, char *s2);
 
 #endif

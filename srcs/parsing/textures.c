@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 19:16:17 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:29:58 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int	*color_arr(char *line)
 	int		i;
 
 	str_color = tex_parse(line);
+	printf("str_color: %s\n", str_color);
 	if (!str_color)
-			return (NULL);
+		return (NULL);
 	aux = ft_split(str_color, ',');
 	if (!aux)
 	{
@@ -52,8 +53,12 @@ int	*color_arr(char *line)
 		return (NULL);
 	}
 	i = -1;
-	while (++i < 3)
+	while (++i < 4)
+	{
+		printf("aux[%d]: %s\n", i, aux[i]);
 		color[i] = ft_atoi(aux[i]);
+		printf("color[%d]: %d\n", i, color[i]);
+	}
 	free_tab(aux);
 	return (color);
 }
@@ -79,14 +84,138 @@ char	*tex_parse(char *str)
 	str = tab_to_space(str);
 	tab = ft_split(str, ' ');
 	if (!tab)
-		return (NULL); //manejar en la otra funcion
+		return (NULL);
 	new = ft_strtrim(tab[1], "\n");
-	// new = ft_strdup(tab[1]);
 	if (!new)
 	{
 		free_tab(tab);
-		return (NULL); //manejar en la otra funcion
+		return (NULL);
 	}
 	free_tab(tab);
 	return (new);
+}
+
+// int	check_number(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		printf("c: [%c]\n", str[i]);
+// 		if (ft_isdigit(str[i]))
+// 			i++;
+// 		else
+// 			return (1);
+// 	}
+// 	return (0);
+// }
+
+// char	*color_trim(char *str)
+// {
+// 	int	len;
+// 	char	*color;
+
+// 	len = ft_strlen(str);
+// 	if (str[len - 1] == ',')
+// 		color = ft_strtrim(str, ",");
+// 	if (str[len - 1] == '\n')
+// 		color = ft_strtrim(str, "\n");
+// 	return (color);
+// }
+
+char	*clean_color(char *str)
+{
+	int	i;
+	int	count;
+	char	*color;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) || str[i] == ',')
+			count++;
+		i++;
+	}
+	color = (char *)ft_calloc(count + 1, sizeof(char));
+	if (!color)
+		return (NULL);
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+		if ((str[i] == 'F' || str[i] == 'C') && (str[i + 1] == ' ' || str[i + 1] == '\t'))
+			i++;
+		else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
+		{
+			color[count] = str[i];
+			i++;
+			count++;		
+		}
+		else if (str[i] == '\n')
+			i++;
+		else
+			return (NULL);
+	}
+	if (ft_strlen(color) < 1)
+	{
+		free(color);
+		return (NULL);
+	}
+	return (color);
+}
+
+int	len_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+int	*parse_color_array(char *line)
+{
+	char	**tab;
+	int		*color;
+	int		i;
+	char	*clean;
+	int		len;
+
+	line = tab_to_space(line);
+	clean = clean_color(line);
+	if (!clean)
+		return (NULL);
+	// printf("clean_line: [%s]\n", clean);
+	tab = ft_split(clean, ',');
+	if (!tab)
+	{
+		free (clean);
+		return (NULL);
+	}
+	free(clean);
+	len = len_tab(tab);
+	if (len != 3)
+		return (NULL);
+	color = (int *)ft_calloc(len + 1, sizeof(int));
+	if (!color)
+	{
+		free (clean);
+		free_tab(tab);
+		return (NULL);
+	}
+	i = -1;
+	while (tab[++i])
+	{
+		// if (check_number(tab[i]))
+		// 	return (NULL);
+		color[i] = ft_atoi(tab[i]);
+		// printf("color[%d]: %d\n", i, color[i]);
+	}
+	free_tab(tab);
+	return (color);
 }

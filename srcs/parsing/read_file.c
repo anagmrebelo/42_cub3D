@@ -6,13 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/26 19:17:53 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:16:16 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3D.h"
-# include "get_next_line.h"
-# include "parsing.h"
+#include "cub3D.h"
+#include "get_next_line.h"
+#include "parsing.h"
+#include "utils.h"
 
 int	count_row(char *str_map)
 {
@@ -31,7 +32,6 @@ int	count_row(char *str_map)
 			count++;
 		}
 	}
-	nb_rows++;
 	return (nb_rows);
 }
 
@@ -54,23 +54,23 @@ int	color_parse(char *line, char a, t_map *map)
 {
 	if (a == 'C')
 	{
-		map->color_c = color_arr(line);
+		map->color_c = parse_color_array(line);
 		if (!map->color_c)
 			return (1);
 		if (check_color(map->color_c))
 		{
-			free (map->color_c);
+			// free (map->color_c);
 			return (1);
 		}
 	}
 	if (a == 'F')
 	{
-		map->color_f = color_arr(line);
+		map->color_f = parse_color_array(line);
 		if (!map->color_f)
 			return (1);
 		if (check_color(map->color_f))
 		{
-			free (map->color_f);
+			// free (map->color_f);
 			return (1);
 		}
 	}
@@ -105,14 +105,14 @@ int	check_line(char *line, t_map *map)
 			|| (line[i] == 'E' && line[i + 1] == 'A')
 			|| (line[i] == 'W' && line[i + 1] == 'E'))
 		{
-			tex_parse_aux(line[i], line[i + 1], line, map); //lo chequeo en read_file
+			tex_parse_aux(line[i], line[i + 1], line, map);
 			return (1);
 		}
 		if (line[i] == 'C' || line[i] == 'F')
 		{
 			if (color_parse(line, line[i], map))
 			{
-				printf("Color error\n");
+				error_control("Color not valid or missing color\n");
 				return (2);
 			}
 			return (1);
@@ -121,8 +121,8 @@ int	check_line(char *line, t_map *map)
 			return (0);
 		else
 		{
-			printf("Error, map not closed?\n");
-			return (1);
+			error_control("Shit on the .cub\n");
+			return (2);
 		}
 	}
 	return (0);
@@ -130,17 +130,17 @@ int	check_line(char *line, t_map *map)
 
 char	*read_file(char *path, t_map *map)
 {
-    int		fd;
+	int		fd;
 	char	*line;
 	int		exit;
 	char	*str_map;
-	int	len;
-	int	chk;
+	int		len;
+	int		chk;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Cannot read the map\n");
+		error_control("Cannot read the map\n");
 		return (NULL);
 	}
 	line = NULL;
@@ -167,10 +167,15 @@ char	*read_file(char *path, t_map *map)
 				len = ft_strlen(line) - 1;
 				if (len > map->nb_cols)
 					map->nb_cols = len;
-				str_map = ft_strjoin(str_map, line); //join_free
+				str_map = join_free_s1(str_map, line);
 				free (line);
 			}
 		}
+	}
+	if (!str_map)
+	{
+		error_control("No map in the file\n");
+		return (NULL);
 	}
 	map->nb_rows = count_row(str_map);
 	return (str_map);

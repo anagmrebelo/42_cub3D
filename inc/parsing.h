@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:46:05 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/26 19:16:09 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/04/28 16:10:54 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int		fill_map(t_map *map);
 int		check_map(char **mtx, t_map *map);
 char	*tex_parse(char *str);
 int		*color_arr(char *line);
+int	    *parse_color_array(char *str);
 int		check_color(int *arr);
 void	free_tab(char** tab);
+void	error_control(char *msj);
 
 #endif
