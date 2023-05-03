@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 18:39:25 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 19:29:00 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,40 +28,35 @@ int	check_color(int *arr)
 	return (0);
 }
 
-int	*color_arr(char *line)
-{
-	char	*str_color;
-	char	**aux;
-	int		*color;
-	int		i;
+// int	*color_arr(char *line)
+// {
+// 	char	*str_color;
+// 	char	**aux;
+// 	int		*color;
+// 	int		i;
 
-	str_color = tex_parse(line);
-	printf("str_color: %s\n", str_color);
-	if (!str_color)
-		return (NULL);
-	aux = ft_split(str_color, ',');
-	if (!aux)
-	{
-		free (str_color);
-		return (NULL);
-	}
-	free (str_color);
-	color = (int *)ft_calloc(4, sizeof(int));
-	if (!color)
-	{
-		free_tab(aux);
-		return (NULL);
-	}
-	i = -1;
-	while (++i < 4)
-	{
-		printf("aux[%d]: %s\n", i, aux[i]);
-		color[i] = ft_atoi(aux[i]);
-		printf("color[%d]: %d\n", i, color[i]);
-	}
-	free_tab(aux);
-	return (color);
-}
+// 	str_color = tex_parse(line);
+// 	if (!str_color)
+// 		return (NULL);
+// 	aux = ft_split(str_color, ',');
+// 	if (!aux)
+// 	{
+// 		free (str_color);
+// 		return (NULL);
+// 	}
+// 	free (str_color);
+// 	color = (int *)ft_calloc(4, sizeof(int));
+// 	if (!color)
+// 	{
+// 		free_tab(aux);
+// 		return (NULL);
+// 	}
+// 	i = -1;
+// 	while (++i < 4)
+// 		color[i] = ft_atoi(aux[i]);
+// 	free_tab(aux);
+// 	return (color);
+// }
 
 char	*tab_to_space(char *str)
 {
@@ -93,6 +88,36 @@ char	*tex_parse(char *str)
 	}
 	free_tab(tab);
 	return (new);
+}
+
+char	*fill_clean_color(char *color, char *str)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = -1;
+	while (str[i])
+	{
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+		if ((str[i] == 'F' || str[i] == 'C')
+			&& (str[i + 1] == ' ' || str[i + 1] == '\t'))
+			i++;
+		else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
+		{
+			color[++count] = str[i];
+			i++;
+		}
+		else if (str[i] == '\n')
+			i++;
+		else
+		{
+			free(color);
+			return (NULL);
+		}
+	}
+	return (color);
 }
 
 char	*clean_color(char *str)

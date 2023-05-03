@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 19:10:44 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 19:23:34 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,7 @@ void	tex_parse_aux(char a, char b, char *line, t_map *map)
 	if (a == 'S' && b == 'O')
 		map->tex_so = tex_parse(line);
 	if (a == 'E' && b == 'A')
-	{
-		if (map->tex_ea) //SI LA TEXTURA YA TIENE UNA RUTA LIBERARLA ANTES PARA ASIGNARLE OTRA??
-		{
-			free (map->tex_ea);
-			map->tex_ea = tex_parse(line);
-		}
-	}
+		map->tex_ea = tex_parse(line);
 	if (a == 'W' && b == 'E')
 		map->tex_we = tex_parse(line);
 }
