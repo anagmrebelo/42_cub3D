@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 15:16:16 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:47:05 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ int	color_parse(char *line, char a, t_map *map)
 		if (!map->color_c)
 			return (1);
 		if (check_color(map->color_c))
-		{
-			// free (map->color_c);
 			return (1);
-		}
 	}
 	if (a == 'F')
 	{
@@ -69,10 +66,7 @@ int	color_parse(char *line, char a, t_map *map)
 		if (!map->color_f)
 			return (1);
 		if (check_color(map->color_f))
-		{
-			// free (map->color_f);
 			return (1);
-		}
 	}
 	return (0);
 }

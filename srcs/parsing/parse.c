@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 14:26:13 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:46:46 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	check_content(char *str_map)
 		else
 		{
 			error_control("Your map has a wrong character\n");
-			// printf("CHAR: %c\n", str_map[i]);
 			return (1);
 		}
 	}

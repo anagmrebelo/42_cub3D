@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 15:29:58 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:48:20 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,39 +95,10 @@ char	*tex_parse(char *str)
 	return (new);
 }
 
-// int	check_number(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		printf("c: [%c]\n", str[i]);
-// 		if (ft_isdigit(str[i]))
-// 			i++;
-// 		else
-// 			return (1);
-// 	}
-// 	return (0);
-// }
-
-// char	*color_trim(char *str)
-// {
-// 	int	len;
-// 	char	*color;
-
-// 	len = ft_strlen(str);
-// 	if (str[len - 1] == ',')
-// 		color = ft_strtrim(str, ",");
-// 	if (str[len - 1] == '\n')
-// 		color = ft_strtrim(str, "\n");
-// 	return (color);
-// }
-
 char	*clean_color(char *str)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 	char	*color;
 
 	i = 0;
@@ -147,13 +118,14 @@ char	*clean_color(char *str)
 	{
 		while (str[i] == ' ' || str[i] == '\t')
 			i++;
-		if ((str[i] == 'F' || str[i] == 'C') && (str[i + 1] == ' ' || str[i + 1] == '\t'))
+		if ((str[i] == 'F' || str[i] == 'C')
+			&& (str[i + 1] == ' ' || str[i + 1] == '\t'))
 			i++;
 		else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
 		{
 			color[count] = str[i];
 			i++;
-			count++;		
+			count++;
 		}
 		else if (str[i] == '\n')
 			i++;
@@ -190,7 +162,6 @@ int	*parse_color_array(char *line)
 	clean = clean_color(line);
 	if (!clean)
 		return (NULL);
-	// printf("clean_line: [%s]\n", clean);
 	tab = ft_split(clean, ',');
 	if (!tab)
 	{
@@ -210,12 +181,7 @@ int	*parse_color_array(char *line)
 	}
 	i = -1;
 	while (tab[++i])
-	{
-		// if (check_number(tab[i]))
-		// 	return (NULL);
 		color[i] = ft_atoi(tab[i]);
-		// printf("color[%d]: %d\n", i, color[i]);
-	}
 	free_tab(tab);
 	return (color);
 }
