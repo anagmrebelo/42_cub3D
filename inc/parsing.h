@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:46:05 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 16:10:54 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 18:28:18 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	check_args(int argc, char **argv, t_master *master);
 int		parse(char *path, t_map *map);
-char	*read_file(char *path, t_map *map);
+int     read_file(char *path, t_map *map);
 char	**create_map(int x, int y);
 int		fill_map(t_map *map);
 int		check_map(char **mtx, t_map *map);

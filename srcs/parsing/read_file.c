@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 15:47:05 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 19:10:44 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,6 @@
 #include "get_next_line.h"
 #include "parsing.h"
 #include "utils.h"
-
-int	count_row(char *str_map)
-{
-	int	count;
-	int	nb_rows;
-
-	count = 0;
-	nb_rows = 0;
-	while (str_map[count])
-	{
-		if (str_map[count] != '\n')
-			count++;
-		else
-		{
-			nb_rows++;
-			count++;
-		}
-	}
-	return (nb_rows);
-}
 
 int	ft_isspace(char *line)
 {
@@ -78,7 +58,13 @@ void	tex_parse_aux(char a, char b, char *line, t_map *map)
 	if (a == 'S' && b == 'O')
 		map->tex_so = tex_parse(line);
 	if (a == 'E' && b == 'A')
-		map->tex_ea = tex_parse(line);
+	{
+		if (map->tex_ea) //SI LA TEXTURA YA TIENE UNA RUTA LIBERARLA ANTES PARA ASIGNARLE OTRA??
+		{
+			free (map->tex_ea);
+			map->tex_ea = tex_parse(line);
+		}
+	}
 	if (a == 'W' && b == 'E')
 		map->tex_we = tex_parse(line);
 }
@@ -122,25 +108,58 @@ int	check_line(char *line, t_map *map)
 	return (0);
 }
 
-char	*read_file(char *path, t_map *map)
+int	check_path(char *path)
 {
-	int		fd;
-	char	*line;
-	int		exit;
-	char	*str_map;
-	int		len;
-	int		chk;
+	int	fd;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
 		error_control("Cannot read the map\n");
-		return (NULL);
+		return (-1);
 	}
+	return (fd);
+}
+
+int	checking(char *line, t_map *map)
+{
+	int	chk;
+	int	len;
+
+	chk = check_line(line, map);
+	if (chk == 1)
+	{
+		free (line);
+		return (0);
+	}
+	else if (chk == 2)
+	{
+		free (line);
+		return (1);
+	}
+	else
+	{
+		len = ft_strlen(line) - 1;
+		if (len > map->nb_cols)
+			map->nb_cols = len;
+		map->str_map = join_free_s1(map->str_map, line);
+		map->nb_rows++;
+		free (line);
+	}
+	return (0);
+}
+
+int	read_file(char *path, t_map *map)
+{
+	int		fd;
+	char	*line;
+	int		exit;
+
+	fd = check_path(path);
+	if (fd < 0)
+		return (1);
 	line = NULL;
 	exit = 0;
-	map->nb_cols = 0;
-	str_map = NULL;
 	while (!exit)
 	{
 		line = get_next_line(fd);
@@ -148,29 +167,9 @@ char	*read_file(char *path, t_map *map)
 			exit = 1;
 		else
 		{
-			chk = check_line(line, map);
-			if (chk == 1)
-				free (line);
-			else if (chk == 2)
-			{
-				free (line);
-				return (NULL);
-			}
-			else
-			{
-				len = ft_strlen(line) - 1;
-				if (len > map->nb_cols)
-					map->nb_cols = len;
-				str_map = join_free_s1(str_map, line);
-				free (line);
-			}
+			if (checking(line, map))
+				return (1);
 		}
 	}
-	if (!str_map)
-	{
-		error_control("No map in the file\n");
-		return (NULL);
-	}
-	map->nb_rows = count_row(str_map);
-	return (str_map);
+	return (0);
 }

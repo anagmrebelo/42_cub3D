@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 15:48:20 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 18:39:25 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,10 @@ char	*clean_color(char *str)
 		else if (str[i] == '\n')
 			i++;
 		else
+		{
+			free(color);
 			return (NULL);
+		}
 	}
 	if (ft_strlen(color) < 1)
 	{

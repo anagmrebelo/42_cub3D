@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:24:56 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 16:03:19 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 18:18:58 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	check_map(char **mtx, t_map *map)
 		|| check_nb_cols(mtx, map->nb_rows, 0)
 		|| check_nb_cols(mtx, map->nb_rows, (map->nb_cols - 1)))
 	{
-		printf("The map is not closed or has a wrong char in the 'walls'\n");
+		error_control("The map not closed or wrong char in the 'walls'\n");
 		return (1);
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 15:46:46 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 19:10:56 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,21 @@ void	error_control(char *msj)
 {
 	write(1, "Error\n", 6);
 	ft_putstr_fd(msj, 1);
+}
+
+int	aux_check_content(int count)
+{
+	if (count > 1)
+	{
+		error_control("Only 1 initial position\n");
+		return (1);
+	}
+	if (count == 0)
+	{
+		error_control("You need an initial position: N-W-E-S\n");
+		return (1);
+	}
+	return (0);
 }
 
 int	check_content(char *str_map)
@@ -43,16 +58,8 @@ int	check_content(char *str_map)
 			return (1);
 		}
 	}
-	if (count > 1)
-	{
-		error_control("Only 1 initial position\n");
+	if (aux_check_content(count))
 		return (1);
-	}
-	if (count == 0)
-	{
-		error_control("You need an initial position: N-W-E-S\n");
-		return (1);
-	}
 	return (0);
 }
 
@@ -109,9 +116,16 @@ void	save_ini_pos(t_map *map)
 
 int	parse(char *path, t_map *map)
 {
-	map->str_map = read_file(path, map);
-	if (!map->str_map)
+	map->str_map = NULL;
+	map->nb_cols = 0;
+	map->nb_rows = 0;
+	if (read_file(path, map))
 		return (1);
+	if (!map->str_map)
+	{
+		error_control("No map in the file\n");
+		return (1);
+	}
 	if (!map->color_c || !map->color_f)
 	{
 		error_control("Missing color\n");
