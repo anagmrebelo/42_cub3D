@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 17:46:03 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:29:58 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,20 +139,43 @@ char	*clean_color(char *str)
 		i++;
 	}
 	color = (char *)ft_calloc(count + 1, sizeof(char));
+	if (!color)
+		return (NULL);
 	i = 0;
 	count = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) || str[i] == ',')
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+		if ((str[i] == 'F' || str[i] == 'C') && (str[i + 1] == ' ' || str[i + 1] == '\t'))
+			i++;
+		else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
 		{
 			color[count] = str[i];
 			i++;
 			count++;		
 		}
-		else
+		else if (str[i] == '\n')
 			i++;
+		else
+			return (NULL);
+	}
+	if (ft_strlen(color) < 1)
+	{
+		free(color);
+		return (NULL);
 	}
 	return (color);
+}
+
+int	len_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
 
 int	*parse_color_array(char *line)
@@ -160,25 +183,38 @@ int	*parse_color_array(char *line)
 	char	**tab;
 	int		*color;
 	int		i;
-	char	*str;
 	char	*clean;
+	int		len;
 
 	line = tab_to_space(line);
-	// printf("line: %s\n", line);
 	clean = clean_color(line);
-	printf("clean_line: [%s]\n", clean);
-	tab = ft_split(line, ' ');
-	if (!tab)
+	if (!clean)
 		return (NULL);
-	color = (int *)ft_calloc(4, sizeof(int));
-	i = 0;
+	// printf("clean_line: [%s]\n", clean);
+	tab = ft_split(clean, ',');
+	if (!tab)
+	{
+		free (clean);
+		return (NULL);
+	}
+	free(clean);
+	len = len_tab(tab);
+	if (len != 3)
+		return (NULL);
+	color = (int *)ft_calloc(len + 1, sizeof(int));
+	if (!color)
+	{
+		free (clean);
+		free_tab(tab);
+		return (NULL);
+	}
+	i = -1;
 	while (tab[++i])
 	{
-		str = ft_strtrim(tab[i], ",");
-		// if (check_number(str))
+		// if (check_number(tab[i]))
 		// 	return (NULL);
-		color[i] = ft_atoi(str);
-		free (str);
+		color[i] = ft_atoi(tab[i]);
+		// printf("color[%d]: %d\n", i, color[i]);
 	}
 	free_tab(tab);
 	return (color);

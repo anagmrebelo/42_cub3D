@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 17:17:51 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:16:16 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	count_row(char *str_map)
 			count++;
 		}
 	}
-	nb_rows++;
 	return (nb_rows);
 }
 
@@ -60,7 +59,7 @@ int	color_parse(char *line, char a, t_map *map)
 			return (1);
 		if (check_color(map->color_c))
 		{
-			free (map->color_c);
+			// free (map->color_c);
 			return (1);
 		}
 	}
@@ -71,7 +70,7 @@ int	color_parse(char *line, char a, t_map *map)
 			return (1);
 		if (check_color(map->color_f))
 		{
-			free (map->color_f);
+			// free (map->color_f);
 			return (1);
 		}
 	}
@@ -113,8 +112,7 @@ int	check_line(char *line, t_map *map)
 		{
 			if (color_parse(line, line[i], map))
 			{
-				printf("ENTRO AQUI");
-				error_control("Color not valid\n");
+				error_control("Color not valid or missing color\n");
 				return (2);
 			}
 			return (1);

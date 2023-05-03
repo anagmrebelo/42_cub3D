@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:17:28 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 13:41:15 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:15:36 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	fill_map(t_map *map)
 		fill_row(aux[i], map->mtx[i]);
 	if (check_map(map->mtx, map))
 	{
-		free_tab(map->mtx);
 		free_tab(aux);
 		return (1);
 	}

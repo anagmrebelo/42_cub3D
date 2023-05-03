@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:24:56 by mrollo            #+#    #+#             */
-/*   Updated: 2023/04/28 13:41:54 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:34:06 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ int	check_nb_cols(char **map, int rows, int j)
 	return (0);
 }
 
+int	check_round_2(char **map, int x, int y)
+{
+	if ((map[x][y - 1] == ' ') || (map[x][y + 1] == ' ') || (map[x + 1][y] == ' ') || (map[x - 1][y] == ' '))
+		return (1);
+	return (0);
+}
+
 int	check_round(char **map, int x, int y)
 {
 	if ((map[x][y - 1] == ' ' || map[x][y - 1] == '1')
@@ -63,7 +70,7 @@ int	check_map(char **mtx, t_map *map)
 		|| check_nb_cols(mtx, map->nb_rows, 0)
 		|| check_nb_cols(mtx, map->nb_rows, (map->nb_cols - 1)))
 	{
-		printf("The map is not closed\n");
+		printf("The map is not closed or has a wrong char in the 'walls'\n");
 		return (1);
 	}
 	i = 0;
@@ -76,7 +83,15 @@ int	check_map(char **mtx, t_map *map)
 			{
 				if (check_round(mtx, i, j))
 				{
-					printf("not closed desde check\n");
+					error_control("The map has to be closed\n");
+					return (1);
+				}
+			}
+			if (mtx[i][j] == '0')
+			{
+				if (check_round_2(mtx, i, j))
+				{
+					error_control("The map has to be closed\n");
 					return (1);
 				}
 			}
