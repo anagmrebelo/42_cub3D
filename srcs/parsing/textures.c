@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 19:29:00 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/05 12:45:47 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,14 @@ char	*tex_parse(char *str)
 	return (new);
 }
 
-char	*fill_clean_color(char *color, char *str)
+char	*fill_clean_color(char *color, char *str, int i, int count)
 {
-	int		i;
-	int		count;
+	// int		i;
+	// int		count;
 
-	i = 0;
-	count = -1;
+	// i = 0;
+	// count = -1;
+	printf("count: %d, i: %d\n", count, i);
 	while (str[i])
 	{
 		while (str[i] == ' ' || str[i] == '\t')
@@ -120,7 +121,7 @@ char	*fill_clean_color(char *color, char *str)
 	return (color);
 }
 
-char	*clean_color(char *str)
+char	*aux_clean_color(char *str)
 {
 	int		i;
 	int		count;
@@ -137,29 +138,42 @@ char	*clean_color(char *str)
 	color = (char *)ft_calloc(count + 1, sizeof(char));
 	if (!color)
 		return (NULL);
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-		if ((str[i] == 'F' || str[i] == 'C')
-			&& (str[i + 1] == ' ' || str[i + 1] == '\t'))
-			i++;
-		else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
-		{
-			color[count] = str[i];
-			i++;
-			count++;
-		}
-		else if (str[i] == '\n')
-			i++;
-		else
-		{
-			free(color);
-			return (NULL);
-		}
-	}
+	color = fill_clean_color(color, str, 0, -1);
+	if (!color)
+		return (NULL);
+	return (color);
+}
+
+char	*clean_color(char *str)
+{
+	// int		i;
+	// int		count;
+	char	*color;
+
+	color = aux_clean_color(str);
+	// i = 0;
+	// count = 0;
+	// while (str[i])
+	// {
+	// 	while (str[i] == ' ' || str[i] == '\t')
+	// 		i++;
+	// 	if ((str[i] == 'F' || str[i] == 'C')
+	// 		&& (str[i + 1] == ' ' || str[i + 1] == '\t'))
+	// 		i++;
+	// 	else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
+	// 	{
+	// 		color[count] = str[i];
+	// 		i++;
+	// 		count++;
+	// 	}
+	// 	else if (str[i] == '\n')
+	// 		i++;
+	// 	else
+	// 	{
+	// 		free(color);
+	// 		return (NULL);
+	// 	}
+	// }
 	if (ft_strlen(color) < 1)
 	{
 		free(color);
