@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 12:35:23 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/05 13:18:56 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,59 +63,43 @@ void	tex_parse_aux(char a, char b, char *line, t_map *map)
 		map->tex_we = tex_parse(line);
 }
 
-// int	aux_check_line(char a, char b, t_map *map, char *line)
-// {
-// 	if ((a == 'N' && b == 'O')
-// 		|| (a == 'S' && b == 'O')
-// 		|| (a == 'E' && b == 'A')
-// 		|| (a == 'W' && b == 'E'))
-// 	{
-// 		tex_parse_aux(a, b, line, map);
-// 		return (1);
-// 	}
-// 	if (a == 'C' || a == 'F')
-// 	{
-// 		if (color_parse(line, a, map))
-// 		{
-// 			error_control("Color not valid or missing color\n");
-// 			return (2);
-// 		}
-// 		return (1);
-// 	}
-// }
+int	aux_check_line(char a, char b, char *line, t_map *map)
+{
+	if ((a == 'N' && b == 'O') || (a == 'S' && b == 'O')
+		|| (a == 'E' && b == 'A') || (a == 'W' && b == 'E'))
+	{
+		tex_parse_aux(a, b, line, map);
+		return (1);
+	}
+	if (a == 'C' || a == 'F')
+	{
+		if (color_parse(line, a, map))
+		{
+			error_control("Color not valid or missing color\n");
+			return (2);
+		}
+		return (1);
+	}
+	else
+	{
+		error_control("Shit on the .cub\n");
+		return (2);
+	}
+}
 
 int	check_line(char *line, t_map *map)
 {
 	int	i;
-	// int	rtrn;
 
 	i = 0;
 	if (!ft_isspace(line))
 		return (1);
-	while (line)
+	while (line[i])
 	{
 		while (line[i] == ' ' || line[i] == '\t')
 			i++;
-		
-		// if (line[i] > 64 && line[i] < 91)
-		// 	return (aux_check_line(line[i], line[i + 1], line, map));
-		if ((line[i] == 'N' && line[i + 1] == 'O')
-			|| (line[i] == 'S' && line[i + 1] == 'O')
-			|| (line[i] == 'E' && line[i + 1] == 'A')
-			|| (line[i] == 'W' && line[i + 1] == 'E'))
-		{
-			tex_parse_aux(line[i], line[i + 1], line, map);
-			return (1);
-		}
-		if (line[i] == 'C' || line[i] == 'F')
-		{
-			if (color_parse(line, line[i], map))
-			{
-				error_control("Color not valid or missing color\n");
-				return (2);
-			}
-			return (1);
-		}
+		if (line[i] > 64 && line[i] < 91)
+			return (aux_check_line(line[i], line[i + 1], line, map));
 		if (line[i] == '1')
 			return (0);
 		else
