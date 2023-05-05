@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:10:36 by arebelo           #+#    #+#             */
-/*   Updated: 2023/04/28 15:54:58 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/05/05 15:01:13 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "free.h"
+#include "parsing.h"
 
 /**
  * Creates an image of the size of the window 
@@ -49,7 +50,10 @@ static void	save_image(t_master *master, t_img *img, char *path)
 	img->mlx_img = mlx_xpm_file_to_image(master->mlx.mlx_ptr,
 			path, &img->width, &img->height);
 	if (!img->mlx_img)
+	{
+		error_control("Couldn't convert file xpm to image.\n");
 		clean_exit(master);
+	}
 	img->addr = mlx_get_data_addr(
 			img->mlx_img, &img->bpp, &img->line_len, &img->endian);
 	if (!img->addr)
