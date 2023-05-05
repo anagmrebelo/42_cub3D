@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 12:45:47 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/05 13:03:34 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,36 +27,6 @@ int	check_color(int *arr)
 	}
 	return (0);
 }
-
-// int	*color_arr(char *line)
-// {
-// 	char	*str_color;
-// 	char	**aux;
-// 	int		*color;
-// 	int		i;
-
-// 	str_color = tex_parse(line);
-// 	if (!str_color)
-// 		return (NULL);
-// 	aux = ft_split(str_color, ',');
-// 	if (!aux)
-// 	{
-// 		free (str_color);
-// 		return (NULL);
-// 	}
-// 	free (str_color);
-// 	color = (int *)ft_calloc(4, sizeof(int));
-// 	if (!color)
-// 	{
-// 		free_tab(aux);
-// 		return (NULL);
-// 	}
-// 	i = -1;
-// 	while (++i < 4)
-// 		color[i] = ft_atoi(aux[i]);
-// 	free_tab(aux);
-// 	return (color);
-// }
 
 char	*tab_to_space(char *str)
 {
@@ -92,12 +62,6 @@ char	*tex_parse(char *str)
 
 char	*fill_clean_color(char *color, char *str, int i, int count)
 {
-	// int		i;
-	// int		count;
-
-	// i = 0;
-	// count = -1;
-	printf("count: %d, i: %d\n", count, i);
 	while (str[i])
 	{
 		while (str[i] == ' ' || str[i] == '\t')
@@ -146,34 +110,9 @@ char	*aux_clean_color(char *str)
 
 char	*clean_color(char *str)
 {
-	// int		i;
-	// int		count;
 	char	*color;
 
 	color = aux_clean_color(str);
-	// i = 0;
-	// count = 0;
-	// while (str[i])
-	// {
-	// 	while (str[i] == ' ' || str[i] == '\t')
-	// 		i++;
-	// 	if ((str[i] == 'F' || str[i] == 'C')
-	// 		&& (str[i + 1] == ' ' || str[i + 1] == '\t'))
-	// 		i++;
-	// 	else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
-	// 	{
-	// 		color[count] = str[i];
-	// 		i++;
-	// 		count++;
-	// 	}
-	// 	else if (str[i] == '\n')
-	// 		i++;
-	// 	else
-	// 	{
-	// 		free(color);
-	// 		return (NULL);
-	// 	}
-	// }
 	if (ft_strlen(color) < 1)
 	{
 		free(color);
@@ -192,13 +131,32 @@ int	len_tab(char **tab)
 	return (i);
 }
 
+int	*fill_color_array(char **tab)
+{
+	int	*color;
+	int	len;
+	int	i;
+
+	len = len_tab(tab);
+	if (len != 3)
+		return (NULL);
+	color = (int *)ft_calloc(len + 1, sizeof(int));
+	if (!color)
+	{
+		free_tab(tab);
+		return (NULL);
+	}
+	i = -1;
+	while (tab[++i])
+		color[i] = ft_atoi(tab[i]);
+	return (color);
+}
+
 int	*parse_color_array(char *line)
 {
 	char	**tab;
 	int		*color;
-	int		i;
 	char	*clean;
-	int		len;
 
 	line = tab_to_space(line);
 	clean = clean_color(line);
@@ -211,19 +169,9 @@ int	*parse_color_array(char *line)
 		return (NULL);
 	}
 	free(clean);
-	len = len_tab(tab);
-	if (len != 3)
-		return (NULL);
-	color = (int *)ft_calloc(len + 1, sizeof(int));
+	color = fill_color_array(tab);
 	if (!color)
-	{
-		free (clean);
-		free_tab(tab);
 		return (NULL);
-	}
-	i = -1;
-	while (tab[++i])
-		color[i] = ft_atoi(tab[i]);
 	free_tab(tab);
 	return (color);
 }
