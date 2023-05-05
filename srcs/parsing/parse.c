@@ -6,18 +6,12 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 19:23:46 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/05 13:26:07 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
-
-void	error_control(char *msj)
-{
-	write(1, "Error\n", 6);
-	ft_putstr_fd(msj, 1);
-}
 
 int	aux_check_content(int count)
 {
@@ -88,30 +82,6 @@ int	check_textures(t_map *map)
 		return (1);
 	}
 	return (0);
-}
-
-void	save_ini_pos(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->nb_rows)
-	{
-		j = 0;
-		while (j < map->nb_cols)
-		{
-			if (map->mtx[i][j] == 'N' || map->mtx[i][j] == 'S'
-				|| map->mtx[i][j] == 'E' || map->mtx[i][j] == 'W')
-			{
-				map->view = map->mtx[i][j];
-				map->px = j;
-				map->py = i;
-			}
-			j++;
-		}
-		i++;
-	}
 }
 
 int	parse(char *path, t_map *map)

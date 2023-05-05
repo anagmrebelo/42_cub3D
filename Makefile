@@ -6,7 +6,7 @@
 #    By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 18:20:34 by arebelo           #+#    #+#              #
-#    Updated: 2023/04/28 12:26:41 by mrollo           ###   ########.fr        #
+#    Updated: 2023/05/05 13:32:49 by mrollo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ SRCS				= main.c\
 					parsing/read_file.c\
 					parsing/map.c\
 					parsing/map_check.c\
+					parsing/check_rows_cols.c\
 					parsing/textures.c\
+					parsing/aux.c\
+					parsing/clean_color.c\
 					hooks/key_letters.c\
 					hooks/key_arrows.c\
 					hooks/key_hooks.c\

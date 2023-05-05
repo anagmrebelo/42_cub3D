@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 13:18:56 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/05 13:28:53 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,6 @@
 #include "get_next_line.h"
 #include "parsing.h"
 #include "utils.h"
-
-int	ft_isspace(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
-}
-
-int	color_parse(char *line, char a, t_map *map)
-{
-	if (a == 'C')
-	{
-		map->color_c = parse_color_array(line);
-		if (!map->color_c)
-			return (1);
-		if (check_color(map->color_c))
-			return (1);
-	}
-	if (a == 'F')
-	{
-		map->color_f = parse_color_array(line);
-		if (!map->color_f)
-			return (1);
-		if (check_color(map->color_f))
-			return (1);
-	}
-	return (0);
-}
 
 void	tex_parse_aux(char a, char b, char *line, t_map *map)
 {
@@ -109,19 +73,6 @@ int	check_line(char *line, t_map *map)
 		}
 	}
 	return (0);
-}
-
-int	check_path(char *path)
-{
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		error_control("Cannot read the map\n");
-		return (-1);
-	}
-	return (fd);
 }
 
 int	checking(char *line, t_map *map)
