@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:46:05 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/05/10 14:35:39 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:54:52 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	    tex_parse_aux(char a, char b, char *line, t_map *map);
 int	    len_tab(char **tab);
 char	*tab_to_space(char *str);
 void	free_tab(char **tab);
-void	error_control(char *msj);
+int		error_control(char *msj, int rtrn);
 int		save_ini_pos(t_map *map);
 int		ft_isspace(char *line);
 int		color_parse(char *line, char a, t_map *map);

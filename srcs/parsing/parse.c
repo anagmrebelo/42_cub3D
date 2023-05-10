@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/10 14:34:59 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 20:39:34 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,9 @@
 static int	aux_check_content(int count)
 {
 	if (count > 1)
-	{
-		error_control("Only 1 initial position\n");
-		return (1);
-	}
+		return (error_control("Only 1 initial position\n", 1));
 	if (count == 0)
-	{
-		error_control("You need an initial position: N-W-E-S\n");
-		return (1);
-	}
+		return (error_control("You need an initial position: N-W-E-S\n", 1));
 	return (0);
 }
 
@@ -47,10 +41,7 @@ static int	check_content(char *str_map)
 			i++;
 		}
 		else
-		{
-			error_control("Your map has a wrong character\n");
-			return (1);
-		}
+			return (error_control("Your map has a wrong character\n", 1));
 	}
 	if (aux_check_content(count))
 		return (1);
@@ -71,16 +62,10 @@ static int	open_close(char *path)
 static int	check_textures(t_map *map)
 {
 	if (!map->tex_ea || !map->tex_no || !map->tex_so || !map->tex_we)
-	{
-		error_control("Texture error or missing\n");
-		return (1);
-	}
+		return (error_control("Texture error or missing\n", 1));
 	if (open_close(map->tex_ea) || open_close(map->tex_no)
 		|| open_close(map->tex_so) || open_close(map->tex_we))
-	{
-		error_control("Can't open texture\n");
-		return (1);
-	}
+		return (error_control("Can't open texture\n", 1));
 	return (0);
 }
 
@@ -92,15 +77,9 @@ int	parse(char *path, t_map *map)
 	if (read_file(path, map))
 		return (1);
 	if (!map->str_map)
-	{
-		error_control("No map in the file\n");
-		return (1);
-	}
+		return (error_control("No map in the file\n", 1));
 	if (!map->color_c || !map->color_f)
-	{
-		error_control("Missing color\n");
-		return (1);
-	}
+		return (error_control("Missing color\n", 1));
 	if (check_content(map->str_map))
 		return (1);
 	if (check_textures(map))
