@@ -6,77 +6,40 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 19:16:16 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 15:29:58 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:46:48 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-int	check_color(int *arr)
+static int	tex_check_name(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i])
+	if (ft_strcmp(str, "NO") != 0 && ft_strcmp(str, "SO") != 0
+		&& ft_strcmp(str, "EA") != 0 && ft_strcmp(str, "WE") != 0)
 	{
-		if (arr[i] >= 0 && arr[i] <= 255)
-			i++;
-		else
-			return (1);
+		error_control("Texture name not correct\n");
+		return (1);
 	}
 	return (0);
 }
 
-int	*color_arr(char *line)
+static int	tex_len_check(char **tab)
 {
-	char	*str_color;
-	char	**aux;
-	int		*color;
-	int		i;
+	int	len;
 
-	str_color = tex_parse(line);
-	printf("str_color: %s\n", str_color);
-	if (!str_color)
-		return (NULL);
-	aux = ft_split(str_color, ',');
-	if (!aux)
+	len = len_tab(tab);
+	if (len > 2)
 	{
-		free (str_color);
-		return (NULL);
+		if ((ft_strcmp(tab[2], "\n") == 0) && (len == 3))
+			return (0);
+		error_control("Texture usage: <NO/SO/EA/WE ./path>\n");
+		return (1);
 	}
-	free (str_color);
-	color = (int *)ft_calloc(4, sizeof(int));
-	if (!color)
-	{
-		free_tab(aux);
-		return (NULL);
-	}
-	i = -1;
-	while (++i < 4)
-	{
-		printf("aux[%d]: %s\n", i, aux[i]);
-		color[i] = ft_atoi(aux[i]);
-		printf("color[%d]: %d\n", i, color[i]);
-	}
-	free_tab(aux);
-	return (color);
+	return (0);
 }
 
-char	*tab_to_space(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '\t')
-			str[i] = ' ';
-	}
-	return (str);
-}
-
-char	*tex_parse(char *str)
+static char	*tex_parse(char *str)
 {
 	char	**tab;
 	char	*new;
@@ -85,137 +48,48 @@ char	*tex_parse(char *str)
 	tab = ft_split(str, ' ');
 	if (!tab)
 		return (NULL);
+	if (tex_len_check(tab) || tex_check_name(tab[0]))
+	{
+		free_tab(tab);
+		return (NULL);
+	}
 	new = ft_strtrim(tab[1], "\n");
 	if (!new)
 	{
 		free_tab(tab);
+		error_control("Texture error\n");
 		return (NULL);
 	}
 	free_tab(tab);
 	return (new);
 }
 
-// int	check_number(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		printf("c: [%c]\n", str[i]);
-// 		if (ft_isdigit(str[i]))
-// 			i++;
-// 		else
-// 			return (1);
-// 	}
-// 	return (0);
-// }
-
-// char	*color_trim(char *str)
-// {
-// 	int	len;
-// 	char	*color;
-
-// 	len = ft_strlen(str);
-// 	if (str[len - 1] == ',')
-// 		color = ft_strtrim(str, ",");
-// 	if (str[len - 1] == '\n')
-// 		color = ft_strtrim(str, "\n");
-// 	return (color);
-// }
-
-char	*clean_color(char *str)
+static char	*reassig_check(char *new, char *old)
 {
-	int	i;
-	int	count;
-	char	*color;
-
-	i = 0;
-	count = 0;
-	while (str[i])
+	if (!old)
+		return (new);
+	else
 	{
-		if (ft_isdigit(str[i]) || str[i] == ',')
-			count++;
-		i++;
-	}
-	color = (char *)ft_calloc(count + 1, sizeof(char));
-	if (!color)
-		return (NULL);
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		while (str[i] == ' ' || str[i] == '\t')
-			i++;
-		if ((str[i] == 'F' || str[i] == 'C') && (str[i + 1] == ' ' || str[i + 1] == '\t'))
-			i++;
-		else if ((str[i] > 47 && str[i] < 58) || str[i] == ',')
-		{
-			color[count] = str[i];
-			i++;
-			count++;		
-		}
-		else if (str[i] == '\n')
-			i++;
-		else
-			return (NULL);
-	}
-	if (ft_strlen(color) < 1)
-	{
-		free(color);
+		free (new);
+		free (old);
 		return (NULL);
 	}
-	return (color);
 }
 
-int	len_tab(char **tab)
+int	tex_parse_aux(char a, char b, char *line, t_map *map)
 {
-	int	i;
+	char	*texture;
 
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-int	*parse_color_array(char *line)
-{
-	char	**tab;
-	int		*color;
-	int		i;
-	char	*clean;
-	int		len;
-
-	line = tab_to_space(line);
-	clean = clean_color(line);
-	if (!clean)
-		return (NULL);
-	// printf("clean_line: [%s]\n", clean);
-	tab = ft_split(clean, ',');
-	if (!tab)
-	{
-		free (clean);
-		return (NULL);
-	}
-	free(clean);
-	len = len_tab(tab);
-	if (len != 3)
-		return (NULL);
-	color = (int *)ft_calloc(len + 1, sizeof(int));
-	if (!color)
-	{
-		free (clean);
-		free_tab(tab);
-		return (NULL);
-	}
-	i = -1;
-	while (tab[++i])
-	{
-		// if (check_number(tab[i]))
-		// 	return (NULL);
-		color[i] = ft_atoi(tab[i]);
-		// printf("color[%d]: %d\n", i, color[i]);
-	}
-	free_tab(tab);
-	return (color);
+	texture = tex_parse(line);
+	if (!texture)
+		return (2);
+	if (a == 'N' && b == 'O')
+		map->tex_no = reassig_check(texture, map->tex_no);
+	if (a == 'S' && b == 'O')
+		map->tex_so = reassig_check(texture, map->tex_so);
+	if (a == 'E' && b == 'A')
+		map->tex_ea = reassig_check(texture, map->tex_ea);
+	if (a == 'W' && b == 'E')
+		map->tex_we = reassig_check(texture, map->tex_we);
+	return (0);
 }
