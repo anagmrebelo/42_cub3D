@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:24:50 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 13:28:40 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:33:33 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	error_control(char *msj)
 	ft_putstr_fd(msj, 1);
 }
 
-void	save_ini_pos(t_map *map)
+int	save_ini_pos(t_map *map)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < map->nb_rows)
+	i = -1;
+	while (++i < map->nb_rows)
 	{
-		j = 0;
-		while (j < map->nb_cols)
+		j = -1;
+		while (++j < map->nb_cols)
 		{
 			if (map->mtx[i][j] == 'N' || map->mtx[i][j] == 'S'
 				|| map->mtx[i][j] == 'E' || map->mtx[i][j] == 'W')
@@ -36,11 +36,15 @@ void	save_ini_pos(t_map *map)
 				map->view = map->mtx[i][j];
 				map->px = j;
 				map->py = i;
+				if (check_round_2(map->mtx, i, j))
+				{
+					error_control("Initial pos has to be surrounded by 1 o 0\n");
+					return (1);
+				}
 			}
-			j++;
 		}
-		i++;
 	}
+	return (0);
 }
 
 int	ft_isspace(char *line)
@@ -58,36 +62,25 @@ int	ft_isspace(char *line)
 	return (0);
 }
 
-int	check_path(char *path)
+int	len_tab(char **tab)
 {
-	int	fd;
+	int	i;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		error_control("Cannot read the map\n");
-		return (-1);
-	}
-	return (fd);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
 
-int	color_parse(char *line, char a, t_map *map)
+char	*tab_to_space(char *str)
 {
-	if (a == 'C')
+	int	i;
+
+	i = -1;
+	while (str[++i])
 	{
-		map->color_c = parse_color_array(line);
-		if (!map->color_c)
-			return (1);
-		if (check_color(map->color_c))
-			return (1);
+		if (str[i] == '\t')
+			str[i] = ' ';
 	}
-	if (a == 'F')
-	{
-		map->color_f = parse_color_array(line);
-		if (!map->color_f)
-			return (1);
-		if (check_color(map->color_f))
-			return (1);
-	}
-	return (0);
+	return (str);
 }

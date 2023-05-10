@@ -6,14 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:31:04 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 13:35:12 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:33:54 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-char	*fill_clean_color(char *color, char *str, int i, int count)
+static char	*fill_clean_color(char *color, char *str, int i, int count)
 {
 	while (str[i])
 	{
@@ -38,7 +38,7 @@ char	*fill_clean_color(char *color, char *str, int i, int count)
 	return (color);
 }
 
-char	*aux_clean_color(char *str)
+static char	*aux_clean_color(char *str)
 {
 	int		i;
 	int		count;
@@ -72,19 +72,4 @@ char	*clean_color(char *str)
 		return (NULL);
 	}
 	return (color);
-}
-
-int	check_color(int *arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		if (arr[i] >= 0 && arr[i] <= 255)
-			i++;
-		else
-			return (1);
-	}
-	return (0);
 }

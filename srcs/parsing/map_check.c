@@ -6,22 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:24:56 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 13:23:01 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:34:32 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-int	check_round_2(char **map, int x, int y)
-{
-	if ((map[x][y - 1] == ' ') || (map[x][y + 1] == ' ')
-		|| (map[x + 1][y] == ' ') || (map[x - 1][y] == ' '))
-		return (1);
-	return (0);
-}
-
-int	check_round(char **map, int x, int y)
+static int	check_round(char **map, int x, int y)
 {
 	if ((map[x][y - 1] == ' ' || map[x][y - 1] == '1')
 		&& (map[x][y + 1] == ' ' || map[x][y + 1] == '1')
@@ -31,7 +23,7 @@ int	check_round(char **map, int x, int y)
 	return (1);
 }
 
-int	aux_check_map(char c, char **map, int i, int j)
+static int	aux_check_map(char c, char **map, int i, int j)
 {
 	if (c == ' ')
 	{
@@ -49,6 +41,14 @@ int	aux_check_map(char c, char **map, int i, int j)
 			return (1);
 		}
 	}
+	return (0);
+}
+
+int	check_round_2(char **map, int x, int y)
+{
+	if ((map[x][y - 1] == ' ') || (map[x][y + 1] == ' ')
+		|| (map[x + 1][y] == ' ') || (map[x - 1][y] == ' '))
+		return (1);
 	return (0);
 }
 

@@ -6,14 +6,14 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:49:18 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 13:26:07 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:34:59 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-int	aux_check_content(int count)
+static int	aux_check_content(int count)
 {
 	if (count > 1)
 	{
@@ -28,7 +28,7 @@ int	aux_check_content(int count)
 	return (0);
 }
 
-int	check_content(char *str_map)
+static int	check_content(char *str_map)
 {
 	int	i;
 	int	count;
@@ -57,7 +57,7 @@ int	check_content(char *str_map)
 	return (0);
 }
 
-int	open_close(char *path)
+static int	open_close(char *path)
 {
 	int	fd;
 
@@ -68,7 +68,7 @@ int	open_close(char *path)
 	return (0);
 }
 
-int	check_textures(t_map *map)
+static int	check_textures(t_map *map)
 {
 	if (!map->tex_ea || !map->tex_no || !map->tex_so || !map->tex_we)
 	{
@@ -107,6 +107,7 @@ int	parse(char *path, t_map *map)
 		return (1);
 	if (fill_map(map))
 		return (1);
-	save_ini_pos(map);
+	if (save_ini_pos(map))
+		return (1);
 	return (0);
 }

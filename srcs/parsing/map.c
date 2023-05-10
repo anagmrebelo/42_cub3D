@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 16:17:28 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/03 18:14:57 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:34:46 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-void	fill_with_spaces(char *str, int cols)
+static void	fill_with_spaces(char *str, int cols)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ void	fill_with_spaces(char *str, int cols)
 	str[i] = '\0';
 }
 
-char	**create_map(int x, int y)
+static char	**create_map(int x, int y)
 {
 	char	**map;
 	int		i;
@@ -58,7 +58,7 @@ char	**create_map(int x, int y)
 	return (map);
 }
 
-void	fill_row(char *str, char *nb_rows)
+static void	fill_row(char *str, char *nb_rows)
 {
 	int	i;
 

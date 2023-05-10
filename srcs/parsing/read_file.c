@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/05 15:40:57 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 14:35:12 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,26 @@
 #include "parsing.h"
 #include "utils.h"
 
-void	tex_parse_aux(char a, char b, char *line, t_map *map)
+static int	check_path(char *path)
 {
-	if (a == 'N' && b == 'O')
-		map->tex_no = tex_parse(line);
-	if (a == 'S' && b == 'O')
-		map->tex_so = tex_parse(line);
-	if (a == 'E' && b == 'A')
-		map->tex_ea = tex_parse(line);
-	if (a == 'W' && b == 'E')
-		map->tex_we = tex_parse(line);
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		error_control("Cannot read the map\n");
+		return (-1);
+	}
+	return (fd);
 }
 
-int	aux_check_line(char a, char b, char *line, t_map *map)
+static int	aux_check_line(char a, char b, char *line, t_map *map)
 {
 	if ((a == 'N' && b == 'O') || (a == 'S' && b == 'O')
 		|| (a == 'E' && b == 'A') || (a == 'W' && b == 'E'))
 	{
-		tex_parse_aux(a, b, line, map);
+		if (tex_parse_aux(a, b, line, map))
+			return (2);
 		return (1);
 	}
 	if (a == 'C' || a == 'F')
@@ -51,13 +53,20 @@ int	aux_check_line(char a, char b, char *line, t_map *map)
 	}
 }
 
-int	check_line(char *line, t_map *map)
+static int	check_line(char *line, t_map *map)
 {
 	int	i;
 
 	i = 0;
 	if (!ft_isspace(line))
+	{
+		if (map->mp == 1)
+		{
+			error_control("Invalid map\n");
+			return (2);
+		}
 		return (1);
+	}
 	while (line[i])
 	{
 		while (line[i] == ' ' || line[i] == '\t')
@@ -75,7 +84,7 @@ int	check_line(char *line, t_map *map)
 	return (0);
 }
 
-int	checking(char *line, t_map *map)
+static int	checking(char *line, t_map *map)
 {
 	int	chk;
 	int	len;
@@ -93,6 +102,7 @@ int	checking(char *line, t_map *map)
 	}
 	else
 	{
+		map->mp = 1;
 		len = ft_strlen(line) - 1;
 		if (len > map->nb_cols)
 			map->nb_cols = len;
@@ -114,6 +124,7 @@ int	read_file(char *path, t_map *map)
 		return (1);
 	line = NULL;
 	exit = 0;
+	map->mp = 0;
 	while (!exit)
 	{
 		line = get_next_line(fd);
