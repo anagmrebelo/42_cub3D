@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:10:36 by arebelo           #+#    #+#             */
-/*   Updated: 2023/05/05 15:01:13 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 15:57:06 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	save_image(t_master *master, t_img *img, char *path)
 			path, &img->width, &img->height);
 	if (!img->mlx_img)
 	{
-		error_control("Couldn't convert file xpm to image.\n");
+		error_control("Couldn't convert file xpm to image.\n", 1);
 		clean_exit(master);
 	}
 	img->addr = mlx_get_data_addr(

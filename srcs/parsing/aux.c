@@ -6,17 +6,18 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:24:50 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/10 14:33:33 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 20:56:00 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parsing.h"
 
-void	error_control(char *msj)
+int	error_control(char *msj, int rtrn)
 {
 	write(1, "Error\n", 6);
 	ft_putstr_fd(msj, 1);
+	return (rtrn);
 }
 
 int	save_ini_pos(t_map *map)
@@ -37,10 +38,8 @@ int	save_ini_pos(t_map *map)
 				map->px = j;
 				map->py = i;
 				if (check_round_2(map->mtx, i, j))
-				{
-					error_control("Initial pos has to be surrounded by 1 o 0\n");
-					return (1);
-				}
+					return (error_control
+						("Ini pos has to be surrounded by 1 or 0\n", 1));
 			}
 		}
 	}

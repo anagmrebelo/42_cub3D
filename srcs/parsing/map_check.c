@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:24:56 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/10 14:34:32 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 20:54:35 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,12 @@ static int	aux_check_map(char c, char **map, int i, int j)
 	if (c == ' ')
 	{
 		if (check_round(map, i, j))
-		{
-			error_control("The map has to be closed\n");
-			return (1);
-		}
+			return (error_control("The map has to be closed\n", 1));
 	}
 	if (c == '0')
 	{
 		if (check_round_2(map, i, j))
-		{
-			error_control("The map has to be closed\n");
-			return (1);
-		}
+			return (error_control("The map has to be closed\n", 1));
 	}
 	return (0);
 }
@@ -61,10 +55,7 @@ int	check_map(char **mtx, t_map *map)
 		|| check_nb_rows(mtx[map->nb_rows - 1], map->nb_cols)
 		|| check_nb_cols(mtx, map->nb_rows, 0)
 		|| check_nb_cols(mtx, map->nb_rows, (map->nb_cols - 1)))
-	{
-		error_control("The map not closed or wrong char in the 'walls'\n");
-		return (1);
-	}
+		return (error_control("Map not closed or wrong char in the walls\n", 1));
 	i = 0;
 	while (++i < map->nb_rows - 1)
 	{

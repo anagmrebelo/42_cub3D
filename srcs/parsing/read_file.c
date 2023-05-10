@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/10 14:35:12 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/05/10 20:40:17 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_path(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		error_control("Cannot read the map\n");
+		error_control("Cannot read the map\n", -1);
 		return (-1);
 	}
 	return (fd);
@@ -40,17 +40,11 @@ static int	aux_check_line(char a, char b, char *line, t_map *map)
 	if (a == 'C' || a == 'F')
 	{
 		if (color_parse(line, a, map))
-		{
-			error_control("Color not valid or missing color\n");
-			return (2);
-		}
+			return (error_control("Color not valid or missing color\n", 2));
 		return (1);
 	}
 	else
-	{
-		error_control("Shit on the .cub\n");
-		return (2);
-	}
+		return (error_control("Shit on the .cub\n", 2));
 }
 
 static int	check_line(char *line, t_map *map)
@@ -61,10 +55,7 @@ static int	check_line(char *line, t_map *map)
 	if (!ft_isspace(line))
 	{
 		if (map->mp == 1)
-		{
-			error_control("Invalid map\n");
-			return (2);
-		}
+			return (error_control("Invalid map\n", 2));
 		return (1);
 	}
 	while (line[i])
@@ -76,10 +67,7 @@ static int	check_line(char *line, t_map *map)
 		if (line[i] == '1')
 			return (0);
 		else
-		{
-			error_control("Shit on the .cub\n");
-			return (2);
-		}
+			return (error_control("Shit on the .cub\n", 2));
 	}
 	return (0);
 }
