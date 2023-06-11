@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/05/10 14:36:22 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/06/11 17:34:58 by anarebelo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define SCALE 64
 # define PLAYER_SIZE 7
 # define ANGLE_VIEW 60
-# define PLAYER_SPEED 3
-# define ANGLE_SPEED 2
+# define PLAYER_SPEED 2
+# define ANGLE_SPEED 1
 
 // -------- Minimap settings --------
 # define MINIMAP_OFF 10
