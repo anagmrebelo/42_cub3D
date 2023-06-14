@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_letters.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarebelo <anarebelo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:32:04 by arebelo           #+#    #+#             */
-/*   Updated: 2023/06/11 17:42:12 by anarebelo        ###   ########.fr       */
+/*   Updated: 2023/06/14 19:00:44 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	move_left(t_master *master)
 	while (counter < PLAYER_SPEED)
 	{
 		if (allow_move(master,
-				master->player.px - cos(deg_to_rad(temp)) ,
+				master->player.px - cos(deg_to_rad(temp)),
 				master->player.py))
 			master->player.px -= cos(deg_to_rad(temp));
 		if (allow_move(master,
@@ -83,7 +83,7 @@ void	move_right(t_master *master)
 	while (counter < PLAYER_SPEED)
 	{
 		if (allow_move(master,
-				master->player.px + cos(deg_to_rad(temp)) ,
+				master->player.px + cos(deg_to_rad(temp)),
 				master->player.py))
 			master->player.px += cos(deg_to_rad(temp));
 		if (allow_move(master,

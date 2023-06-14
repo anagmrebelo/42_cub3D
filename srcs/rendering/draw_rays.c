@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:58:53 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/05/02 10:51:29 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/06/14 19:01:39 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ static void	draw_floor_ceil(t_master *master, int r)
 	point_a[1] = round(master->map.line_f);
 	point_b[0] = r;
 	point_b[1] = WINDOW_HEIGHT;
-	// Draw floor
 	draw_line(master, point_a, point_b, master->map.floor_col);
 	point_a[1] = 0;
 	point_b[1] = master->map.line_off;
-	// Draw celing
 	draw_line(master, point_a, point_b, master->map.ceil_col);
 }
 
@@ -119,17 +117,14 @@ void	find_obs(t_master *master, float xo, float yo, char c)
 void	draw_rays_3d(t_master *master)
 {
 	int		r;
-	//number of rays to draw
+
 	master->map.ra = angle_check(master->player.pa + ANGLE_VIEW / 2);
 	r = 0;
 	while (r < WINDOW_WIDTH)
 	{
 		master->map.dis_t = 100000;
-		//------------ Check vertical lines------------
 		check_vertical_lines(master);
-		//------------ Check horizontal lines------------
 		check_horizontal_lines(master);
-		// ----------- Draw 3D Walls, ceilings and floors ------------
 		draw_3d_wall(master, r);
 		master->map.ra = angle_check(master->map.ra
 				- (float)ANGLE_VIEW / WINDOW_WIDTH);

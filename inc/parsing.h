@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 14:46:05 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/05/10 15:54:52 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/06/14 18:57:22 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		check_map(char **mtx, t_map *map);
 int		check_nb_rows(char *row, int cols);
 int		check_nb_cols(char **map, int rows, int j);
 int		check_round_2(char **map, int x, int y);
-int	    tex_parse_aux(char a, char b, char *line, t_map *map);
-int	    len_tab(char **tab);
+int		tex_parse_aux(char a, char b, char *line, t_map *map);
+int		len_tab(char **tab);
 char	*tab_to_space(char *str);
 void	free_tab(char **tab);
 int		error_control(char *msj, int rtrn);

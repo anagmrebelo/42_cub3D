@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:05:48 by arebelo           #+#    #+#             */
-/*   Updated: 2023/05/02 10:53:13 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/06/14 19:01:48 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ void	check_horizontal_lines(t_master *master)
 
 	tang = 1.0 / tan(deg_to_rad(master->map.ra));
 	master->map.dof = 0;
-	if (master->map.ra < 180 && master->map.ra > 0 && !isnan(tang)) //Looking up
+	if (master->map.ra < 180 && master->map.ra > 0 && !isnan(tang))
 	{
 		look_up(master, tang);
 		yo = -master->map.block_size;
 		xo = -yo * tang;
 	}
-	else if (master->map.ra > 180 && !isnan(tang)) //Looking down
+	else if (master->map.ra > 180 && !isnan(tang))
 	{
 		look_down(master, tang);
 		yo = master->map.block_size;
 		xo = -yo * tang;
 	}
-	else //Looking straight left or right
+	else
 	{
 		master->map.rx = master->player.px;
 		master->map.ry = master->player.py;

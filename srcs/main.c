@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:28:21 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/04/28 12:29:24 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/06/14 18:58:22 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	render(t_master *master)
 */
 static void	window_init(t_master *master)
 {
-	// Create mlx and window
 	master->mlx.mlx_ptr = mlx_init();
 	if (!master->mlx.mlx_ptr)
 		clean_exit(master);
@@ -44,9 +43,7 @@ static void	window_init(t_master *master)
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!master->mlx.mlx_win)
 		clean_exit(master);
-	// Upload texture images and create new img for game
 	upload_images(master);
-	//Define player initial pos
 	set_positions(master);
 	return ;
 }
@@ -56,14 +53,10 @@ static void	window_init(t_master *master)
 */
 static void	window_loops(t_master *master)
 {
-	// Key hooks
 	mlx_hook(master->mlx.mlx_win, 2, 1L << 0, &key_down, master);
 	mlx_hook(master->mlx.mlx_win, 3, 1L << 0, &key_up, master);
-	// Red cross hook
 	mlx_hook(master->mlx.mlx_win, 17, 0, &red_cross, master);
-	// Changes on image
 	mlx_loop_hook(master->mlx.mlx_ptr, &render, master);
-	// Maintain window open 
 	mlx_loop(master->mlx.mlx_ptr);
 }
 

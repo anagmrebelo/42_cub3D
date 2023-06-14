@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:08:32 by arebelo           #+#    #+#             */
-/*   Updated: 2023/05/02 10:51:46 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/06/14 19:02:27 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ void	check_vertical_lines(t_master *master)
 
 	master->map.dof = 0;
 	tang = tan(deg_to_rad(master->map.ra));
-	if (master->map.ra < 90 || master->map.ra > 270) //Looking Right
+	if (master->map.ra < 90 || master->map.ra > 270)
 	{
 		look_right(master, tang);
 		xo = master->map.block_size;
 		yo = -xo * tang;
 	}
-	else if (master->map.ra > 90 && master->map.ra < 270) //Looking Left
+	else if (master->map.ra > 90 && master->map.ra < 270)
 	{
 		look_left(master, tang);
 		xo = -master->map.block_size;
 		yo = -xo * tang;
 	}
-	else //Looking straight up or down
+	else
 	{
 		master->map.rx = master->player.px;
 		master->map.ry = master->player.py;

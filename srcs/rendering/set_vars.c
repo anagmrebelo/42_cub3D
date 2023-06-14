@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arebelo <arebelo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:28:18 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/05/02 10:46:16 by arebelo          ###   ########.fr       */
+/*   Updated: 2023/06/14 19:02:14 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	set_positions(t_master *master)
 {
-	// Initial player position
 	master->player.px = master->map.px * SCALE + SCALE / 2;
 	master->player.py = master->map.py * SCALE + SCALE / 2;
 	if (master->map.view == 'N')
@@ -34,7 +33,6 @@ void	set_positions(t_master *master)
 			master->map.color_c[1], master->map.color_c[2]);
 	master->map.floor_col = create_trgb(0, master->map.color_f[0],
 			master->map.color_f[1], master->map.color_f[2]);
-	// Definining minimap scale
 	if (master->map.nb_cols > master->map.nb_rows)
 		master->map.map_s = MINIMAP_SIZE / master->map.nb_cols;
 	else
