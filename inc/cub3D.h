@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:30:20 by anarebelo         #+#    #+#             */
-/*   Updated: 2023/06/14 19:03:27 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/06/14 19:06:50 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define PLAYER_SIZE 7
 # define ANGLE_VIEW 60
 # define PLAYER_SPEED 3
-# define ANGLE_SPEED 1
+# define ANGLE_SPEED 2
 
 // -------- Minimap settings --------
 # define MINIMAP_OFF 10

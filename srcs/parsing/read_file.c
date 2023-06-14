@@ -6,7 +6,7 @@
 /*   By: mrollo <mrollo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:55:52 by mrollo            #+#    #+#             */
-/*   Updated: 2023/05/10 20:40:17 by mrollo           ###   ########.fr       */
+/*   Updated: 2023/06/14 19:10:51 by mrollo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	aux_check_line(char a, char b, char *line, t_map *map)
 		return (1);
 	}
 	else
-		return (error_control("Shit on the .cub\n", 2));
+		return (error_control("Invalid .cub\n", 2));
 }
 
 static int	check_line(char *line, t_map *map)
@@ -67,7 +67,7 @@ static int	check_line(char *line, t_map *map)
 		if (line[i] == '1')
 			return (0);
 		else
-			return (error_control("Shit on the .cub\n", 2));
+			return (error_control("Invalid .cub\n", 2));
 	}
 	return (0);
 }
