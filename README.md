@@ -60,13 +60,13 @@ C 50,50,50
 ```
 For detailed specifications, please refer to the project subject or documentation.
 
-##Screenshots
+## Screenshots
 Insert some screenshots of your project in action.
 
-##Contributors
+## Contributors
 Ana Rebêlo (@anagmrebelo)
 
-Micaela Rollo ()
+Micaela Rollo (@micarollo)
 
-##License
+## License
 This project is licensed under the MIT License.
