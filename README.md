@@ -44,14 +44,12 @@ Esc: Exit the game
 The map is defined in a .cub configuration file. Here's a basic example of the map format:
 
 ```
-R 1920 1080
-NO textures/north_texture_path.png
-SO textures/south_texture_path.png
-WE textures/west_texture_path.png
-EA textures/east_texture_path.png
-S sprite_path.png
-F 220,100,0
-C 50,50,50
+NO srcs/imgs/wall_text/a.xpm
+SO srcs/imgs/wall_text/b.xpm
+EA srcs/imgs/wall_text/c.xpm
+WE srcs/imgs/wall_text/d.xpm
+F 30,240,200
+C 40,12,240
 111111
 100001
 101101
