@@ -15,7 +15,7 @@ cub3d is a project that introduces students to the concepts of raycasting and gr
 
 ## Instalation
 ```
-git clone https://github.com/your-username/cub3d.git
+git clone https://github.com/anagmrebelo/42_cub3D
 cd 42_cub3D
 make
 ```
