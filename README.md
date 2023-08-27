@@ -22,7 +22,7 @@ make
 
 ## Usage
 ```
-./cub3D path/to/map.cub
+./cub3D maps/map.cub
 ```
 
 ## Controls
