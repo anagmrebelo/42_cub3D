@@ -8,7 +8,6 @@ cub3d is a project that introduces students to the concepts of raycasting and gr
 - Raycasting-based graphics engine
 - Textured walls and sprites rendering
 - Basic maze exploration
-- Adjustable screen resolution and window size
 - Support for multiple textures and sprite images
 - Basic collision detection
 - Minimalistic user interface
@@ -59,7 +58,7 @@ C 40,12,240
 For detailed specifications, please refer to the project subject or documentation.
 
 ## Screenshots
-Insert some screenshots of your project in action.
+<img width="961" alt="Screenshot 2023-08-27 at 18 50 51" src="https://github.com/anagmrebelo/42_cub3D/assets/66007323/e0411965-f6b9-4948-b712-78439ab1cfb1">
 
 ## Contributors
 Ana Rebêlo (@anagmrebelo)
