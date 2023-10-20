@@ -65,5 +65,3 @@ Ana Rebêlo (@anagmrebelo)
 
 Micaela Rollo (@micarollo)
 
-## License
-This project is licensed under the MIT License.
