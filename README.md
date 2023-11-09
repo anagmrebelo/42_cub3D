@@ -1,4 +1,6 @@
 # 42_cub3D
+![ezgif com-video-to-gif-5](https://github.com/anagmrebelo/42_cub3D/assets/66007323/03f1d3b5-39dd-4ffb-94a4-5a39fe2eb260)
+
 This is the README file for the cub3d project, completed as part of the curriculum at 42 coding school. The objective of this project is to create a simple raycasting game engine that renders a 3D maze using the principles of raycasting.
 
 ## Description
